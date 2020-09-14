@@ -10,8 +10,10 @@
 * @version    $Id$
 */
 import CryptoUtility from './cryptoUtility.js'
-const util = require('util')
-const events = require('events')
+// const util = require('util')
+// const events = require('events')
+import util from 'util'
+import events from 'events'
 
 var RCutility = function () {
   events.EventEmitter.call(this)

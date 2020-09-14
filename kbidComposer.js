@@ -11,8 +11,8 @@
 */
 import CryptoUtility from './cryptoUtility.js'
 import KbidEntry from './kbids/KBIDentry.js'
-const util = require('util')
-const events = require('events')
+import util from 'util'
+import events from 'events'
 
 var KbidComposer = function () {
   events.EventEmitter.call(this)

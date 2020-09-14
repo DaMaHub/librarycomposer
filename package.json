@@ -17,10 +17,15 @@
     "network",
     "library"
   ],
+  "type": "module",
   "author": "aboynejames",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/DaMaHub/referencecontractcomposer/issues"
   },
-  "homepage": "https://github.com/DaMaHub/referencecontractcomposer#readme"
+  "homepage": "https://github.com/DaMaHub/referencecontractcomposer#readme",
+  "dependencies": {
+    "bs58": "^4.0.1",
+    "object-hash": "^2.0.3"
+  }
 }

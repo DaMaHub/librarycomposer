@@ -16,8 +16,10 @@ import ComputeRefCont from './referencecontracts/computeRef.js'
 import VisualiseRefCont from './referencecontracts/visualiseRef.js'
 import ModulueRefCont from './referencecontracts/moduleRef.js'
 import ExperimentRefCont from './referencecontracts/experimentRef.js'
-const util = require('util')
-const events = require('events')
+// const util = require('util')
+// const events = require('events')
+import util from 'util'
+import events from 'events'
 
 var ReferenceContractComposer = function () {
   events.EventEmitter.call(this)
