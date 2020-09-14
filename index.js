@@ -7,3 +7,5 @@ const liveComposer = new RcComposer()
 const liveKBID = new KbidComposer()
 const liveRcUtility = new RcUtility()
 const liveCryptoUtilty = new CryptoUtility()
+
+export default liveRcUtility
