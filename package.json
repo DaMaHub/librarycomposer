@@ -1,0 +1,26 @@
+{
+  "name": "refcontractcomposer",
+  "version": "0.0.2",
+  "description": "create new reference contracts and utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaMaHub/referencecontractcomposer.git"
+  },
+  "keywords": [
+    "reference",
+    "contracts",
+    "smart",
+    "network",
+    "library"
+  ],
+  "author": "aboynejames",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaMaHub/referencecontractcomposer/issues"
+  },
+  "homepage": "https://github.com/DaMaHub/referencecontractcomposer#readme"
+}
