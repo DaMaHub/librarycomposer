@@ -1,6 +1,6 @@
 {
   "name": "refcontractcomposer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "create new reference contracts and utilities",
   "main": "index.js",
   "scripts": {
