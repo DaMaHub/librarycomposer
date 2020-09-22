@@ -201,6 +201,7 @@ RCutility.prototype.expMatchModuleLive = function (allRefcont, expModules) {
 RCutility.prototype.extractData = function (modules, typeAsk) {
   let packages = []
   for (const mod of modules) {
+    console.log(mod)
     // console.log(mod.value.concept.moduleinfo.name)
     if (mod.value.concept.moduleinfo.name === typeAsk) {
       packages.push(mod.value.concept)
