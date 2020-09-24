@@ -44,6 +44,7 @@ ModuleReferenceContract.prototype.modulePrepare = function (inputRC) {
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
+  RefContractHolder.type = 'library'
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
   RefContractHolder.hash = dtHASH

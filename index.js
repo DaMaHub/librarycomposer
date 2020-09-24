@@ -23,7 +23,6 @@ var LibraryLib = function () {
   this.liveKBID = new KbidComposer()
   this.liveLibraryLib = new RcUtility()
   this.liveCryptoUtilty = new CryptoUtility()
-
 }
 
 /**

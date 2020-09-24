@@ -38,6 +38,7 @@ VisualiseReferenceContract.prototype.visualisePrepare = function (inputRC) {
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(visualiseReferenceContract)
   const RefContractHolder = {}
+  RefContractHolder.type = 'library'
   RefContractHolder.reftype = 'visualise'
   RefContractHolder.action = 'PUT'
   RefContractHolder.hash = dtHASH

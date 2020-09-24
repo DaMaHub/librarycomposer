@@ -38,6 +38,7 @@ ComputeReferenceContract.prototype.computePrepare = function (inputRC) {
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(computeReferenceContract)
   const RefContractHolder = {}
+  RefContractHolder.type = 'library'
   RefContractHolder.reftype = 'compute'
   RefContractHolder.action = 'PUT'
   RefContractHolder.hash = dtHASH

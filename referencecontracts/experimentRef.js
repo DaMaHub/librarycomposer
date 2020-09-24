@@ -48,6 +48,7 @@ ExperimentReferenceContract.prototype.nxpPrepare = function (inputRC) {
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(nxpReferenceContract)
   const RefContractHolder = {}
+  RefContractHolder.type = 'library'
   RefContractHolder.reftype = 'experiment'
   RefContractHolder.action = 'PUT'
   RefContractHolder.hash = dtHASH
