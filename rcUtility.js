@@ -10,8 +10,6 @@
 * @version    $Id$
 */
 import CryptoUtility from './cryptoUtility.js'
-// const util = require('util')
-// const events = require('events')
 import util from 'util'
 import events from 'events'
 
@@ -48,8 +46,6 @@ RCutility.prototype.refcontractLookup = function (refCont, allContracts) {
 *
 */
 RCutility.prototype.refcontractSperate = function (refContractsList) {
-  // console.log('seperate out the reference contracts')
-  // console.log(refContractsList)
   const refContractHolder = {}
   const datatypeList = []
   const unitsList = []
@@ -99,13 +95,11 @@ RCutility.prototype.refcontractSperate = function (refContractsList) {
 *
 */
 RCutility.prototype.experimentSplit = function (inputNXPs) {
-  // console.log('experimentSplit')
-  // console.log(inputNXPs)
   const splitExperiments = {}
   let genesis = []
   let joined = []
   for (const exp of inputNXPs) {
-    console.log(exp.value.refcontract)
+    // console.log(exp.value.refcontract)
     if (exp.value.concept.state === 'genesis') {
       genesis.push(exp)
     } else if (exp.value.concept.state === 'joined') {
@@ -122,25 +116,21 @@ RCutility.prototype.experimentSplit = function (inputNXPs) {
 * @method expMatchModule
 *
 */
-RCutility.prototype.expMatchModule = function (allRefcont, expModules) {
-  // console.log(allRefcont)
-  // console.log(expModules)
+RCutility.prototype.expMatchModuleGenesis = function (allRefcont, expModules) {
   let expHolder = []
-  let expandedNXP = {}
-  expandedNXP.modules = []
   for (const exp of expModules) {
+    let expandedNXP = {}
+    expandedNXP.modules = []
     for (const mod of exp.value.modules) {
       // match this key to module
       for (const mrf of allRefcont) {
-        if (mod.key === mrf.key) {
+        if (mod === mrf.key) {
           expandedNXP.modules.push(mrf)
         }
       }
     }
     expandedNXP.exp = exp
     expHolder.push(expandedNXP)
-    expandedNXP = {}
-    expandedNXP.modules = []
   }
   return expHolder
 }
@@ -150,9 +140,7 @@ RCutility.prototype.expMatchModule = function (allRefcont, expModules) {
 * @method expMatchGenModule
 *
 */
-RCutility.prototype.expMatchGenModule = function (allRefcont, expModules) {
-  // console.log(allRefcont)
-  // console.log(expModules)
+RCutility.prototype.expMatchModuleJoined = function (allRefcont, expModules) {
   let expJOINHolder = []
   // joined list of modules in NXP
   let joinModules = {}
@@ -162,7 +150,7 @@ RCutility.prototype.expMatchGenModule = function (allRefcont, expModules) {
     for (const mod of exp.value.modules) {
       // match this key to module
       for (const mrf of allRefcont) {
-        if (mod.key === mrf.key) {
+        if (mod === mrf.key) {
           joinModules.modules.push(mrf)
         }
       }
@@ -198,11 +186,36 @@ RCutility.prototype.expMatchModuleLive = function (allRefcont, expModules) {
 * @method extractQuestion
 *
 */
+RCutility.prototype.extractQuestion = function (modules, typeAsk) {
+  // console.log('question mod matcher')
+  // console.log(modules)
+  // console.log(typeAsk)
+  let question = ''
+  for (const mod of modules) {
+    // console.log(typeof (mod.value))
+    if (typeof (mod.value) === 'object') {
+      if (mod.value.concept.moduleinfo.name === typeAsk) {
+        question = mod.value.concept.question
+      }
+    }
+  }
+  return question
+}
+
+/**
+* extract the network experiment question module
+* @method extractData
+*
+*/
 RCutility.prototype.extractData = function (modules, typeAsk) {
+  console.log('extract data')
+  console.log(modules)
+  console.log(typeAsk)
   let packages = []
   for (const mod of modules) {
+    console.log('looking for data mach')
     console.log(mod)
-    // console.log(mod.value.concept.moduleinfo.name)
+    console.log(mod.value.concept.moduleinfo.name)
     if (mod.value.concept.moduleinfo.name === typeAsk) {
       packages.push(mod.value.concept)
     }
@@ -256,27 +269,6 @@ RCutility.prototype.extractEducation = function (modules, typeAsk) {
     }
   }
   return education
-}
-
-/**
-* extract the network experiment question module
-* @method extractQuestion
-*
-*/
-RCutility.prototype.extractQuestion = function (modules, typeAsk) {
-  // console.log('question mod matcher')
-  // console.log(modules)
-  // console.log(typeAsk)
-  let question = ''
-  for (const mod of modules) {
-    // console.log(typeof (mod.value))
-    if (typeof (mod.value) === 'object') {
-      if (mod.value.concept.moduleinfo.name === typeAsk) {
-        question = mod.value.concept.question
-      }
-    }
-  }
-  return question
 }
 
 /**
