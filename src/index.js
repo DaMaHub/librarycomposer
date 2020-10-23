@@ -21,7 +21,7 @@ var LibraryLib = function () {
   console.log('ref contract composer live')
   this.liveComposer = new RcComposer()
   this.liveKBID = new KbidComposer()
-  this.liveLibraryLib = new RcUtility()
+  this.liveRefcontUtility = new RcUtility()
   this.liveCryptoUtilty = new CryptoUtility()
 }
 
