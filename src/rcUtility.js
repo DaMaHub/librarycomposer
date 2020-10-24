@@ -194,7 +194,7 @@ RCutility.prototype.extractQuestion = function (modules, typeAsk) {
   for (const mod of modules) {
     // console.log(typeof (mod.value))
     if (typeof (mod.value) === 'object') {
-      if (mod.value.concept.moduleinfo.name === typeAsk) {
+      if (mod.value.info.moduleinfo.name === typeAsk) {
         question = mod.value.concept.question
       }
     }
@@ -215,9 +215,9 @@ RCutility.prototype.extractData = function (modules, typeAsk) {
   for (const mod of modules) {
     console.log('looking for data mach')
     console.log(mod)
-    console.log(mod.value.concept.moduleinfo.name)
-    if (mod.value.concept.moduleinfo.name === typeAsk) {
-      packages.push(mod.value.concept)
+    console.log(mod.value.info.moduleinfo.name)
+    if (mod.value.info.moduleinfo.name === typeAsk) {
+      packages.push(mod.value.info)
     }
   }
   return packages
@@ -232,7 +232,7 @@ RCutility.prototype.extractCompute = function (modules, typeAsk) {
   let computes = []
   for (const mod of modules) {
     // console.log(mod.value.concept.moduleinfo.name)
-    if (mod.value.concept.moduleinfo.name === typeAsk) {
+    if (mod.value.info.moduleinfo.name === typeAsk) {
       computes.push(mod.value.concept)
     }
   }
@@ -248,7 +248,7 @@ RCutility.prototype.extractVisualise = function (modules, typeAsk) {
   let visuals = []
   for (const mod of modules) {
     // console.log(mod.value.concept.moduleinfo.name)
-    if (mod.value.concept.moduleinfo.name === typeAsk) {
+    if (mod.value.info.moduleinfo.name === typeAsk) {
       visuals.push(mod.value.concept)
     }
   }
@@ -264,7 +264,7 @@ RCutility.prototype.extractEducation = function (modules, typeAsk) {
   let education = []
   for (const mod of modules) {
     // console.log(mod.value.concept.moduleinfo.name)
-    if (mod.value.concept.moduleinfo.name === typeAsk) {
+    if (mod.value.info.moduleinfo.name === typeAsk) {
       education.push(mod.value.concept)
     }
   }
