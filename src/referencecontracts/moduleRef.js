@@ -32,14 +32,9 @@ util.inherits(ModuleReferenceContract, events.EventEmitter)
 ModuleReferenceContract.prototype.modulePrepare = function (inputRC) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
+  datatypeReferenceContract.info = {}
   // need to prepare matching of datatyps ref contracts to table columns
-  datatypeReferenceContract.concept = inputRC
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
+  datatypeReferenceContract.info = inputRC
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -48,8 +43,6 @@ ModuleReferenceContract.prototype.modulePrepare = function (inputRC) {
   RefContractHolder.action = 'PUT'
   RefContractHolder.hash = dtHASH
   RefContractHolder.contract = datatypeReferenceContract
-  console.log('module holder')
-  console.log(RefContractHolder)
   return RefContractHolder
 }
 
