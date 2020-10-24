@@ -130,14 +130,9 @@ ModuleReferenceContract.prototype.prepareTemplateModule = function (modIN) {
 ModuleReferenceContract.prototype.prepareQuestion = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
+  datatypeReferenceContract.info = {}
   // need to prepare matching of datatyps ref contracts to table columns
-  datatypeReferenceContract.concept = modIN
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
+  datatypeReferenceContract.info = modIN
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -158,14 +153,8 @@ ModuleReferenceContract.prototype.prepareQuestion = function (modIN) {
 ModuleReferenceContract.prototype.prepareData = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
-  // need to prepare matching of datatyps ref contracts to table columns
-  datatypeReferenceContract.concept = modIN
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
+  datatypeReferenceContract.info = {}
+  datatypeReferenceContract.info = modIN
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -184,14 +173,8 @@ ModuleReferenceContract.prototype.prepareData = function (modIN) {
 ModuleReferenceContract.prototype.prepareCompute = function (modIN, defaults) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
-  // need to prepare matching of datatyps ref contracts to table columns
-  datatypeReferenceContract.concept = modIN
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
+  datatypeReferenceContract.info = {}
+  datatypeReferenceContract.info = modIN
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -212,14 +195,8 @@ ModuleReferenceContract.prototype.prepareCompute = function (modIN, defaults) {
 ModuleReferenceContract.prototype.prepareVisulise = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
-  // need to prepare matching of datatyps ref contracts to table columns
-  datatypeReferenceContract.concept = modIN
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
+  datatypeReferenceContract.info = {}
+  datatypeReferenceContract.info = modIN
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -240,14 +217,8 @@ ModuleReferenceContract.prototype.prepareVisulise = function (modIN) {
 ModuleReferenceContract.prototype.prepareJoinModule = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
-  // need to prepare matching of datatyps ref contracts to table columns
-  datatypeReferenceContract.concept = modIN
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
+  datatypeReferenceContract.info = {}
+  datatypeReferenceContract.info = modIN
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -267,14 +238,8 @@ ModuleReferenceContract.prototype.prepareJoinQuestion = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.type = modIN.type
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
-  // need to prepare matching of datatyps ref contracts to table columns
-  datatypeReferenceContract.concept = modIN
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
+  datatypeReferenceContract.info = {}
+  datatypeReferenceContract.info = modIN
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -296,17 +261,11 @@ ModuleReferenceContract.prototype.prepareJoinData = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.type = modIN.type
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
-  // need to prepare matching of datatyps ref contracts to table columns
+  datatypeReferenceContract.info = {}
   let dataSourceSelected = {}
   dataSourceSelected.type = modIN.type
   dataSourceSelected.data = modIN.data
-  datatypeReferenceContract.concept = dataSourceSelected
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
+  datatypeReferenceContract.info = dataSourceSelected
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -326,14 +285,8 @@ ModuleReferenceContract.prototype.prepareJoinCompute = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.type = modIN.type
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
-  // need to prepare matching of datatyps ref contracts to table columns
-  datatypeReferenceContract.concept = modIN
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
+  datatypeReferenceContract.info = {}
+  datatypeReferenceContract.info = modIN
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -353,14 +306,8 @@ ModuleReferenceContract.prototype.prepareJoinVisulise = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.type = modIN.type
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
-  // need to prepare matching of datatyps ref contracts to table columns
-  datatypeReferenceContract.concept = modIN
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
+  datatypeReferenceContract.info = {}
+  datatypeReferenceContract.info = modIN
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
