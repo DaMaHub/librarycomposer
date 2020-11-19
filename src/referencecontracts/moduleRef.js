@@ -95,6 +95,30 @@ ModuleReferenceContract.prototype.moduleJoinPrepare = function (inputRC) {
 }
 
 /**
+* prepare a module template reference contract
+* @method moduleUpdatePrepare
+*
+*/
+ModuleReferenceContract.prototype.moduleUpdatePrepare = function (inputRC) {
+  let newModule = {}
+  // what type of modules is it?
+  if (inputRC.reftype === 'module') {
+    newModule = this.prepareUpdateModule(inputRC)
+  } else if (inputRC.info.value.type === 'question') {
+    newModule = this.prepareUpdateQuestion(inputRC)
+  } else if (inputRC.info.value.type === 'data') {
+    newModule = this.prepareUpdateData(inputRC)
+  } else if (inputRC.info.value.type === 'compute') {
+    newModule = this.prepareUpdateCompute(inputRC)
+  } else if (inputRC.info.value.type === 'visualise') {
+    newModule = this.prepareUpdateVisulise(inputRC)
+  } else if (inputRC.info.value.type === 'education') {
+    newModule = 1
+  }
+  return newModule
+}
+
+/**
 * prepare template module
 * @method prepareTemplateModule
 *
@@ -117,8 +141,6 @@ ModuleReferenceContract.prototype.prepareTemplateModule = function (modIN) {
   RefContractHolder.action = 'PUT'
   RefContractHolder.hash = dtHASH
   RefContractHolder.contract = datatypeReferenceContract
-  // console.log('module holder')
-  // console.log(RefContractHolder)
   return RefContractHolder
 }
 
@@ -140,8 +162,6 @@ ModuleReferenceContract.prototype.prepareQuestion = function (modIN) {
   RefContractHolder.action = 'PUT'
   RefContractHolder.hash = dtHASH
   RefContractHolder.contract = datatypeReferenceContract
-  // console.log('module holder')
-  // console.log(RefContractHolder)
   return RefContractHolder
 }
 
@@ -182,8 +202,6 @@ ModuleReferenceContract.prototype.prepareCompute = function (modIN, defaults) {
   RefContractHolder.action = 'PUT'
   RefContractHolder.hash = dtHASH
   RefContractHolder.contract = datatypeReferenceContract
-  // console.log('module holder')
-  // console.log(RefContractHolder)
   return RefContractHolder
 }
 
@@ -204,8 +222,6 @@ ModuleReferenceContract.prototype.prepareVisulise = function (modIN) {
   RefContractHolder.action = 'PUT'
   RefContractHolder.hash = dtHASH
   RefContractHolder.contract = datatypeReferenceContract
-  // console.log('module holder')
-  // console.log(RefContractHolder)
   return RefContractHolder
 }
 
@@ -256,8 +272,6 @@ ModuleReferenceContract.prototype.prepareJoinQuestion = function (modIN) {
 *
 */
 ModuleReferenceContract.prototype.prepareJoinData = function (modIN) {
-  console.log('join data module')
-  console.log(modIN)
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.type = modIN.type
@@ -308,6 +322,32 @@ ModuleReferenceContract.prototype.prepareJoinVisulise = function (modIN) {
   datatypeReferenceContract.type = modIN.type
   datatypeReferenceContract.info = {}
   datatypeReferenceContract.info = modIN
+  // create a hash of entries as the index key
+  const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
+  const RefContractHolder = {}
+  RefContractHolder.reftype = 'module'
+  RefContractHolder.action = 'PUT'
+  RefContractHolder.hash = dtHASH
+  RefContractHolder.contract = datatypeReferenceContract
+  return RefContractHolder
+}
+
+/**
+* prepare compute module
+* @method prepareUpdateCompute
+*
+*/
+ModuleReferenceContract.prototype.prepareUpdateCompute = function (modIN) {
+  const datatypeReferenceContract = {}
+  datatypeReferenceContract.refcontract = 'module'
+  datatypeReferenceContract.type = 'compute'
+  if (modIN.info.value.link !== undefined) {
+    datatypeReferenceContract.link = modIN.info.value.link
+  } else {
+    datatypeReferenceContract.link = modIN.info.key
+  }
+  datatypeReferenceContract.info = {}
+  datatypeReferenceContract.info = modIN.info.value.info
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}

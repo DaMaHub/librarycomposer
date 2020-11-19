@@ -15,7 +15,6 @@ import events from 'events'
 
 var RCutility = function () {
   events.EventEmitter.call(this)
-  console.log('ref contract composer live')
   this.cryptoLive = new CryptoUtility()
 }
 
@@ -55,7 +54,6 @@ RCutility.prototype.refcontractSperate = function (refContractsList) {
   const visualiseList = []
   const nxpList = []
   for (const rc of refContractsList) {
-    // console.log(rc)
     if (rc.value.refcontract === 'datatype') {
       const refCont = { key: rc.key, value: rc.value }
       datatypeList.push(refCont)
@@ -79,6 +77,7 @@ RCutility.prototype.refcontractSperate = function (refContractsList) {
       nxpList.push(refCont)
     }
   }
+  // just return the latest modules (and all other contract TODO)
   refContractHolder.datatype = datatypeList
   refContractHolder.units = unitsList
   refContractHolder.compute = computeList
@@ -99,7 +98,6 @@ RCutility.prototype.experimentSplit = function (inputNXPs) {
   let genesis = []
   let joined = []
   for (const exp of inputNXPs) {
-    // console.log(exp.value.refcontract)
     if (exp.value.concept.state === 'genesis') {
       genesis.push(exp)
     } else if (exp.value.concept.state === 'joined') {
@@ -187,12 +185,8 @@ RCutility.prototype.expMatchModuleLive = function (allRefcont, expModules) {
 *
 */
 RCutility.prototype.extractQuestion = function (modules, typeAsk) {
-  // console.log('question mod matcher')
-  // console.log(modules)
-  // console.log(typeAsk)
   let question = ''
   for (const mod of modules) {
-    // console.log(typeof (mod.value))
     if (typeof (mod.value) === 'object') {
       if (mod.value.info.moduleinfo.name === typeAsk) {
         question = mod.value.concept.question
@@ -225,7 +219,6 @@ RCutility.prototype.extractData = function (modules, typeAsk) {
 RCutility.prototype.extractCompute = function (modules, typeAsk) {
   let computes = []
   for (const mod of modules) {
-    // console.log(mod.value.concept.moduleinfo.name)
     if (mod.value.info.moduleinfo.name === typeAsk) {
       computes.push(mod.value.info)
     }
@@ -241,7 +234,6 @@ RCutility.prototype.extractCompute = function (modules, typeAsk) {
 RCutility.prototype.extractVisualise = function (modules, typeAsk) {
   let visuals = []
   for (const mod of modules) {
-    // console.log(mod.value.concept.moduleinfo.name)
     if (mod.value.info.moduleinfo.name === typeAsk) {
       visuals.push(mod.value.info)
     }
@@ -257,7 +249,6 @@ RCutility.prototype.extractVisualise = function (modules, typeAsk) {
 RCutility.prototype.extractEducation = function (modules, typeAsk) {
   let education = []
   for (const mod of modules) {
-    // console.log(mod.value.concept.moduleinfo.name)
     if (mod.value.info.moduleinfo.name === typeAsk) {
       education.push(mod.value.info)
     }
@@ -293,9 +284,7 @@ RCutility.prototype.mergePackageMap = function (col, table) {
   table.shift()
   let countCol = 1
   for (const co of col) {
-    // console.log(co)
     for (const tb of table) {
-      // console.log(tb[0])
       if (co.count === countCol) {
         const mapPair = {}
         mapPair.refcontract = tb[0].key
@@ -305,8 +294,6 @@ RCutility.prototype.mergePackageMap = function (col, table) {
       }
     }
   }
-  // console.log('mapped pair')
-  // console.log(mapped)
   return mapped
 }
 

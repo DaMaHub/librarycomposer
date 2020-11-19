@@ -18,7 +18,6 @@ import events from 'events'
 
 var LibraryLib = function () {
   events.EventEmitter.call(this)
-  console.log('ref contract composer live')
   this.liveComposer = new RcComposer()
   this.liveKBID = new KbidComposer()
   this.liveRefcontUtility = new RcUtility()

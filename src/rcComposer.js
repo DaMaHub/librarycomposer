@@ -23,7 +23,6 @@ import events from 'events'
 
 var ReferenceContractComposer = function () {
   events.EventEmitter.call(this)
-  console.log('ref contract composer live')
   this.cryptoLive = new CryptoUtility()
   this.datatypeRefLive = new DatatypeRefCont()
   this.packagingRefLive = new PackagingRefCont()
@@ -45,7 +44,6 @@ util.inherits(ReferenceContractComposer, events.EventEmitter)
 *
 */
 ReferenceContractComposer.prototype.datatypeComposer = function (input) {
-  console.log('prepare New datatype contract')
   const preContract = this.datatypeRefLive.dataTypePrepare(input)
   return preContract
 }
@@ -56,7 +54,6 @@ ReferenceContractComposer.prototype.datatypeComposer = function (input) {
 *
 */
 ReferenceContractComposer.prototype.packagingComposer = function (input) {
-  console.log('prepare New Packaing contract')
   const preContract = this.packagingRefLive.packagingPrepare(input)
   return preContract
 }
@@ -67,7 +64,6 @@ ReferenceContractComposer.prototype.packagingComposer = function (input) {
 *
 */
 ReferenceContractComposer.prototype.computeComposer = function (input) {
-  console.log('prepare New compute contract')
   const preContract = this.computeRefLive.computePrepare(input)
   return preContract
 }
@@ -78,7 +74,6 @@ ReferenceContractComposer.prototype.computeComposer = function (input) {
 *
 */
 ReferenceContractComposer.prototype.visualiseComposer = function (input) {
-  console.log('prepare New visualise contract')
   const preContract = this.visualiseRefLive.visualisePrepare(input)
   return preContract
 }
@@ -92,6 +87,8 @@ ReferenceContractComposer.prototype.moduleComposer = function (input, join) {
   let preContract = {}
   if (join === 'join') {
     preContract = this.moduleRefLive.moduleJoinPrepare(input)
+  } else if (join === 'update') {
+    preContract = this.moduleRefLive.moduleUpdatePrepare(input)
   } else {
     preContract = this.moduleRefLive.moduleGenesisPrepare(input)
   }
@@ -104,7 +101,6 @@ ReferenceContractComposer.prototype.moduleComposer = function (input, join) {
 *
 */
 ReferenceContractComposer.prototype.experimentComposerGenesis = function (input) {
-  console.log('prepare New visualise contract')
   const preContract = this.experimentRefLive.nxpPrepare(input)
   return preContract
 }
@@ -115,7 +111,6 @@ ReferenceContractComposer.prototype.experimentComposerGenesis = function (input)
 *
 */
 ReferenceContractComposer.prototype.experimentComposerJoin = function (input) {
-  console.log('prepare New visualise contract')
   const preContract = this.experimentRefLive.nxpJoinedPrepare(input)
   return preContract
 }
@@ -126,11 +121,8 @@ ReferenceContractComposer.prototype.experimentComposerJoin = function (input) {
 *
 */
 ReferenceContractComposer.prototype.refcontractLookup = function (refCont, allContracts) {
-  console.log('lookup contract')
-  console.log(refCont)
   let matchKey = {}
   for (const rc of allContracts) {
-    console.log(rc)
     if (refCont.trim() === rc.key) {
       matchKey = rc
     }
