@@ -10,6 +10,7 @@
 * @version    $Id$
 */
 import CryptoUtility from './cryptoUtility.js'
+import LifeboardRefCont from './referencecontracts/lifeboardRef.js'
 import DatatypeRefCont from './referencecontracts/datatypeRef.js'
 import PackagingRefCont from './referencecontracts/packagingRef.js'
 import ComputeRefCont from './referencecontracts/computeRef.js'
@@ -24,6 +25,7 @@ import events from 'events'
 var ReferenceContractComposer = function () {
   events.EventEmitter.call(this)
   this.cryptoLive = new CryptoUtility()
+  this.lifeboardRefLive = new LifeboardRefCont()
   this.datatypeRefLive = new DatatypeRefCont()
   this.packagingRefLive = new PackagingRefCont()
   this.computeRefLive = new ComputeRefCont()
@@ -37,6 +39,21 @@ var ReferenceContractComposer = function () {
 * @method inherits
 */
 util.inherits(ReferenceContractComposer, events.EventEmitter)
+
+/**
+* Lifeboard composer
+* @method lifeboardComposer
+*
+*/
+ReferenceContractComposer.prototype.lifeboardComposer = function (input, type) {
+  let preContract = {}
+  if (type === 'new') {
+    preContract = this.lifeboardRefLive.lifeboardPrepare(input)
+  } else if (type === 'member') {
+    preContract = this.lifeboardRefLive.lbmemberPrepare(input)
+  }
+  return preContract
+}
 
 /**
 * Datatype composer
