@@ -211,6 +211,8 @@ ModuleReferenceContract.prototype.prepareCompute = function (modIN, defaults) {
 *
 */
 ModuleReferenceContract.prototype.prepareVisulise = function (modIN) {
+  let makeDate = new Date().toString()
+  modIN.makeDate = makeDate
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.info = {}
@@ -317,6 +319,8 @@ ModuleReferenceContract.prototype.prepareJoinCompute = function (modIN) {
 *
 */
 ModuleReferenceContract.prototype.prepareJoinVisulise = function (modIN) {
+  let makeDate = new Date().toString()
+  modIN.makeDate = makeDate
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.type = modIN.type
