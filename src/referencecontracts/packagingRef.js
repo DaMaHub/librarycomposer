@@ -51,6 +51,7 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
   newPackagingMap.tablestructure = mergeDTColumn
   newPackagingMap.tidy = inputRC.tidy
   newPackagingMap.category = inputRC.category
+  newPackagingMap.device = inputRC.device
   // prepare semantic part of datatype ref contracts
   datatypeReferenceContract.concept = newPackagingMap
   // prepare space coordinates e.g. quark, atom, molecule etc.
