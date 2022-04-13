@@ -30,8 +30,6 @@ util.inherits(PackagingReferenceContract, events.EventEmitter)
 *
 */
 PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
-  console.log('packing in')
-  console.log(inputRC)
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'packaging'
   datatypeReferenceContract.concept = {}
@@ -39,8 +37,6 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
   datatypeReferenceContract.computational = {}
   // need to prepare matching of datatyps ref contracts to table columns
   const mergeDTColumn = this.mergePackageMap(inputRC.apicolumns, inputRC.apicolHolder)
-  console.log('merge colums back')
-  console.log(mergeDTColumn)
   const newPackagingMap = {}
   newPackagingMap.name = inputRC.name
   newPackagingMap.description = inputRC.description
@@ -65,8 +61,6 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
   RefContractHolder.action = 'PUT'
   RefContractHolder.hash = dtHASH
   RefContractHolder.contract = datatypeReferenceContract
-  console.log('package holder')
-  console.log(RefContractHolder)
   return RefContractHolder
 }
 
@@ -76,9 +70,6 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
 *
 */
 PackagingReferenceContract.prototype.mergePackageMap = function (col, table) {
-  console.log('dt col matcher')
-  console.log(col)
-  console.log(table)
   const mapped = []
   // remove first element array empty by design
   table.shift()
@@ -88,7 +79,11 @@ PackagingReferenceContract.prototype.mergePackageMap = function (col, table) {
     if (co.count === countCol) {
       const keyID = countCol - 1
       const mapPair = {}
-      mapPair.refcontract = table[keyID][0].key
+      if (table[keyID].length > 0) {
+        mapPair.refcontract = table[keyID][0].key
+      } else {
+        mapPair.refcontract = null
+      }
       mapPair.column = co.name
       mapped.push(mapPair)
     }
