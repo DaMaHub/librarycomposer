@@ -41,8 +41,10 @@ ComputeReferenceContract.prototype.computePrepare = function (inputRC) {
   RefContractHolder.type = 'library'
   RefContractHolder.reftype = 'compute'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = computeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = computeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 

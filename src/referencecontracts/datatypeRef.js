@@ -45,8 +45,10 @@ DatatypeReferenceContract.prototype.dataTypePrepare = function (inputRC) {
   RefContractHolder.type = 'library'
   RefContractHolder.reftype = 'datatype'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 

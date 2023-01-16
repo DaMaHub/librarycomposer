@@ -41,8 +41,10 @@ VisualiseReferenceContract.prototype.visualisePrepare = function (inputRC) {
   RefContractHolder.type = 'library'
   RefContractHolder.reftype = 'visualise'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = visualiseReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = visualiseReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 

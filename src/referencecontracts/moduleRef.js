@@ -41,8 +41,10 @@ ModuleReferenceContract.prototype.modulePrepare = function (inputRC) {
   RefContractHolder.type = 'library'
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -139,8 +141,10 @@ ModuleReferenceContract.prototype.prepareTemplateModule = function (modIN) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -160,8 +164,10 @@ ModuleReferenceContract.prototype.prepareQuestion = function (modIN) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -180,8 +186,10 @@ ModuleReferenceContract.prototype.prepareData = function (modIN) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -200,8 +208,10 @@ ModuleReferenceContract.prototype.prepareCompute = function (modIN, defaults) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -222,8 +232,10 @@ ModuleReferenceContract.prototype.prepareVisulise = function (modIN) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -242,8 +254,10 @@ ModuleReferenceContract.prototype.prepareJoinModule = function (modIN) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -263,8 +277,10 @@ ModuleReferenceContract.prototype.prepareJoinQuestion = function (modIN) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -287,8 +303,10 @@ ModuleReferenceContract.prototype.prepareJoinData = function (modIN) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -308,8 +326,10 @@ ModuleReferenceContract.prototype.prepareJoinCompute = function (modIN) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -331,8 +351,10 @@ ModuleReferenceContract.prototype.prepareJoinVisulise = function (modIN) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -357,8 +379,10 @@ ModuleReferenceContract.prototype.prepareUpdateCompute = function (modIN) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 

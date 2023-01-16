@@ -31,8 +31,6 @@ util.inherits(ExperimentReferenceContract, events.EventEmitter)
 *
 */
 ExperimentReferenceContract.prototype.nxpPrepare = function (inputRC) {
-  console.log('genesis experiment')
-  console.log(inputRC)
   const nxpReferenceContract = {}
   nxpReferenceContract.refcontract = 'experiment'
   nxpReferenceContract.modules = {}
@@ -51,10 +49,10 @@ ExperimentReferenceContract.prototype.nxpPrepare = function (inputRC) {
   RefContractHolder.type = 'library'
   RefContractHolder.reftype = 'experiment'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = nxpReferenceContract
-  console.log('nxp holder')
-  console.log(RefContractHolder)
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = nxpReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 
@@ -81,10 +79,10 @@ ExperimentReferenceContract.prototype.nxpJoinedPrepare = function (inputRC) {
   const RefContractHolder = {}
   RefContractHolder.reftype = 'experiment'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = nxpReferenceContract
-  console.log('nxp holder')
-  console.log(RefContractHolder)
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = nxpReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 

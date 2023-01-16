@@ -47,10 +47,10 @@ ModuleReferenceContract.prototype.modulePrepare = function (inputRC) {
   RefContractHolder.type = 'library'
   RefContractHolder.reftype = 'module'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = datatypeReferenceContract
-  console.log('module holder')
-  console.log(RefContractHolder)
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = datatypeReferenceContract
+  RefContractHolder.data = contractData
   return RefContractHolder
 }
 

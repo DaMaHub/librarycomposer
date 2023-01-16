@@ -45,8 +45,10 @@ LifeboardContract.prototype.lifeboardPrepare = function (inputRC) {
   RefContractHolder.type = 'lifeboard'
   RefContractHolder.reftype = 'lifeboard'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = lifeboardContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = lifeboardContract
+  RefContractHolder.data = contractData 
   return RefContractHolder
 }
 
@@ -71,8 +73,10 @@ LifeboardContract.prototype.lbmemberPrepare = function (inputRC) {
   RefContractHolder.type = 'lifeboard'
   RefContractHolder.reftype = 'member'
   RefContractHolder.action = 'PUT'
-  RefContractHolder.hash = dtHASH
-  RefContractHolder.contract = lifeboardContract
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = lifeboardContract
+  RefContractHolder.data = contractData 
   return RefContractHolder
 }
 
