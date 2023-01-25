@@ -263,7 +263,7 @@ ModuleReferenceContract.prototype.prepareJoinModule = function (modIN) {
 
 /**
 * prepare question module
-* @method prepareQuestion
+* @method prepareJoinQuestion
 *
 */
 ModuleReferenceContract.prototype.prepareJoinQuestion = function (modIN) {
@@ -335,7 +335,7 @@ ModuleReferenceContract.prototype.prepareJoinCompute = function (modIN) {
 
 /**
 * prepare Visulise module
-* @method prepareVisulise
+* @method prepareJoinVisulise
 *
 */
 ModuleReferenceContract.prototype.prepareJoinVisulise = function (modIN) {

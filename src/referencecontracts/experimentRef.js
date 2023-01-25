@@ -15,7 +15,6 @@ import events from 'events'
 
 var ExperimentReferenceContract = function () {
   events.EventEmitter.call(this)
-  console.log('ref contract composer live')
   this.cryptoLive = new CryptoUtility()
 }
 
@@ -47,7 +46,7 @@ ExperimentReferenceContract.prototype.nxpPrepare = function (inputRC) {
   const dtHASH = this.cryptoLive.evidenceProof(nxpReferenceContract)
   const RefContractHolder = {}
   RefContractHolder.type = 'library'
-  RefContractHolder.reftype = 'experiment'
+  RefContractHolder.reftype = 'experiment-new'
   RefContractHolder.action = 'PUT'
   let contractData = {}
   contractData.hash = dtHASH
@@ -63,7 +62,7 @@ ExperimentReferenceContract.prototype.nxpPrepare = function (inputRC) {
 */
 ExperimentReferenceContract.prototype.nxpJoinedPrepare = function (inputRC) {
   const nxpReferenceContract = {}
-  nxpReferenceContract.refcontract = 'experiment'
+  nxpReferenceContract.refcontract = 'experiment-join'
   nxpReferenceContract.modules = {}
   nxpReferenceContract.concept = {}
   nxpReferenceContract.space = {}

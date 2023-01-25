@@ -72,7 +72,7 @@ RCutility.prototype.refcontractSperate = function (refContractsList) {
     } else if (rc.value.refcontract === 'visualise') {
       const refCont = { key: rc.key, value: rc.value }
       visualiseList.push(refCont)
-    } else if (rc.value.refcontract === 'experiment') {
+    } else if (rc.value.refcontract === 'experiment-join') {
       const refCont = { key: rc.key, value: rc.value }
       nxpList.push(refCont)
     }
