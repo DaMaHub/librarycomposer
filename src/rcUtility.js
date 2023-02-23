@@ -300,4 +300,77 @@ RCutility.prototype.mergePackageMap = function (col, table) {
   return mapped
 }
 
+/**
+* extract ref contracts from modules
+* @method extractRefcontracts
+*
+*/
+RCutility.prototype.extractRefcontracts = function (modulesGrid, peerContext) {
+  let newDisplayOrder = []
+  let referenceContracts = []
+  if (peerContext === 'public') {
+    // first match for question
+    for (let mod of modulesGrid) {
+      if (mod.value.info.moduleinfo.name === 'question') {
+        newDisplayOrder.push(mod)
+        referenceContracts.push()
+      }
+    }
+    for (let mod of modulesGrid) {
+      if (mod.value.info.moduleinfo.name === 'visualise') {
+        newDisplayOrder.push(mod)
+        referenceContracts.push()
+      }
+    }
+    for (let mod of modulesGrid) {
+      if (mod.value.info.moduleinfo.name === 'compute') {
+        newDisplayOrder.push(mod)
+        referenceContracts.push()
+      }
+    }
+    for (let mod of modulesGrid) {
+      if (mod.value.info.moduleinfo.name === 'data') {
+        newDisplayOrder.push(mod)
+        referenceContracts.push()
+      }
+    }
+    // second match for visualisation
+    // third match for compute
+    // forth devices and then other modules as added
+  } else if (peerContext === 'private') {
+    // first match for question
+    for (let mod of modulesGrid) {
+      if (mod.value.info.type === 'question') {
+        newDisplayOrder.push(mod)
+        referenceContracts.push(mod)
+      }
+    }
+    for (let mod of modulesGrid) {
+      if (mod.value.info.type === 'visualise') {
+        newDisplayOrder.push(mod)
+        referenceContracts.push(mod.value.info.visualise)
+      }
+    }
+    for (let mod of modulesGrid) {
+      if (mod.value.info.type === 'compute') {
+        console.log('compute')
+        console.log(mod)
+        newDisplayOrder.push(mod)
+        referenceContracts.push(mod.value.info.compute)
+      }
+    }
+    for (let mod of modulesGrid) {
+      if (mod.value.info.type === 'data') {
+        newDisplayOrder.push(mod)
+        referenceContracts.push(mod.value.info.data)
+      }
+    }
+    // second match for visualisation
+    // third match for compute
+    // forth devices and then other modules as added
+  }
+  return referenceContracts
+  // return newDisplayOrder
+}
+
 export default RCutility
