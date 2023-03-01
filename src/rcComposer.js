@@ -96,7 +96,7 @@ ReferenceContractComposer.prototype.visualiseComposer = function (input) {
 }
 
 /**
-* moduleComposer composer
+* update to reference contract module nb. compute has one to many relationship to keep tract of context
 * @method moduleComposer
 *
 */
