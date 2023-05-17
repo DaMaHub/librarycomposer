@@ -1,6 +1,6 @@
 {
   "name": "librarycomposer",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "create new reference contracts and utilities",
   "main": "src/index.js",
   "scripts": {

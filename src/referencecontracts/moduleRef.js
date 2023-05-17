@@ -312,7 +312,7 @@ ModuleReferenceContract.prototype.prepareJoinData = function (modIN) {
 
 /**
 * prepare compute module
-* @method prepareCompute
+* @method prepareJoinCompute
 *
 */
 ModuleReferenceContract.prototype.prepareJoinCompute = function (modIN) {

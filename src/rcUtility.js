@@ -353,8 +353,6 @@ RCutility.prototype.extractRefcontracts = function (modulesGrid, peerContext) {
     }
     for (let mod of modulesGrid) {
       if (mod.value.info.type === 'compute') {
-        console.log('compute')
-        console.log(mod)
         newDisplayOrder.push(mod)
         referenceContracts.push(mod.value.info.compute)
       }
