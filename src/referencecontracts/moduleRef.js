@@ -286,7 +286,7 @@ ModuleReferenceContract.prototype.prepareJoinQuestion = function (modIN) {
 
 /**
 * prepare data module
-* @method prepareData
+* @method prepareJoinData
 *
 */
 ModuleReferenceContract.prototype.prepareJoinData = function (modIN) {

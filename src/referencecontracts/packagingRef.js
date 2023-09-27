@@ -36,7 +36,7 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
   datatypeReferenceContract.space = {}
   datatypeReferenceContract.computational = {}
   // need to prepare matching of datatyps ref contracts to table columns
-  const mergeDTColumn = this.mergePackageMap(inputRC.apicolumns, inputRC.apicolHolder)
+  const mergeDTColumn = [{refcontract: 'blind1234555554321'}] // this.mergePackageMap(inputRC.apicolumns, inputRC.apicolHolder)  manual mapping to datatypes job for LLM
   const newPackagingMap = {}
   newPackagingMap.name = inputRC.name
   newPackagingMap.description = inputRC.description
@@ -62,8 +62,8 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
   RefContractHolder.reftype = 'packaging'
   RefContractHolder.action = 'PUT'
   let contractData = {}
-  contractData.hash = dtHASH
-  contractData.contract = datatypeReferenceContract
+  contractData.key = dtHASH  // note change from hash and contract
+  contractData.value = datatypeReferenceContract
   RefContractHolder.data = contractData
   return RefContractHolder
 }
