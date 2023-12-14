@@ -35,17 +35,7 @@ VisualiseReferenceContract.prototype.visualisePrepare = function (inputRC) {
   visualiseReferenceContract.concept = {}
   // prepare semantic part of datatype ref contracts
   visualiseReferenceContract.computational = inputRC
-  // create a hash of entries as the index key
-  const dtHASH = this.cryptoLive.evidenceProof(visualiseReferenceContract)
-  const RefContractHolder = {}
-  RefContractHolder.type = 'library'
-  RefContractHolder.reftype = 'visualise'
-  RefContractHolder.action = 'PUT'
-  let contractData = {}
-  contractData.hash = dtHASH
-  contractData.contract = visualiseReferenceContract
-  RefContractHolder.data = contractData
-  return RefContractHolder
+  return visualiseReferenceContract
 }
 
 export default VisualiseReferenceContract
