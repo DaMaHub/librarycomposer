@@ -4,18 +4,16 @@
 *
 *
 * @class DatatypeReferenceContract
-* @package    LKN health
-* @copyright  Copyright (c) 2020 James Littlejohn
+* @package    Network Library
+* @copyright  Copyright (c) 2023 James Littlejohn
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
 import util from 'util'
 import events from 'events'
 
 var DatatypeReferenceContract = function () {
   events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
 }
 
 /**
@@ -39,17 +37,8 @@ DatatypeReferenceContract.prototype.dataTypePrepare = function (inputRC) {
   datatypeReferenceContract.concept = inputRC
   // prepare space coordinates e.g. quark, atom, molecule etc.
   datatypeReferenceContract.space = { concept: 'mind' }
-  // create a hash of entries as the index key
-  const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
-  const RefContractHolder = {}
-  RefContractHolder.type = 'library'
-  RefContractHolder.reftype = 'datatype'
-  RefContractHolder.action = 'PUT'
-  let contractData = {}
-  contractData.hash = dtHASH
-  contractData.contract = datatypeReferenceContract
-  RefContractHolder.data = contractData
-  return RefContractHolder
+
+  return datatypeReferenceContract
 }
 
 export default DatatypeReferenceContract

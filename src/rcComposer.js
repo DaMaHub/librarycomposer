@@ -61,18 +61,40 @@ ReferenceContractComposer.prototype.lifeboardComposer = function (input, type) {
 *
 */
 ReferenceContractComposer.prototype.datatypeComposer = function (input) {
-  const preContract = this.datatypeRefLive.dataTypePrepare(input)
-  return preContract
+  const prepContract = this.datatypeRefLive.dataTypePrepare(input)
+    // create a hash of entries as the index key
+    const dtHASH = this.cryptoLive.evidenceProof(prepContract)
+    const RefContractHolder = {}
+    RefContractHolder.type = 'library'
+    RefContractHolder.action = 'contracts'
+    RefContractHolder.privacy = 'public'
+    RefContractHolder.reftype = 'datatype'
+    RefContractHolder.task = 'PUT'
+    let contractData = {}
+    contractData.hash = dtHASH
+    contractData.contract = prepContract
+    RefContractHolder.data = contractData
+  return RefContractHolder
 }
-
 /**
 * Packaging composer
 * @method packagingComposer
 *
 */
 ReferenceContractComposer.prototype.packagingComposer = function (input) {
-  const preContract = this.packagingRefLive.packagingPrepare(input)
-  return preContract
+  const prepContract = this.packagingRefLive.packagingPrepare(input)
+  const dtHASH = this.cryptoLive.evidenceProof(prepContract)
+  const RefContractHolder = {}
+  RefContractHolder.type = 'library'
+  RefContractHolder.action = 'contracts'
+  RefContractHolder.privacy = 'public'
+  RefContractHolder.reftype = 'packaging'
+  RefContractHolder.task = 'PUT'
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = prepContract
+  RefContractHolder.data = contractData
+  return RefContractHolder
 }
 
 /**
@@ -81,8 +103,19 @@ ReferenceContractComposer.prototype.packagingComposer = function (input) {
 *
 */
 ReferenceContractComposer.prototype.computeComposer = function (input) {
-  const preContract = this.computeRefLive.computePrepare(input)
-  return preContract
+  const prepContract = this.computeRefLive.computePrepare(input)
+  const dtHASH = this.cryptoLive.evidenceProof(prepContract)
+  const RefContractHolder = {}
+  RefContractHolder.type = 'library'
+  RefContractHolder.action = 'contracts'
+  RefContractHolder.privacy = 'public'
+  RefContractHolder.reftype = 'compute'
+  RefContractHolder.task = 'PUT'
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = prepContract
+  RefContractHolder.data = contractData
+  return RefContractHolder
 }
 
 /**
@@ -91,12 +124,23 @@ ReferenceContractComposer.prototype.computeComposer = function (input) {
 *
 */
 ReferenceContractComposer.prototype.visualiseComposer = function (input) {
-  const preContract = this.visualiseRefLive.visualisePrepare(input)
-  return preContract
+  const prepContract = this.visualiseRefLive.visualisePrepare(input)
+  const dtHASH = this.cryptoLive.evidenceProof(prepContract)
+  const RefContractHolder = {}
+  RefContractHolder.type = 'library'
+  RefContractHolder.action = 'contracts'
+  RefContractHolder.privacy = 'public'
+  RefContractHolder.reftype = 'visualise'
+  RefContractHolder.task = 'PUT'
+  let contractData = {}
+  contractData.hash = dtHASH
+  contractData.contract = prepContract
+  RefContractHolder.data = contractData
+  return RefContractHolder
 }
 
 /**
-* update to reference contract module nb. compute has one to many relationship to keep tract of context
+* moduleComposer composer
 * @method moduleComposer
 *
 */

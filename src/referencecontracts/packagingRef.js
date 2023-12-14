@@ -55,17 +55,7 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
   // prepare space coordinates e.g. quark, atom, molecule etc.
   datatypeReferenceContract.space = { concept: 'mind' }
   datatypeReferenceContract.computational = { refcontract: null }
-  // create a hash of entries as the index key
-  const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
-  const RefContractHolder = {}
-  RefContractHolder.type = 'library'
-  RefContractHolder.reftype = 'packaging'
-  RefContractHolder.action = 'PUT'
-  let contractData = {}
-  contractData.key = dtHASH  // note change from hash and contract
-  contractData.value = datatypeReferenceContract
-  RefContractHolder.data = contractData
-  return RefContractHolder
+  return datatypeReferenceContract
 }
 
 /**

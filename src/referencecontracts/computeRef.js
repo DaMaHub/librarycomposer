@@ -35,17 +35,7 @@ ComputeReferenceContract.prototype.computePrepare = function (inputRC) {
   computeReferenceContract.concept = {}
   // prepare semantic part of datatype ref contracts
   computeReferenceContract.computational = inputRC
-  // create a hash of entries as the index key
-  const dtHASH = this.cryptoLive.evidenceProof(computeReferenceContract)
-  const RefContractHolder = {}
-  RefContractHolder.type = 'library'
-  RefContractHolder.reftype = 'compute'
-  RefContractHolder.action = 'PUT'
-  let contractData = {}
-  contractData.hash = dtHASH
-  contractData.contract = computeReferenceContract
-  RefContractHolder.data = contractData
-  return RefContractHolder
+  return computeReferenceContract
 }
 
 export default ComputeReferenceContract
