@@ -60,9 +60,10 @@ ExperimentReferenceContract.prototype.nxpPrepare = function (inputRC) {
 * @method nxpJoinedPrepare
 *
 */
-ExperimentReferenceContract.prototype.nxpJoinedPrepare = function (inputRC) {
+ExperimentReferenceContract.prototype.nxpJoinedPrepare = function (genkey, inputRC) {
   const nxpReferenceContract = {}
   nxpReferenceContract.refcontract = 'experiment-join'
+  nxpReferenceContract.genesis = genkey
   nxpReferenceContract.modules = {}
   nxpReferenceContract.concept = {}
   nxpReferenceContract.space = {}

@@ -15,7 +15,6 @@ import events from 'events'
 
 var ModuleReferenceContract = function () {
   events.EventEmitter.call(this)
-  console.log('ref contract composer live')
   this.cryptoLive = new CryptoUtility()
 }
 

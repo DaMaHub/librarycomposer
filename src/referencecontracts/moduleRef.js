@@ -50,6 +50,35 @@ ModuleReferenceContract.prototype.modulePrepare = function (inputRC) {
 
 /**
 * prepare a module template reference contract
+* @method moduleGenesisTemp
+*
+*/
+ModuleReferenceContract.prototype.moduleGenesisTemp = function (inputRC) {
+  let newModule = {}
+  // what type of modules is it?
+  if (inputRC.reftype === 'module') {
+    newModule = this.prepareTemplateModule(inputRC)
+  } else if (inputRC.moduleinfo.name === 'question') {
+    newModule = this.prepareQuestion(inputRC)
+    newModule.type = 'question'
+  } else if (inputRC.moduleinfo.name === 'data') {
+    newModule = this.prepareData(inputRC)
+    newModule.type = 'data'
+  } else if (inputRC.moduleinfo.name === 'compute') {
+    newModule = this.prepareCompute(inputRC)
+    newModule.type = 'compute'
+  } else if (inputRC.name === 'visualise') {
+    newModule = this.prepareVisulise(inputRC)
+    newModule.type = 'visualise'
+  } else if (inputRC.moduleinfo.name === 'education') {
+    newModule = 1
+    newModule.type = 'education'
+  }
+  return newModule
+}
+
+/**
+* prepare a module template reference contract
 * @method moduleGenesisPrepare
 *
 */
@@ -58,15 +87,15 @@ ModuleReferenceContract.prototype.moduleGenesisPrepare = function (inputRC) {
   // what type of modules is it?
   if (inputRC.reftype === 'module') {
     newModule = this.prepareTemplateModule(inputRC)
-  } else if (inputRC.moduleinfo.name === 'question') {
+  } else if (inputRC.value.refcontract === 'question') {
     newModule = this.prepareQuestion(inputRC)
-  } else if (inputRC.moduleinfo.name === 'data') {
+  } else if (inputRC.value.refcontract === 'packaging') {
     newModule = this.prepareData(inputRC)
-  } else if (inputRC.moduleinfo.name === 'compute') {
+  } else if (inputRC.value.refcontract === 'compute') {
     newModule = this.prepareCompute(inputRC)
-  } else if (inputRC.moduleinfo.name === 'visualise') {
+  } else if (inputRC.value.refcontract === 'visualise') {
     newModule = this.prepareVisulise(inputRC)
-  } else if (inputRC.moduleinfo.name === 'education') {
+  } else if (inputRC.value.refcontract === 'education') {
     newModule = 1
   }
   return newModule
@@ -82,15 +111,15 @@ ModuleReferenceContract.prototype.moduleJoinPrepare = function (inputRC) {
   // what type of modules is it?
   if (inputRC.reftype === 'module') {
     newModule = this.prepareJoinModule(inputRC)
-  } else if (inputRC.type === 'question') {
+  } else if (inputRC?.value?.style === 'question' || inputRC.style === 'question') {
     newModule = this.prepareJoinQuestion(inputRC)
-  } else if (inputRC.type === 'data') {
+  } else if (inputRC?.value?.style === 'packaging' || inputRC.style === 'packaging') {
     newModule = this.prepareJoinData(inputRC)
-  } else if (inputRC.type === 'compute') {
+  } else if (inputRC?.value?.style === 'compute' || inputRC.style === 'compute') {
     newModule = this.prepareJoinCompute(inputRC)
-  } else if (inputRC.type === 'visualise') {
+  } else if (inputRC?.value?.style === 'visualise' || inputRC.style === 'visualise') {
     newModule = this.prepareJoinVisulise(inputRC)
-  } else if (inputRC.type === 'education') {
+  } else if (inputRC?.value?.style === 'education' || inputRC.style === 'education') {
     newModule = 1
   }
   return newModule
@@ -106,15 +135,15 @@ ModuleReferenceContract.prototype.moduleUpdatePrepare = function (inputRC) {
   // what type of modules is it?
   if (inputRC.reftype === 'module') {
     newModule = this.prepareUpdateModule(inputRC)
-  } else if (inputRC.info.value.type === 'question') {
+  } else if (inputRC.info.value.style === 'question') {
     newModule = this.prepareUpdateQuestion(inputRC)
-  } else if (inputRC.info.value.type === 'data') {
+  } else if (inputRC.info.value.style === 'data') {
     newModule = this.prepareUpdateData(inputRC)
-  } else if (inputRC.info.value.type === 'compute') {
+  } else if (inputRC.info.value.style === 'compute') {
     newModule = this.prepareUpdateCompute(inputRC)
-  } else if (inputRC.info.value.type === 'visualise') {
+  } else if (inputRC.info.value.style === 'visualise') {
     newModule = this.prepareUpdateVisulise(inputRC)
-  } else if (inputRC.info.value.type === 'education') {
+  } else if (inputRC.info.value.style === 'education') {
     newModule = 1
   }
   return newModule
@@ -128,6 +157,7 @@ ModuleReferenceContract.prototype.moduleUpdatePrepare = function (inputRC) {
 ModuleReferenceContract.prototype.prepareTemplateModule = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
+  datatypeReferenceContract.style = modIN.style
   datatypeReferenceContract.concept = {}
   datatypeReferenceContract.space = {}
   datatypeReferenceContract.computational = {}
@@ -155,6 +185,7 @@ ModuleReferenceContract.prototype.prepareTemplateModule = function (modIN) {
 */
 ModuleReferenceContract.prototype.prepareQuestion = function (modIN) {
   const datatypeReferenceContract = {}
+  datatypeReferenceContract.style = 'question'
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.info = {}
   // need to prepare matching of datatyps ref contracts to table columns
@@ -178,6 +209,7 @@ ModuleReferenceContract.prototype.prepareQuestion = function (modIN) {
 */
 ModuleReferenceContract.prototype.prepareData = function (modIN) {
   const datatypeReferenceContract = {}
+  datatypeReferenceContract.style = 'packaging'
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.info = {}
   datatypeReferenceContract.info = modIN
@@ -200,9 +232,14 @@ ModuleReferenceContract.prototype.prepareData = function (modIN) {
 */
 ModuleReferenceContract.prototype.prepareCompute = function (modIN, defaults) {
   const datatypeReferenceContract = {}
+  datatypeReferenceContract.style = 'compute'
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.info = {}
-  datatypeReferenceContract.info = modIN
+  datatypeReferenceContract.info = modIN.value
+  datatypeReferenceContract.controls = {}
+  datatypeReferenceContract.controls = modIN.value.controls.controls
+  datatypeReferenceContract.settings = {}
+  datatypeReferenceContract.settings = modIN.value.controls.settings
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -224,9 +261,12 @@ ModuleReferenceContract.prototype.prepareVisulise = function (modIN) {
   let makeDate = new Date().toString()
   modIN.makeDate = makeDate
   const datatypeReferenceContract = {}
+  datatypeReferenceContract.style = 'visualise'
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.info = {}
-  datatypeReferenceContract.info = modIN
+  datatypeReferenceContract.info = modIN.value
+  datatypeReferenceContract.settingss = {}
+  datatypeReferenceContract.settings = modIN.value.settings
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -241,14 +281,14 @@ ModuleReferenceContract.prototype.prepareVisulise = function (modIN) {
 
 /**
 * prepare Join module
-* @method prepareTemplateModule
+* @method prepareJoinModule
 *
 */
 ModuleReferenceContract.prototype.prepareJoinModule = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
   datatypeReferenceContract.info = {}
-  datatypeReferenceContract.info = modIN
+  datatypeReferenceContract.info = modIN.value.info
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -269,9 +309,9 @@ ModuleReferenceContract.prototype.prepareJoinModule = function (modIN) {
 ModuleReferenceContract.prototype.prepareJoinQuestion = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
-  datatypeReferenceContract.type = modIN.type
+  datatypeReferenceContract.style = modIN.value.style
   datatypeReferenceContract.info = {}
-  datatypeReferenceContract.info = modIN
+  datatypeReferenceContract.info = modIN.value.info
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -292,12 +332,12 @@ ModuleReferenceContract.prototype.prepareJoinQuestion = function (modIN) {
 ModuleReferenceContract.prototype.prepareJoinData = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
-  datatypeReferenceContract.type = modIN.type
+  datatypeReferenceContract.style = modIN.value.style
   datatypeReferenceContract.info = {}
-  let dataSourceSelected = {}
-  dataSourceSelected.type = modIN.type
-  dataSourceSelected.data = modIN.data
-  datatypeReferenceContract.info = dataSourceSelected
+  // let dataSourceSelected = {}
+  // dataSourceSelected.type = modIN.type
+  // dataSourceSelected.data = modIN.data
+  datatypeReferenceContract.info = modIN.value.info
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -318,9 +358,9 @@ ModuleReferenceContract.prototype.prepareJoinData = function (modIN) {
 ModuleReferenceContract.prototype.prepareJoinCompute = function (modIN) {
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
-  datatypeReferenceContract.type = modIN.type
+  datatypeReferenceContract.style = modIN.value.style
   datatypeReferenceContract.info = {}
-  datatypeReferenceContract.info = modIN
+  datatypeReferenceContract.info = modIN.value.info
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}
@@ -343,9 +383,9 @@ ModuleReferenceContract.prototype.prepareJoinVisulise = function (modIN) {
   modIN.makeDate = makeDate
   const datatypeReferenceContract = {}
   datatypeReferenceContract.refcontract = 'module'
-  datatypeReferenceContract.type = modIN.type
+  datatypeReferenceContract.style = modIN.value.style
   datatypeReferenceContract.info = {}
-  datatypeReferenceContract.info = modIN
+  datatypeReferenceContract.info = modIN.value.info
   // create a hash of entries as the index key
   const dtHASH = this.cryptoLive.evidenceProof(datatypeReferenceContract)
   const RefContractHolder = {}

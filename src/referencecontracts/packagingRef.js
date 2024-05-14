@@ -30,7 +30,7 @@ util.inherits(PackagingReferenceContract, events.EventEmitter)
 *
 */
 PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
-  const datatypeReferenceContract = {}
+  const datatypeReferenceContract = {}  
   datatypeReferenceContract.refcontract = 'packaging'
   datatypeReferenceContract.concept = {}
   datatypeReferenceContract.space = {}

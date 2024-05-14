@@ -46,6 +46,7 @@ RCutility.prototype.refcontractLookup = function (refCont, allContracts) {
 */
 RCutility.prototype.refcontractSperate = function (refContractsList) {
   const refContractHolder = {}
+  const questionList = []
   const datatypeList = []
   const unitsList = []
   const computeList = []
@@ -54,33 +55,37 @@ RCutility.prototype.refcontractSperate = function (refContractsList) {
   const visualiseList = []
   const nxpList = []
   for (const rc of refContractsList) {
-    if (rc.value.refcontract === 'datatype') {
+    if (rc.value?.refcontract === 'question') {
+      const refCont = { key: rc.key, value: rc.value }
+      questionList.push(refCont)
+    } else if (rc.value?.refcontract === 'datatype') {
       const refCont = { key: rc.key, value: rc.value }
       datatypeList.push(refCont)
-    } else if (rc.value.refcontract === 'units') {
+    } else if (rc.value?.refcontract === 'units') {
       const refCont = { key: rc.key, value: rc.value }
       unitsList.push(refCont)
-    } else if (rc.value.refcontract === 'compute') {
+    } else if (rc.value?.refcontract === 'compute') {
       const refCont = { key: rc.key, value: rc.value }
       computeList.push(refCont)
-    } else if (rc.value.refcontract === 'packaging') {
+    } else if (rc.value?.refcontract === 'packaging') {
       const refCont = { key: rc.key, value: rc.value }
       packagingList.push(refCont)
-    } else if (rc.value.refcontract === 'module') {
+    } else if (rc.value?.refcontract === 'module') {
       const refCont = { key: rc.key, value: rc.value }
       moduleList.push(refCont)
-    } else if (rc.value.refcontract === 'visualise') {
+    } else if (rc.value?.refcontract === 'visualise') {
       const refCont = { key: rc.key, value: rc.value }
       visualiseList.push(refCont)
-    } else if (rc.value.refcontract === 'experiment') {
+    } else if (rc.value?.refcontract === 'experiment') {
       const refCont = { key: rc.key, value: rc.value }
       nxpList.push(refCont)
-    } else if (rc.value.refcontract === 'experiment-join') {
+    } else if (rc.value?.refcontract === 'experiment-join') {
       const refCont = { key: rc.key, value: rc.value }
       nxpList.push(refCont)
     }
   }
   // just return the latest modules (and all other contract TODO)
+  refContractHolder.question = questionList
   refContractHolder.datatype = datatypeList
   refContractHolder.units = unitsList
   refContractHolder.compute = computeList

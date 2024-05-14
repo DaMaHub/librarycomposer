@@ -11,6 +11,7 @@
 */
 import CryptoUtility from './cryptoUtility.js'
 import LifeboardRefCont from './referencecontracts/lifeboardRef.js'
+import QuestionRefCont from './referencecontracts/questionRef.js'
 import DatatypeRefCont from './referencecontracts/datatypeRef.js'
 import PackagingRefCont from './referencecontracts/packagingRef.js'
 import ComputeRefCont from './referencecontracts/computeRef.js'
@@ -26,6 +27,7 @@ var ReferenceContractComposer = function () {
   events.EventEmitter.call(this)
   this.cryptoLive = new CryptoUtility()
   this.lifeboardRefLive = new LifeboardRefCont()
+  this.questionRefLive = new QuestionRefCont()
   this.datatypeRefLive = new DatatypeRefCont()
   this.packagingRefLive = new PackagingRefCont()
   this.computeRefLive = new ComputeRefCont()
@@ -56,6 +58,28 @@ ReferenceContractComposer.prototype.lifeboardComposer = function (input, type) {
 }
 
 /**
+* question composer
+* @method questionComposer
+*
+*/
+ReferenceContractComposer.prototype.questionComposer = function (input) {
+  const prepContract = this.questionRefLive.questionPrepare(input)
+    // create a hash of entries as the index key
+    const dtHASH = this.cryptoLive.evidenceProof(prepContract)
+    const RefContractHolder = {}
+    RefContractHolder.type = 'library'
+    RefContractHolder.action = 'contracts'
+    RefContractHolder.privacy = 'public'
+    RefContractHolder.reftype = 'datatype'
+    RefContractHolder.task = 'PUT'
+    let contractData = {}
+    contractData.hash = dtHASH
+    contractData.contract = prepContract
+    RefContractHolder.data = contractData
+  return RefContractHolder
+}
+
+/**
 * Datatype composer
 * @method datatypeComposer
 *
@@ -76,6 +100,7 @@ ReferenceContractComposer.prototype.datatypeComposer = function (input) {
     RefContractHolder.data = contractData
   return RefContractHolder
 }
+
 /**
 * Packaging composer
 * @method packagingComposer
@@ -144,12 +169,14 @@ ReferenceContractComposer.prototype.visualiseComposer = function (input) {
 * @method moduleComposer
 *
 */
-ReferenceContractComposer.prototype.moduleComposer = function (input, join) {
+ReferenceContractComposer.prototype.moduleComposer = function (input, action) {
   let preContract = {}
-  if (join === 'join') {
+  if (action === 'join') {
     preContract = this.moduleRefLive.moduleJoinPrepare(input)
-  } else if (join === 'update') {
+  } else if (action === 'update') {
     preContract = this.moduleRefLive.moduleUpdatePrepare(input)
+  } else if (action === 'temp') {
+    preContract = this.moduleRefLive.moduleGenesisTemp(input)
   } else {
     preContract = this.moduleRefLive.moduleGenesisPrepare(input)
   }
@@ -171,8 +198,8 @@ ReferenceContractComposer.prototype.experimentComposerGenesis = function (input)
 * @method experimentComposerJoin
 *
 */
-ReferenceContractComposer.prototype.experimentComposerJoin = function (input) {
-  const preContract = this.experimentRefLive.nxpJoinedPrepare(input)
+ReferenceContractComposer.prototype.experimentComposerJoin = function (genkey, input) {
+  const preContract = this.experimentRefLive.nxpJoinedPrepare(genkey, input)
   return preContract
 }
 
