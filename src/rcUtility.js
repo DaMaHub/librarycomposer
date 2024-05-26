@@ -210,7 +210,6 @@ RCutility.prototype.extractQuestion = function (modules, typeAsk) {
 *
 */
 RCutility.prototype.extractData = function (modules, typeAsk) {
-  console.log(modules[0])
   let packages = []
   for (const mod of modules) {
     if (mod.value.info.moduleinfo.name === typeAsk) {

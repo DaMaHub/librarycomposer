@@ -30,6 +30,44 @@ util.inherits(PackagingReferenceContract, events.EventEmitter)
 *
 */
 PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
+  console.log('packaingININNINII')
+  console.log(inputRC)
+  const datatypeReferenceContract = {}  
+  datatypeReferenceContract.refcontract = 'packaging'
+  datatypeReferenceContract.concept = {}
+  datatypeReferenceContract.space = {}
+  datatypeReferenceContract.computational = {}
+  // need to prepare matching of datatyps ref contracts to table columns
+  const mergeDTColumn = this.mergePackageMap(inputRC.apicolumns, inputRC.apicolHolder) //  manual mapping to datatypes job for LLM
+  const newPackagingMap = {}
+  newPackagingMap.name = inputRC.name
+  newPackagingMap.description = inputRC.description
+  newPackagingMap.primary = inputRC.primary
+  newPackagingMap.api = inputRC.api
+  newPackagingMap.apibase = inputRC.apibase
+  newPackagingMap.apipath = inputRC.apipath
+  newPackagingMap.filename = inputRC.filename
+  newPackagingMap.sqlitetablename = inputRC.sqlitetablename
+  newPackagingMap.tablestructure = mergeDTColumn
+  newPackagingMap.tidy = inputRC.tidy
+  newPackagingMap.category = inputRC.category
+  newPackagingMap.device = inputRC.device
+  // prepare semantic part of datatype ref contracts
+  datatypeReferenceContract.concept = newPackagingMap
+  // prepare space coordinates e.g. quark, atom, molecule etc.
+  datatypeReferenceContract.space = { concept: 'mind' }
+  datatypeReferenceContract.computational = { refcontract: null }
+  return datatypeReferenceContract
+}
+
+/**
+* prepare a datatype reference contract
+* @method packagingBlindPrepare
+*
+*/
+PackagingReferenceContract.prototype.packagingBlindPrepare = function (inputRC) {
+  console.log('BLIND PACKAGING')
+  console.log(inputRC)
   const datatypeReferenceContract = {}  
   datatypeReferenceContract.refcontract = 'packaging'
   datatypeReferenceContract.concept = {}
@@ -65,21 +103,15 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
 */
 PackagingReferenceContract.prototype.mergePackageMap = function (col, table) {
   const mapped = []
-  // remove first element array empty by design
-  table.shift()
   let countCol = 0
   for (const co of col) {
-    countCol++
-    if (co.count === countCol) {
-      const keyID = countCol - 1
+    if (co.count === countCol || co.count === countCol.cid) {
+      console.log('match')
       const mapPair = {}
-      if (table[keyID].length > 0) {
-        mapPair.refcontract = table[keyID][0].key
-      } else {
-        mapPair.refcontract = null
-      }
+      mapPair.refcontract = table[co.name]
       mapPair.column = co.name
       mapped.push(mapPair)
+      countCol++
     }
   }
   return mapped
