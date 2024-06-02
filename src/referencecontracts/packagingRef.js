@@ -47,11 +47,14 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
   newPackagingMap.apibase = inputRC.apibase
   newPackagingMap.apipath = inputRC.apipath
   newPackagingMap.filename = inputRC.filename
+  newPackagingMap.path = inputRC.path
   newPackagingMap.sqlitetablename = inputRC.sqlitetablename
   newPackagingMap.tablestructure = mergeDTColumn
   newPackagingMap.tidy = inputRC.tidy
   newPackagingMap.category = inputRC.category
   newPackagingMap.device = inputRC.device
+  newPackagingMap.devicesList = inputRC.devicesList
+  newPackagingMap.deviceColumns = inputRC.deviceColumns
   // prepare semantic part of datatype ref contracts
   datatypeReferenceContract.concept = newPackagingMap
   // prepare space coordinates e.g. quark, atom, molecule etc.
@@ -88,6 +91,8 @@ PackagingReferenceContract.prototype.packagingBlindPrepare = function (inputRC) 
   newPackagingMap.tidy = inputRC.tidy
   newPackagingMap.category = inputRC.category
   newPackagingMap.device = inputRC.device
+  newPackagingMap.devicesList = inputRC.devicesList
+  newPackagingMap.deviceColumns = inputRC.deviceColumns
   // prepare semantic part of datatype ref contracts
   datatypeReferenceContract.concept = newPackagingMap
   // prepare space coordinates e.g. quark, atom, molecule etc.

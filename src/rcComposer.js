@@ -107,8 +107,10 @@ ReferenceContractComposer.prototype.datatypeComposer = function (input) {
 *
 */
 ReferenceContractComposer.prototype.packagingComposer = function (input) {
+  console.log('pack composer')
+  console.log(input)
   // check if genesis or join
-  const prepContract = this.packagingRefLive.packagingPrepare(input.data)
+  const prepContract = this.packagingRefLive.packagingPrepare(input)
   const dtHASH = this.cryptoLive.evidenceProof(prepContract)
   const RefContractHolder = {}
   RefContractHolder.type = 'library'
