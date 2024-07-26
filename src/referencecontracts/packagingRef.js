@@ -48,6 +48,8 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
   newPackagingMap.apipath = inputRC.apipath
   newPackagingMap.filename = inputRC.filename
   newPackagingMap.path = inputRC.path
+  newPackagingMap.tableQuery = inputRC.tableQuery
+  newPackagingMap.sourcedevicecol = inputRC.sourcedevicecol
   newPackagingMap.sqlitetablename = inputRC.sqlitetablename
   newPackagingMap.tablestructure = mergeDTColumn
   newPackagingMap.tidy = inputRC.tidy
@@ -55,6 +57,9 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
   newPackagingMap.device = inputRC.device
   newPackagingMap.devicesList = inputRC.devicesList
   newPackagingMap.deviceColumns = inputRC.deviceColumns
+  newPackagingMap.devicequery = inputRC.deviceQuery
+  newPackagingMap.firmwarequery = inputRC.firmwareQuery
+  newPackagingMap.deviceColumnID = inputRC.deviceColumnID
   // prepare semantic part of datatype ref contracts
   datatypeReferenceContract.concept = newPackagingMap
   // prepare space coordinates e.g. quark, atom, molecule etc.
@@ -69,8 +74,8 @@ PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
 *
 */
 PackagingReferenceContract.prototype.packagingBlindPrepare = function (inputRC) {
-  console.log('BLIND PACKAGING')
-  console.log(inputRC)
+  // console.log('BLIND PACKAGING')
+  // console.log(inputRC)
   const datatypeReferenceContract = {}  
   datatypeReferenceContract.refcontract = 'packaging'
   datatypeReferenceContract.concept = {}
@@ -86,6 +91,8 @@ PackagingReferenceContract.prototype.packagingBlindPrepare = function (inputRC) 
   newPackagingMap.apibase = inputRC.apibase
   newPackagingMap.apipath = inputRC.apipath
   newPackagingMap.filename = inputRC.filename
+  newPackagingMap.tableQuery = inputRC.tableQuery
+  newPackagingMap.sourcedevicecol = inputRC.sourcedevicecol
   newPackagingMap.sqlitetablename = inputRC.sqlitetablename
   newPackagingMap.tablestructure = mergeDTColumn
   newPackagingMap.tidy = inputRC.tidy
@@ -93,6 +100,9 @@ PackagingReferenceContract.prototype.packagingBlindPrepare = function (inputRC) 
   newPackagingMap.device = inputRC.device
   newPackagingMap.devicesList = inputRC.devicesList
   newPackagingMap.deviceColumns = inputRC.deviceColumns
+  newPackagingMap.devicequery = inputRC.deviceQuery
+  newPackagingMap.firmwarequery = inputRC.firmwareQuery
+  newPackagingMap.deviceColumnID = inputRC.deviceColumnID
   // prepare semantic part of datatype ref contracts
   datatypeReferenceContract.concept = newPackagingMap
   // prepare space coordinates e.g. quark, atom, molecule etc.
@@ -111,7 +121,6 @@ PackagingReferenceContract.prototype.mergePackageMap = function (col, table) {
   let countCol = 0
   for (const co of col) {
     if (co.count === countCol || co.count === countCol.cid) {
-      console.log('match')
       const mapPair = {}
       mapPair.refcontract = table[co.name]
       mapPair.column = co.name
