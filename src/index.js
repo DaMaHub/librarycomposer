@@ -1,6 +1,11 @@
 'use strict'
-import RcComposer from './rcComposer.js'
-import KbidComposer from './kbidComposer.js'
+import CuesComposer from './composers/cuesComposer.js'
+import MediaComposer from './composers/mediaComposer.js'
+import ResearchComposer from './composers/researchComposer.js'
+import MarkerComposer from './composers/markerComposer.js'
+import ProductComposer from './composers/productComposer.js'
+import RcComposer from './composers/rcComposer.js'
+import KbidComposer from './composers/kbidComposer.js'
 import RcUtility from './rcUtility.js'
 import CryptoUtility from './cryptoUtility.js'
 /**
@@ -18,6 +23,11 @@ import events from 'events'
 
 var LibraryLib = function () {
   events.EventEmitter.call(this)
+  this.liveCues = new CuesComposer()
+  this.liveMedia = new MediaComposer()
+  this.liveResearch = new ResearchComposer()
+  this.liveMarker = new MarkerComposer()
+  this.liveProduct = new ProductComposer()
   this.liveComposer = new RcComposer()
   this.liveKBID = new KbidComposer()
   this.liveRefcontUtility = new RcUtility()

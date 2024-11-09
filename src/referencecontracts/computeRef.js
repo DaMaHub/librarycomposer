@@ -26,7 +26,7 @@ util.inherits(ComputeReferenceContract, events.EventEmitter)
 
 /**
 * prepare a datatype reference contract
-* @method dataTypePrepare
+* @method computePrepare
 *
 */
 ComputeReferenceContract.prototype.computePrepare = function (inputRC) {

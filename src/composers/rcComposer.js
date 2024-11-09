@@ -9,15 +9,15 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from './cryptoUtility.js'
-import LifeboardRefCont from './referencecontracts/lifeboardRef.js'
-import QuestionRefCont from './referencecontracts/questionRef.js'
-import DatatypeRefCont from './referencecontracts/datatypeRef.js'
-import PackagingRefCont from './referencecontracts/packagingRef.js'
-import ComputeRefCont from './referencecontracts/computeRef.js'
-import VisualiseRefCont from './referencecontracts/visualiseRef.js'
-import ModulueRefCont from './referencecontracts/moduleRef.js'
-import ExperimentRefCont from './referencecontracts/experimentRef.js'
+import CryptoUtility from '../cryptoUtility.js'
+import LifeboardRefCont from '../referencecontracts/lifeboardRef.js'
+import QuestionRefCont from '../referencecontracts/questionRef.js'
+import DatatypeRefCont from '../referencecontracts/datatypeRef.js'
+import PackagingRefCont from '../referencecontracts/packagingRef.js'
+import ComputeRefCont from '../referencecontracts/computeRef.js'
+import VisualiseRefCont from '../referencecontracts/visualiseRef.js'
+import ModulueRefCont from '../referencecontracts/moduleRef.js'
+import ExperimentRefCont from '../referencecontracts/experimentRef.js'
 // const util = require('util')
 // const events = require('events')
 import util from 'util'
@@ -107,8 +107,6 @@ ReferenceContractComposer.prototype.datatypeComposer = function (input) {
 *
 */
 ReferenceContractComposer.prototype.packagingComposer = function (input) {
-  console.log('pack composer')
-  console.log(input)
   // check if genesis or join
   const prepContract = this.packagingRefLive.packagingPrepare(input)
   const dtHASH = this.cryptoLive.evidenceProof(prepContract)
