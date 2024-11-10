@@ -10,14 +10,14 @@
 * @version    $Id$
 */
 import CryptoUtility from '../cryptoUtility.js'
-import mediaContract from '../contracttemplate/mediaContract.js'
+import productContract from '../contracttemplate/productContract.js'
 import util from 'util'
 import events from 'events'
 
 var ProductComposer = function () {
   events.EventEmitter.call(this)
   this.cryptoLive = new CryptoUtility()
-  this.livemediaContracts = new mediaContract()
+  this.liveproductContracts = new productContract()
 }
 
 /**
@@ -28,18 +28,21 @@ util.inherits(ProductComposer, events.EventEmitter)
 
 /**
 * prepare and indiviual cue
-* @method mediaPrepare
+* @method productPrepare
 *
 */
-ProductComposer.prototype.productPrepare = function () {
-  console.log('parepare prodcut contract please')
-  let cueContract = this.livemediaContracts.mediaContractform()
-  return cueContract
+ProductComposer.prototype.productPrepare = function (pData) {
+  let reContract = this.liveproductContracts.markerContractform(pData.data)
+  const cueHASH = this.cryptoLive.evidenceProof(reContract)
+  let reReady = {}
+  reReady.cueid = cueHASH
+  reReady.data = reContract
+  return reReady
 }
 
 /**
 * prepare and indiviual cue
-* @method mediaRelationships
+* @method productRelationships
 *
 */
 ProductComposer.prototype.productRelationships = function () {

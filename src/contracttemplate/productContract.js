@@ -30,11 +30,16 @@ util.inherits(ProductContract, events.EventEmitter)
 * @method productContractform
 *
 */
-ProductContract.prototype.productContractform = function () {
-  console.log('parddfdfdfdfepare cue contract please')
+ProductContract.prototype.productContractform = function (inPro) {
   let cueContract = {}
-  cueContract.cuid = '11222'
-  cueContract.data = {label: [1], datasets: [2]}
+  cueContract.refcontract = 'product'
+  cueContract.concept = {}
+  cueContract.space = {}
+  cueContract.computational = {}
+  // prepare semantic part of datatype ref contracts
+  cueContract.concept = inPro
+  // prepare space coordinates e.g. quark, atom, molecule etc.
+  cueContract.space = { concept: 'mind' }
   return cueContract
 }
 

@@ -31,7 +31,6 @@ util.inherits(CuesContract, events.EventEmitter)
 *
 */
 CuesContract.prototype.cuesContractform = function (inCue) {
-  console.log(inCue)
   let cueContract = {}
   cueContract.refcontract = 'cue'
   cueContract.concept = {}

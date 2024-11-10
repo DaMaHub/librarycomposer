@@ -10,14 +10,14 @@
 * @version    $Id$
 */
 import CryptoUtility from '../cryptoUtility.js'
-import mediaContract from '../contracttemplate/mediaContract.js'
+import markerContract from '../contracttemplate/markerContract.js'
 import util from 'util'
 import events from 'events'
 
 var MarkerComposer = function () {
   events.EventEmitter.call(this)
   this.cryptoLive = new CryptoUtility()
-  this.livemediaContracts = new mediaContract()
+  this.livemarkerContracts = new markerContract()
 }
 
 /**
@@ -31,10 +31,13 @@ util.inherits(MarkerComposer, events.EventEmitter)
 * @method mediaPrepare
 *
 */
-MarkerComposer.prototype.markerPrepare = function () {
-  console.log('parepare research contract please')
-  let cueContract = this.livemediaContracts.mediaContractform()
-  return cueContract
+MarkerComposer.prototype.markerPrepare = function (rData) {
+  let reContract = this.livemarkerContracts.markerContractform(rData.data)
+  const cueHASH = this.cryptoLive.evidenceProof(reContract)
+  let reReady = {}
+  reReady.cueid = cueHASH
+  reReady.data = reContract
+  return reReady
 }
 
 /**

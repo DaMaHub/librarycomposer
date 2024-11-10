@@ -30,11 +30,16 @@ util.inherits(MarkerContract, events.EventEmitter)
 * @method markerContractform
 *
 */
-MarkerContract.prototype.markerContractform = function () {
-  console.log('parddfdfdfdfepare cue contract please')
+MarkerContract.prototype.markerContractform = function (inMa) {
   let cueContract = {}
-  cueContract.cuid = '11222'
-  cueContract.data = {label: [1], datasets: [2]}
+  cueContract.refcontract = 'marker'
+  cueContract.concept = {}
+  cueContract.space = {}
+  cueContract.computational = {}
+  // prepare semantic part of datatype ref contracts
+  cueContract.concept = inMa
+  // prepare space coordinates e.g. quark, atom, molecule etc.
+  cueContract.space = { concept: 'mind' }
   return cueContract
 }
 

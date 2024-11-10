@@ -10,14 +10,14 @@
 * @version    $Id$
 */
 import CryptoUtility from '../cryptoUtility.js'
-import mediaContract from '../contracttemplate/mediaContract.js'
+import researchContract from '../contracttemplate/researchContract.js'
 import util from 'util'
 import events from 'events'
 
 var ResearchComposer = function () {
   events.EventEmitter.call(this)
   this.cryptoLive = new CryptoUtility()
-  this.livemediaContracts = new mediaContract()
+  this.liveresearchContracts = new researchContract()
 }
 
 /**
@@ -28,13 +28,16 @@ util.inherits(ResearchComposer, events.EventEmitter)
 
 /**
 * prepare and indiviual cue
-* @method mediaPrepare
+* @method researchPrepare
 *
 */
-ResearchComposer.prototype.researchPrepare = function () {
-  console.log('parepare research contract please')
-  let cueContract = this.livemediaContracts.mediaContractform()
-  return cueContract
+ResearchComposer.prototype.researchPrepare = function (rData) {
+  let reContract = this.liveresearchContracts.researchContractform(rData.data)
+  const cueHASH = this.cryptoLive.evidenceProof(reContract)
+  let reReady = {}
+  reReady.cueid = cueHASH
+  reReady.data = reContract
+  return reReady
 }
 
 /**

@@ -30,12 +30,17 @@ util.inherits(ResearchContract, events.EventEmitter)
 * @method researchContractform
 *
 */
-ResearchContract.prototype.researchContractform = function () {
-  console.log('parddfdfdfdfepare cue contract please')
-  let cueContract = {}
-  cueContract.cuid = '11222'
-  cueContract.data = {label: [1], datasets: [2]}
-  return cueContract
+ResearchContract.prototype.researchContractform = function (inRe) {
+  let researchContract = {}
+  researchContract.refcontract = 'research'
+  researchContract.concept = {}
+  researchContract.space = {}
+  researchContract.computational = {}
+  // prepare semantic part of datatype ref contracts
+  researchContract.concept = inRe
+  // prepare space coordinates e.g. quark, atom, molecule etc.
+  researchContract.space = { concept: 'mind' }
+  return researchContract
 }
 
 /**
