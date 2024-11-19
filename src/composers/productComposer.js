@@ -32,7 +32,7 @@ util.inherits(ProductComposer, events.EventEmitter)
 *
 */
 ProductComposer.prototype.productPrepare = function (pData) {
-  let reContract = this.liveproductContracts.markerContractform(pData.data)
+  let reContract = this.liveproductContracts.productContractform(pData.data)
   const cueHASH = this.cryptoLive.evidenceProof(reContract)
   let reReady = {}
   reReady.cueid = cueHASH
