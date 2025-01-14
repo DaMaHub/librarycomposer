@@ -31,10 +31,13 @@ util.inherits(MediaComposer, events.EventEmitter)
 * @method mediaPrepare
 *
 */
-MediaComposer.prototype.mediaPrepare = function () {
-  console.log('parepare cue contract please')
-  let mediaContract = this.livemediaContracts.mediaContractform()
-  return mediaContract
+MediaComposer.prototype.mediaPrepare = function (data) {
+  let mediaContract = this.livemediaContracts.mediaContractform(data)
+  const cueHASH = this.cryptoLive.evidenceProof(mediaContract)
+  let reReady = {}
+  reReady.cueid = cueHASH
+  reReady.data = mediaContract
+  return reReady
 }
 
 /**

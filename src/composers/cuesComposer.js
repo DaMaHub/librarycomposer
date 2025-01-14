@@ -41,13 +41,17 @@ CuesComposer.prototype.cuesPrepare = function (inCue) {
 }
 
 /**
-* prepare and indiviual cue
+* prepare update relationships with cue
 * @method cuesRelationships
 *
 */
-CuesComposer.prototype.cuesRelationships = function () {
-  let relContract = {}
-  return relContract
+CuesComposer.prototype.cuesRelationships = function (cueUpdate) {
+  let relContract = this.liveCuesContracts.relationshipsBuilder(cueUpdate.data.contract, cueUpdate.data.relationships)
+  let cueReady = {}
+  const cueHASH = cueUpdate.data.contract.key
+  cueReady.cueid = cueHASH
+  cueReady.data = relContract.value
+  return cueReady
 }
 
 export default CuesComposer

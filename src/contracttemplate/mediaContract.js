@@ -30,16 +30,17 @@ util.inherits(MediaContract, events.EventEmitter)
 * @method mediaContractform
 *
 */
-MediaContract.prototype.mediaContractform = function (formInput) {
-  console.log('parddfdfdfdfepare media contract please')
-  const mediaContract = {}  
-  mediaContract.refcontract = 'packaging'
-  mediaContract.concept = {}
-  mediaContract.space = {}
-  mediaContract.computational = {}
-  mediaContract.concept = formInput
-  mediaContract.space = { concept: 'mind' }
-  mediaContract.computational = { refcontract: null }
+MediaContract.prototype.mediaContractform = function (medIn) {
+  let cueContract = {}
+  cueContract.refcontract = 'media'
+  cueContract.concept = {}
+  cueContract.space = {}
+  cueContract.computational = {}
+  // prepare semantic part of datatype ref contracts
+  cueContract.concept = medIn
+  // prepare space coordinates e.g. quark, atom, molecule etc.
+  cueContract.space = { concept: 'mind' }
+  return cueContract
 }
 
 /**
@@ -47,7 +48,7 @@ MediaContract.prototype.mediaContractform = function (formInput) {
 * @method mediaRelationships
 *
 */
-MediaContract.prototype.relationshipsBuilder = function () {
+MediaContract.prototype.mediaRelationships = function () {
 
 }
 

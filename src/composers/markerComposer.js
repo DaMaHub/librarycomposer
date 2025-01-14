@@ -28,7 +28,7 @@ util.inherits(MarkerComposer, events.EventEmitter)
 
 /**
 * prepare and indiviual cue
-* @method mediaPrepare
+* @method MarkerComposer
 *
 */
 MarkerComposer.prototype.markerPrepare = function (rData) {
