@@ -31,8 +31,6 @@ util.inherits(CuesContract, events.EventEmitter)
 *
 */
 CuesContract.prototype.cuesContractform = function (inCue) {
-  console.log('inCue')
-  console.log(inCue)
   let cueContract = {}
   cueContract.refcontract = 'cue'
   cueContract.concept = {}
@@ -53,9 +51,6 @@ CuesContract.prototype.cuesContractform = function (inCue) {
 *
 */
 CuesContract.prototype.relationshipsBuilder = function (cueContract, updateRels) {
-  console.log('cue contra upate')
-  console.log(cueContract)
-  console.log(updateRels)  
   cueContract.value.computational.relationships = updateRels
   return cueContract
 }
