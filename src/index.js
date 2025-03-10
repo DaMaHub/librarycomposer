@@ -1,5 +1,6 @@
 'use strict'
 import CuesComposer from './composers/cuesComposer.js'
+import ModelComposer from './composers/modelComposer.js'
 import MediaComposer from './composers/mediaComposer.js'
 import ResearchComposer from './composers/researchComposer.js'
 import MarkerComposer from './composers/markerComposer.js'
@@ -24,6 +25,7 @@ import events from 'events'
 var LibraryLib = function () {
   events.EventEmitter.call(this)
   this.liveCues = new CuesComposer()
+  this.liveModel = new ModelComposer()
   this.liveMedia = new MediaComposer()
   this.liveResearch = new ResearchComposer()
   this.liveMarker = new MarkerComposer()
