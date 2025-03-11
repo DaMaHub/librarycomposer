@@ -33,8 +33,6 @@ util.inherits(ModelComposer, events.EventEmitter)
 */
 ModelComposer.prototype.modelPrepare = function (inModel) {
   let modelContract = this.liveModelContracts.ModelContractform(inModel.data)
-  console.log('compaers')
-  console.log(modelContract)
   let modelReady = {}
   const modelHASH = this.cryptoLive.evidenceProof(modelContract)
   modelReady.id = modelHASH
