@@ -31,8 +31,6 @@ util.inherits(MediaContract, events.EventEmitter)
 *
 */
 MediaContract.prototype.mediaContractform = function (medIn) {
-  console.log(' from medai form')
-  console.log(medIn)
   let cueContract = {}
   cueContract.refcontract = 'media'
   cueContract.concept = {}
