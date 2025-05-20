@@ -98,8 +98,6 @@ ReferenceContractComposer.prototype.datatypeComposer = function (input) {
     contractData.hash = dtHASH
     contractData.contract = prepContract
     RefContractHolder.data = contractData
-    console.log('wdududud')
-    console.log(RefContractHolder)
   return RefContractHolder
 }
 
