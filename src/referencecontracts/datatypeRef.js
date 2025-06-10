@@ -22,7 +22,7 @@ class DatatypeReferenceContract extends EventEmitter {
     const contract = {
       refcontract: 'datatype',
       concept: inputRC,
-      computational: cue.computational,
+      computational: inputRC.computational,
       space: { concept: 'mind' },
       time: {
         createTimestamp: currentTime,
