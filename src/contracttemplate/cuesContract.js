@@ -4,55 +4,40 @@
 *
 *
 * @class CuesContract
-* @package    HOP health
+* @package    HOP library 
 * @copyright  Copyright (c) 2024 James Littlejohn
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
-import util from 'util'
-import events from 'events'
+import { EventEmitter } from 'events';
+import { DateTime } from 'luxon';
 
-var CuesContract = function () {
-  events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+class CuesContract extends EventEmitter {
+  constructor() {
+    super();
+  }
 
+  cuesContractform(cue) {
+    const contract = {
+      refcontract: 'cue',
+      concept: cue.concept,
+      space: { concept: 'mind' },
+      computational: cue.computational,
+      time: {
+        createTimestamp: DateTime.now().toMillis(),
+        lastTimestamp: DateTime.now().toMillis(),
+        frequencyCount: 0
+      }
+    };
+    return contract;
+  }
+
+  relationshipsBuilder(cue, relationships) {
+    cue.computational.relationships = relationships;
+    cue.time.lastTimestamp = DateTime.now().toMillis();
+    cue.time.frequencyCount += 1;
+    return cue;
+  }
 }
 
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(CuesContract, events.EventEmitter)
-
-/**
-* prepare and indiviual cue
-* @method cuesContractform
-*
-*/
-CuesContract.prototype.cuesContractform = function (inCue) {
-  let cueContract = {}
-  cueContract.refcontract = 'cue'
-  cueContract.concept = {}
-  cueContract.space = {}
-  cueContract.computational = {}
-  // prepare semantic part of datatype ref contracts
-  cueContract.concept = inCue.concept
-  // relationships with cue
-  cueContract.computational = inCue.computational
-
-  cueContract.space = { concept: 'mind' }
-  return cueContract
-}
-
-/**
-* prepare and indiviual cue
-* @method cuesRelationships
-*
-*/
-CuesContract.prototype.relationshipsBuilder = function (cueContract, updateRels) {
-  cueContract.value.computational.relationships = updateRels
-  return cueContract
-}
-
-export default CuesContract
+export default CuesContract;

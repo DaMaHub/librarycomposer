@@ -9,36 +9,29 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import util from 'util'
-import events from 'events'
+import { EventEmitter } from 'events';
+import { DateTime } from 'luxon';
 
-var DatatypeReferenceContract = function () {
-  events.EventEmitter.call(this)
+class DatatypeReferenceContract extends EventEmitter {
+  constructor() {
+    super();
+  }
+
+  cuesContractform(inputRC) {
+    const currentTime = DateTime.now().toMillis();
+    const contract = {
+      refcontract: 'datatype',
+      concept: inputRC,
+      computational: cue.computational,
+      space: { concept: 'mind' },
+      time: {
+        createTimestamp: currentTime,
+        lastTimestamp: currentTime,
+        frequencyCount: 0
+      }
+    };
+    return contract;
+  }
 }
 
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(DatatypeReferenceContract, events.EventEmitter)
-
-/**
-* prepare a datatype reference contract
-* @method dataTypePrepare
-*
-*/
-DatatypeReferenceContract.prototype.dataTypePrepare = function (inputRC) {
-  const datatypeReferenceContract = {}
-  datatypeReferenceContract.refcontract = 'datatype'
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
-  // prepare semantic part of datatype ref contracts
-  datatypeReferenceContract.concept = inputRC
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-
-  return datatypeReferenceContract
-}
-
-export default DatatypeReferenceContract
+export default DatatypeReferenceContract;
