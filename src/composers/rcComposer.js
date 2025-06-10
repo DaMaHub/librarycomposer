@@ -85,7 +85,7 @@ ReferenceContractComposer.prototype.questionComposer = function (input) {
 *
 */
 ReferenceContractComposer.prototype.datatypeComposer = function (input) {
-  const prepContract = this.datatypeRefLive.dataTypePrepare(input)
+  const prepContract = this.datatypeRefLive.dtContractform(input)
     // create a hash of entries as the index key
     const dtHASH = this.cryptoLive.evidenceProof(prepContract)
     const RefContractHolder = {}

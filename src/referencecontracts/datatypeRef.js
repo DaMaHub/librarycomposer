@@ -17,7 +17,7 @@ class DatatypeReferenceContract extends EventEmitter {
     super();
   }
 
-  cuesContractform(inputRC) {
+  dtContractform(inputRC) {
     const currentTime = DateTime.now().toMillis();
     const contract = {
       refcontract: 'datatype',
