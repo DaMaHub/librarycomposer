@@ -29,13 +29,18 @@ class CuesContract extends EventEmitter {
         frequencyCount: 0
       }
     };
+    console.log('parep conract LIBCOMP')
+    console.log(contract)
     return contract;
   }
 
   relationshipsBuilder(cue, relationships) {
-    cue.computational.relationships = relationships;
-    cue.time.lastTimestamp = DateTime.now().toMillis();
-    cue.time.frequencyCount += 1;
+    console.log('relathip update')
+    console.log(cue)
+    console.log(relationships)
+    cue.value.computational.relationships = relationships;
+    cue.value.time.lastTimestamp = DateTime.now().toMillis();
+    cue.value.time.frequencyCount += 1;
     return cue;
   }
 }

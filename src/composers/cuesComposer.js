@@ -41,6 +41,18 @@ CuesComposer.prototype.cuesPrepare = function (inCue) {
 }
 
 /**
+* update contract for latest timestamp
+* @method cuesTimestamp
+*
+*/
+CuesComposer.prototype.cuesTimestamp = function (cueUpdate) {
+  let cueReady = {}
+  cueReady.cueid = cueUpdate.key
+  cueReady.data = cueUpdate.value
+  return cueReady
+}
+
+/**
 * prepare update relationships with cue
 * @method cuesRelationships
 *
