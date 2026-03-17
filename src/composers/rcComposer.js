@@ -9,7 +9,7 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
+import { Encryption } from 'hop-crypto/encryption'
 import LifeboardRefCont from '../referencecontracts/lifeboardRef.js'
 import QuestionRefCont from '../referencecontracts/questionRef.js'
 import DatatypeRefCont from '../referencecontracts/datatypeRef.js'
@@ -25,7 +25,7 @@ import events from 'events'
 
 var ReferenceContractComposer = function () {
   events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+  this.cryptoLive = Encryption
   this.lifeboardRefLive = new LifeboardRefCont()
   this.questionRefLive = new QuestionRefCont()
   this.datatypeRefLive = new DatatypeRefCont()
@@ -65,7 +65,7 @@ ReferenceContractComposer.prototype.lifeboardComposer = function (input, type) {
 ReferenceContractComposer.prototype.questionComposer = function (input) {
   const prepContract = this.questionRefLive.questionPrepare(input)
     // create a hash of entries as the index key
-    const dtHASH = this.cryptoLive.evidenceProof(prepContract)
+    const dtHASH = this.cryptoLive.createKey(prepContract)
     const RefContractHolder = {}
     RefContractHolder.type = 'library'
     RefContractHolder.action = 'contracts'
@@ -73,7 +73,7 @@ ReferenceContractComposer.prototype.questionComposer = function (input) {
     RefContractHolder.reftype = 'datatype'
     RefContractHolder.task = 'PUT'
     let contractData = {}
-    contractData.hash = dtHASH
+    contractData.hash = this.cryptoLive.createPrefixedKey(RefContractHolder.reftype, dtHASH)
     contractData.contract = prepContract
     RefContractHolder.data = contractData
   return RefContractHolder
@@ -87,7 +87,7 @@ ReferenceContractComposer.prototype.questionComposer = function (input) {
 ReferenceContractComposer.prototype.datatypeComposer = function (input) {
   const prepContract = this.datatypeRefLive.dtContractform(input)
     // create a hash of entries as the index key
-    const dtHASH = this.cryptoLive.evidenceProof(prepContract)
+    const dtHASH = this.cryptoLive.createKey(prepContract)
     const RefContractHolder = {}
     RefContractHolder.type = 'library'
     RefContractHolder.action = 'contracts'
@@ -95,7 +95,7 @@ ReferenceContractComposer.prototype.datatypeComposer = function (input) {
     RefContractHolder.reftype = 'datatype'
     RefContractHolder.task = 'PUT'
     let contractData = {}
-    contractData.hash = dtHASH
+    contractData.hash = this.cryptoLive.createPrefixedKey(RefContractHolder.reftype, dtHASH)
     contractData.contract = prepContract
     RefContractHolder.data = contractData
   return RefContractHolder
@@ -109,7 +109,7 @@ ReferenceContractComposer.prototype.datatypeComposer = function (input) {
 ReferenceContractComposer.prototype.packagingComposer = function (input) {
   // check if genesis or join
   const prepContract = this.packagingRefLive.packagingPrepare(input)
-  const dtHASH = this.cryptoLive.evidenceProof(prepContract)
+  const dtHASH = this.cryptoLive.createKey(prepContract)
   const RefContractHolder = {}
   RefContractHolder.type = 'library'
   RefContractHolder.action = 'contracts'
@@ -117,7 +117,7 @@ ReferenceContractComposer.prototype.packagingComposer = function (input) {
   RefContractHolder.reftype = 'packaging'
   RefContractHolder.task = 'PUT'
   let contractData = {}
-  contractData.hash = dtHASH
+  contractData.hash = this.cryptoLive.createPrefixedKey(RefContractHolder.reftype, dtHASH)
   contractData.contract = prepContract
   RefContractHolder.data = contractData
   return RefContractHolder
@@ -130,7 +130,7 @@ ReferenceContractComposer.prototype.packagingComposer = function (input) {
 */
 ReferenceContractComposer.prototype.computeComposer = function (input) {
   const prepContract = this.computeRefLive.computePrepare(input)
-  const dtHASH = this.cryptoLive.evidenceProof(prepContract)
+  const dtHASH = this.cryptoLive.createKey(prepContract)
   const RefContractHolder = {}
   RefContractHolder.type = 'library'
   RefContractHolder.action = 'contracts'
@@ -138,7 +138,7 @@ ReferenceContractComposer.prototype.computeComposer = function (input) {
   RefContractHolder.reftype = 'compute'
   RefContractHolder.task = 'PUT'
   let contractData = {}
-  contractData.hash = dtHASH
+  contractData.hash = this.cryptoLive.createPrefixedKey(RefContractHolder.reftype, dtHASH)
   contractData.contract = prepContract
   RefContractHolder.data = contractData
   return RefContractHolder
@@ -151,7 +151,7 @@ ReferenceContractComposer.prototype.computeComposer = function (input) {
 */
 ReferenceContractComposer.prototype.visualiseComposer = function (input) {
   const prepContract = this.visualiseRefLive.visualisePrepare(input)
-  const dtHASH = this.cryptoLive.evidenceProof(prepContract)
+  const dtHASH = this.cryptoLive.createKey(prepContract)
   const RefContractHolder = {}
   RefContractHolder.type = 'library'
   RefContractHolder.action = 'contracts'
@@ -159,7 +159,7 @@ ReferenceContractComposer.prototype.visualiseComposer = function (input) {
   RefContractHolder.reftype = 'visualise'
   RefContractHolder.task = 'PUT'
   let contractData = {}
-  contractData.hash = dtHASH
+  contractData.hash = this.cryptoLive.createPrefixedKey(RefContractHolder.reftype, dtHASH)
   contractData.contract = prepContract
   RefContractHolder.data = contractData
   return RefContractHolder

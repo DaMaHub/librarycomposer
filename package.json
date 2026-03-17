@@ -1,6 +1,6 @@
 {
   "name": "librarycomposer",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "create new reference contracts and utilities",
   "main": "src/index.js",
   "scripts": {
@@ -28,7 +28,8 @@
   "dependencies": {
     "bs58": "^4.0.1",
     "luxon": "^3.6.1",
-    "object-hash": "^2.0.3"
+    "object-hash": "^2.0.3",
+    "hop-crypto": "^0.1.2"
   },
   "devDependencies": {
   }

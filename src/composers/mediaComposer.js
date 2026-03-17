@@ -9,14 +9,14 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
+import { Encryption } from 'hop-crypto/encryption'
 import mediaContract from '../contracttemplate/mediaContract.js'
 import util from 'util'
 import events from 'events'
 
 var MediaComposer = function () {
   events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+  this.cryptoLive = Encryption
   this.livemediaContracts = new mediaContract()
 }
 
@@ -33,9 +33,9 @@ util.inherits(MediaComposer, events.EventEmitter)
 */
 MediaComposer.prototype.mediaPrepare = function (data) {
   let mediaContract = this.livemediaContracts.mediaContractform(data)
-  const cueHASH = this.cryptoLive.evidenceProof(mediaContract)
+  const cueHASH = this.cryptoLive.createKey(mediaContract)
   let reReady = {}
-  reReady.cueid = cueHASH
+  reReady.cueid = this.cryptoLive.createPrefixedKey('media', cueHASH)
   reReady.data = mediaContract
   return reReady
 }

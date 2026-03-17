@@ -9,14 +9,14 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
+import { Encryption } from 'hop-crypto/encryption'
 import productContract from '../contracttemplate/productContract.js'
 import util from 'util'
 import events from 'events'
 
 var ProductComposer = function () {
   events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+  this.cryptoLive = Encryption
   this.liveproductContracts = new productContract()
 }
 
@@ -33,9 +33,9 @@ util.inherits(ProductComposer, events.EventEmitter)
 */
 ProductComposer.prototype.productPrepare = function (pData) {
   let reContract = this.liveproductContracts.productContractform(pData.data)
-  const cueHASH = this.cryptoLive.evidenceProof(reContract)
+  const cueHASH = this.cryptoLive.createKey(reContract)
   let reReady = {}
-  reReady.cueid = cueHASH
+  reReady.cueid = this.cryptoLive.createPrefixedKey('product', cueHASH)
   reReady.data = reContract
   return reReady
 }

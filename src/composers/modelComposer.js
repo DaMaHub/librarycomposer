@@ -9,14 +9,14 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
+import { Encryption } from 'hop-crypto/encryption'
 import ModelContract from '../contracttemplate/modelContract.js'
 import util from 'util'
 import events from 'events'
 
 var ModelComposer = function () {
   events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+  this.cryptoLive = Encryption
   this.liveModelContracts = new ModelContract()
 }
 
@@ -34,8 +34,8 @@ util.inherits(ModelComposer, events.EventEmitter)
 ModelComposer.prototype.modelPrepare = function (inModel) {
   let modelContract = this.liveModelContracts.ModelContractform(inModel.data)
   let modelReady = {}
-  const modelHASH = this.cryptoLive.evidenceProof(modelContract)
-  modelReady.id = modelHASH
+  const modelHASH = this.cryptoLive.createKey(modelContract)
+  modelReady.id = this.cryptoLive.createPrefixedKey('model', modelHASH)
   modelReady.data = modelContract
   return modelReady
 }

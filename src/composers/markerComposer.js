@@ -9,14 +9,14 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
+import { Encryption } from 'hop-crypto/encryption'
 import markerContract from '../contracttemplate/markerContract.js'
 import util from 'util'
 import events from 'events'
 
 var MarkerComposer = function () {
   events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+  this.cryptoLive = Encryption
   this.livemarkerContracts = new markerContract()
 }
 
@@ -33,9 +33,9 @@ util.inherits(MarkerComposer, events.EventEmitter)
 */
 MarkerComposer.prototype.markerPrepare = function (rData) {
   let reContract = this.livemarkerContracts.markerContractform(rData.data)
-  const cueHASH = this.cryptoLive.evidenceProof(reContract)
+  const cueHASH = this.cryptoLive.createKey(reContract)
   let reReady = {}
-  reReady.cueid = cueHASH
+  reReady.cueid = this.cryptoLive.createPrefixedKey('marker', cueHASH)
   reReady.data = reContract
   return reReady
 }

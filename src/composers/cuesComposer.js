@@ -9,14 +9,14 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
+import { Encryption } from 'hop-crypto/encryption'
 import CuesContract from '../contracttemplate/cuesContract.js'
 import util from 'util'
 import events, { captureRejectionSymbol } from 'events'
 
 var CuesComposer = function () {
   events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+  this.cryptoLive = Encryption
   this.liveCuesContracts = new CuesContract()
 }
 
@@ -34,8 +34,8 @@ util.inherits(CuesComposer, events.EventEmitter)
 CuesComposer.prototype.cuesPrepare = function (inCue) {
   let cueContract = this.liveCuesContracts.cuesContractform(inCue.data)
   let cueReady = {}
-  const cueHASH = this.cryptoLive.evidenceProof(cueContract)
-  cueReady.cueid = cueHASH
+  const cueHASH = this.cryptoLive.createKey(cueContract)
+  cueReady.cueid = this.cryptoLive.createPrefixedKey('cues', cueHASH)
   cueReady.data = cueContract
   return cueReady
 }

@@ -9,14 +9,14 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
+import { Encryption } from 'hop-crypto/encryption'
 import researchContract from '../contracttemplate/researchContract.js'
 import util from 'util'
 import events from 'events'
 
 var ResearchComposer = function () {
   events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+  this.cryptoLive = Encryption
   this.liveresearchContracts = new researchContract()
 }
 
@@ -33,9 +33,9 @@ util.inherits(ResearchComposer, events.EventEmitter)
 */
 ResearchComposer.prototype.researchPrepare = function (rData) {
   let reContract = this.liveresearchContracts.researchContractform(rData.data)
-  const cueHASH = this.cryptoLive.evidenceProof(reContract)
+  const cueHASH = this.cryptoLive.createKey(reContract)
   let reReady = {}
-  reReady.cueid = cueHASH
+  reReady.cueid = this.cryptoLive.createPrefixedKey('research', cueHASH)
   reReady.data = reContract
   return reReady
 }
