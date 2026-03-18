@@ -29,15 +29,10 @@ class CuesContract extends EventEmitter {
         frequencyCount: 0
       }
     };
-    console.log('parep conract LIBCOMP')
-    console.log(contract)
     return contract;
   }
 
   relationshipsBuilder(cue, relationships) {
-    console.log('relathip update')
-    console.log(cue)
-    console.log(relationships)
     cue.value.computational.relationships = relationships;
     cue.value.time.lastTimestamp = DateTime.now().toMillis();
     cue.value.time.frequencyCount += 1;

@@ -22,8 +22,9 @@ import CryptoUtility from './cryptoUtility.js'
 import util from 'util'
 import events from 'events'
 
-var LibraryLib = function () {
+var LibraryLib = function (heliClock) {
   events.EventEmitter.call(this)
+  this.heliClock = heliClock
   this.liveCues = new CuesComposer()
   this.liveModel = new ModelComposer()
   this.liveMedia = new MediaComposer()
