@@ -1,0 +1,42 @@
+{
+  "$id": "https://hop.io/schemas/units.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "const": "units"
+        },
+        "concept": {
+          "type": "object",
+          "properties": {
+            "baseUnit": {
+              "type": "string",
+              "enum": ["m", "kg", "s", "A", "K", "mol", "cd", "heli"],
+              "description": "SI base unit or Heli Stamp for relational time"
+            },
+            "scaleFactor": {
+              "type": "number",
+              "default": 1,
+              "description": "Multiplier for the base unit (e.g., 0.7 for steps to meters)"
+            },
+            "label": {
+              "type": "string",
+              "description": "Human-readable name (e.g., 'Steps', 'Kilometers')"
+            },
+            "references": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uri"
+              },
+              "description": "Links to SI/BIPM/DBpedia definitions"
+            }
+          },
+          "required": ["baseUnit"]
+        }
+      }
+    }
+  ]
+}

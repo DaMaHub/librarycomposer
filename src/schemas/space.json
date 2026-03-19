@@ -1,0 +1,98 @@
+{
+  "$id": "https://hop.io/schemas/space.json",
+  "type": "object",
+  "anyOf": [
+    {
+      "properties": {
+        "concept": {
+          "type": "string"
+        }
+      },
+      "required": ["concept"]
+    },
+    {
+      "properties": {
+        "realWorld": {
+          "type": "object",
+          "properties": {
+            "latitude": {
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
+            },
+            "longitude": {
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
+            },
+            "altitude": {
+              "type": "number",
+              "default": 0
+            },
+            "precision": {
+              "type": "string",
+              "enum": [
+                "point",
+                "area",
+                "path"
+              ]
+            }
+          },
+          "required": [
+            "latitude",
+            "longitude"
+          ]
+        },
+        "emulation": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string",
+              "enum": [
+                "bentobox",
+                "buffer-geometry",
+                "voxel",
+                "relative"
+              ]
+            },
+            "coordinates": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "z": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "x",
+                "y",
+                "z"
+              ]
+            },
+            "scale": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          "required": [
+            "system",
+            "coordinates"
+          ]
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "realWorld",
+        "emulation"
+      ]
+    }
+  ]
+}

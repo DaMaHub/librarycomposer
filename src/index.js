@@ -8,7 +8,6 @@ import ProductComposer from './composers/productComposer.js'
 import RcComposer from './composers/rcComposer.js'
 import KbidComposer from './composers/kbidComposer.js'
 import RcUtility from './rcUtility.js'
-import CryptoUtility from './cryptoUtility.js'
 /**
 *  Interface to reference contract libraries
 *
@@ -22,25 +21,22 @@ import CryptoUtility from './cryptoUtility.js'
 import util from 'util'
 import events from 'events'
 
-var LibraryLib = function (heliClock) {
-  events.EventEmitter.call(this)
-  this.heliClock = heliClock
-  this.liveCues = new CuesComposer()
-  this.liveModel = new ModelComposer()
-  this.liveMedia = new MediaComposer()
-  this.liveResearch = new ResearchComposer()
-  this.liveMarker = new MarkerComposer()
-  this.liveProduct = new ProductComposer()
-  this.liveComposer = new RcComposer()
-  this.liveKBID = new KbidComposer()
-  this.liveRefcontUtility = new RcUtility()
-  this.liveCryptoUtilty = new CryptoUtility()
+class LibraryLib extends events.EventEmitter {
+  constructor(contextAgent) {
+    super()
+    if (!contextAgent || !contextAgent.crypto || !contextAgent.heliclock) {
+      throw new Error('contextAgent with crypto and heliclock properties is required')
+    }
+    this.liveCues = new CuesComposer(contextAgent)
+    this.liveModel = new ModelComposer(contextAgent)
+    this.liveMedia = new MediaComposer(contextAgent)
+    this.liveResearch = new ResearchComposer(contextAgent)
+    this.liveMarker = new MarkerComposer(contextAgent)
+    this.liveProduct = new ProductComposer(contextAgent)
+    this.liveComposer = new RcComposer(contextAgent)
+    this.liveKBID = new KbidComposer(contextAgent)
+    this.liveRefcontUtility = new RcUtility(contextAgent)
+  }
 }
-
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(LibraryLib, events.EventEmitter)
 
 export default LibraryLib

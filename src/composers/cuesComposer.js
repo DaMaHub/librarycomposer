@@ -9,61 +9,61 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import { Encryption } from 'hop-crypto/encryption'
 import CuesContract from '../contracttemplate/cuesContract.js'
-import util from 'util'
-import events, { captureRejectionSymbol } from 'events'
+import events from 'events'
 
-var CuesComposer = function () {
-  events.EventEmitter.call(this)
-  this.cryptoLive = Encryption
-  this.liveCuesContracts = new CuesContract()
-}
+class CuesComposer extends events.EventEmitter {
+  constructor(contextAgent) {
+    super()
+    this.cryptoLive = contextAgent.crypto
+    this.heliLive = contextAgent.heliclock
+    this.liveCuesContracts = new CuesContract(this.heliLive)
+  }
 
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(CuesComposer, events.EventEmitter)
+  /**
+  * prepare and indiviual cue
+  * @method cuesPrepare
+  *
+  */
+  cuesPrepare(inCue) {
+    try {
+      let cueContract = this.liveCuesContracts.cuesContractform(inCue.data)
+      let cueReady = {}
+      const cueHASH = this.cryptoLive.createKey(cueContract)
+      cueReady.cueid = this.cryptoLive.createPrefixedKey('cues', cueHASH)
+      cueReady.data = cueContract
+      return cueReady
+    } catch (error) {
+      console.error('Validation Error in cuesPrepare:', error.message)
+      throw error
+    }
+  }
 
-/**
-* prepare and indiviual cue
-* @method cuesPrepare
-*
-*/
-CuesComposer.prototype.cuesPrepare = function (inCue) {
-  let cueContract = this.liveCuesContracts.cuesContractform(inCue.data)
-  let cueReady = {}
-  const cueHASH = this.cryptoLive.createKey(cueContract)
-  cueReady.cueid = this.cryptoLive.createPrefixedKey('cues', cueHASH)
-  cueReady.data = cueContract
-  return cueReady
-}
+  /**
+  * update contract for latest timestamp
+  * @method cuesTimestamp
+  *
+  */
+  cuesTimestamp(cueUpdate) {
+    let cueReady = {}
+    cueReady.cueid = cueUpdate.key
+    cueReady.data = cueUpdate.value
+    return cueReady
+  }
 
-/**
-* update contract for latest timestamp
-* @method cuesTimestamp
-*
-*/
-CuesComposer.prototype.cuesTimestamp = function (cueUpdate) {
-  let cueReady = {}
-  cueReady.cueid = cueUpdate.key
-  cueReady.data = cueUpdate.value
-  return cueReady
-}
-
-/**
-* prepare update relationships with cue
-* @method cuesRelationships
-*
-*/
-CuesComposer.prototype.cuesRelationships = function (cueUpdate) {
-  let relContract = this.liveCuesContracts.relationshipsBuilder(cueUpdate.data.contract, cueUpdate.data.relationships)
-  let cueReady = {}
-  const cueHASH = cueUpdate.data.contract.key
-  cueReady.cueid = cueHASH
-  cueReady.data = relContract.value
-  return cueReady
+  /**
+  * prepare update relationships with cue
+  * @method cuesRelationships
+  *
+  */
+  cuesRelationships(cueUpdate) {
+    let relContract = this.liveCuesContracts.relationshipsBuilder(cueUpdate.data.contract, cueUpdate.data.relationships)
+    let cueReady = {}
+    const cueHASH = cueUpdate.data.contract.key
+    cueReady.cueid = cueHASH
+    cueReady.data = relContract.value
+    return cueReady
+  }
 }
 
 export default CuesComposer

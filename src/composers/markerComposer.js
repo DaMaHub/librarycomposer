@@ -9,45 +9,45 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import { Encryption } from 'hop-crypto/encryption'
 import markerContract from '../contracttemplate/markerContract.js'
-import util from 'util'
 import events from 'events'
 
-var MarkerComposer = function () {
-  events.EventEmitter.call(this)
-  this.cryptoLive = Encryption
-  this.livemarkerContracts = new markerContract()
-}
+class MarkerComposer extends events.EventEmitter {
+  constructor(contextAgent) {
+    super()
+    this.cryptoLive = contextAgent.crypto
+    this.heliLive = contextAgent.heliclock
+    this.livemarkerContracts = new markerContract(this.heliLive)
+  }
 
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(MarkerComposer, events.EventEmitter)
+  /**
+  * prepare and indiviual cue
+  * @method MarkerComposer
+  *
+  */
+  markerPrepare(rData) {
+    try {
+      let reContract = this.livemarkerContracts.markerContractform(rData.data)
+      const cueHASH = this.cryptoLive.createKey(reContract)
+      let reReady = {}
+      reReady.cueid = this.cryptoLive.createPrefixedKey('marker', cueHASH)
+      reReady.data = reContract
+      return reReady
+    } catch (error) {
+      console.error('Validation Error in markerPrepare:', error.message)
+      throw error
+    }
+  }
 
-/**
-* prepare and indiviual cue
-* @method MarkerComposer
-*
-*/
-MarkerComposer.prototype.markerPrepare = function (rData) {
-  let reContract = this.livemarkerContracts.markerContractform(rData.data)
-  const cueHASH = this.cryptoLive.createKey(reContract)
-  let reReady = {}
-  reReady.cueid = this.cryptoLive.createPrefixedKey('marker', cueHASH)
-  reReady.data = reContract
-  return reReady
-}
-
-/**
-* prepare and indiviual cue
-* @method mediaRelationships
-*
-*/
-MarkerComposer.prototype.markerRelationships = function () {
-  let relContract = {}
-  return relContract
+  /**
+  * prepare and indiviual cue
+  * @method mediaRelationships
+  *
+  */
+  markerRelationships() {
+    let relContract = {}
+    return relContract
+  }
 }
 
 export default MarkerComposer

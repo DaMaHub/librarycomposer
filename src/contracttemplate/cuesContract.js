@@ -10,26 +10,28 @@
 * @version    $Id$
 */
 import { EventEmitter } from 'events';
-import { DateTime } from 'luxon';
+import { validateContract } from '../validation/validationUtility.js';
 
 class CuesContract extends EventEmitter {
-  constructor() {
+  constructor(heliLive) {
     super();
+    this.heliLive = heliLive;
   }
 
   cuesContractform(cue) {
+    const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     const contract = {
       refcontract: 'cue',
       concept: cue.concept,
       space: { concept: 'mind' },
       computational: cue.computational,
       time: {
-        createTimestamp: DateTime.now().toMillis(),
-        lastTimestamp: DateTime.now().toMillis(),
+        createTimestamp: currentTime,
+        lastTimestamp: currentTime,
         frequencyCount: 0
       }
     };
-    return contract;
+    return validateContract('cue', contract);
   }
 
   relationshipsBuilder(cue, relationships) {

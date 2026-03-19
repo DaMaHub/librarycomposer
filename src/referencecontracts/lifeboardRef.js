@@ -1,6 +1,6 @@
 'use strict'
 /**
-*  Prepare Datatype Reference Contracts
+*  Prepare Lifeboard Reference Contracts
 *
 *
 * @class LifeboardContract
@@ -9,75 +9,58 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
-import util from 'util'
-import events from 'events'
+import { EventEmitter } from 'events';
+import { validateContract } from '../validation/validationUtility.js';
 
-var LifeboardContract = function () {
-  events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+class LifeboardContract extends EventEmitter {
+  constructor(heliLive) {
+    super();
+    this.heliLive = heliLive;
+  }
+
+  /**
+  * prepare a lifeboard reference contract
+  * @method lifeboardPrepare
+  *
+  */
+  lifeboardPrepare(inputRC) {
+    const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
+    const lifeboardContract = {
+      refcontract: 'lifeboard',
+      concept: inputRC,
+      space: { concept: 'mind' },
+      computational: { 'routines': 'start'},
+      time: {
+        createTimestamp: currentTime,
+        lastTimestamp: currentTime,
+        frequencyCount: 0
+      }
+    };
+    
+    return validateContract('lifeboard', lifeboardContract);
+  }
+
+  /**
+  * prepare a lifeboard member reference contract
+  * @method lbmemberPrepare
+  *
+  */
+  lbmemberPrepare(inputRC) {
+    const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
+    const lifeboardContract = {
+      refcontract: 'lifeboard',
+      concept: inputRC,
+      space: { concept: 'mind' },
+      computational: { 'routines': 'member'},
+      time: {
+        createTimestamp: currentTime,
+        lastTimestamp: currentTime,
+        frequencyCount: 0
+      }
+    };
+    
+    return validateContract('lifeboard', lifeboardContract);
+  }
 }
 
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(LifeboardContract, events.EventEmitter)
-
-/**
-* prepare a lifeboard reference contract
-* @method lifeboardPrepare
-*
-*/
-LifeboardContract.prototype.lifeboardPrepare = function (inputRC) {
-  const lifeboardContract = {}
-  lifeboardContract.refcontract = 'lifeboard'
-  lifeboardContract.concept = {}
-  lifeboardContract.space = {}
-  lifeboardContract.computational = { 'routines': 'start'}
-  // prepare semantic part of datatype ref contracts
-  lifeboardContract.concept = inputRC
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  lifeboardContract.space = { concept: 'mind' }
-  // create a hash of entries as the index key
-  const dtHASH = this.cryptoLive.evidenceProof(lifeboardContract)
-  const RefContractHolder = {}
-  RefContractHolder.type = 'lifeboard'
-  RefContractHolder.reftype = 'lifeboard'
-  RefContractHolder.action = 'PUT'
-  let contractData = {}
-  contractData.hash = dtHASH
-  contractData.contract = lifeboardContract
-  RefContractHolder.data = contractData 
-  return RefContractHolder
-}
-
-/**
-* prepare a lifeboard reference contract
-* @method lifeboardPrepare
-*
-*/
-LifeboardContract.prototype.lbmemberPrepare = function (inputRC) {
-  const lifeboardContract = {}
-  lifeboardContract.refcontract = 'member'
-  lifeboardContract.concept = {}
-  lifeboardContract.space = {}
-  lifeboardContract.computational = { 'routines': 'start'}
-  // prepare semantic part of datatype ref contracts
-  lifeboardContract.concept = inputRC
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  lifeboardContract.space = { concept: 'mind' }
-  // create a hash of entries as the index key
-  const dtHASH = this.cryptoLive.evidenceProof(lifeboardContract)
-  const RefContractHolder = {}
-  RefContractHolder.type = 'lifeboard'
-  RefContractHolder.reftype = 'member'
-  RefContractHolder.action = 'PUT'
-  let contractData = {}
-  contractData.hash = dtHASH
-  contractData.contract = lifeboardContract
-  RefContractHolder.data = contractData 
-  return RefContractHolder
-}
-
-export default LifeboardContract
+export default LifeboardContract;

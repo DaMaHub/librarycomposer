@@ -1,0 +1,33 @@
+{
+  "$id": "https://hop.io/schemas/datatype.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "const": "datatype"
+        },
+        "concept": {
+          "type": "object",
+          "properties": {
+            "primary": { "type": "string", "enum": ["yes", "no"] },
+            "name": { "type": "string" },
+            "description": { "type": "string" },
+            "wiki": { "type": "string", "format": "uri" },
+            "rdf": { "type": "string", "format": "uri" }
+          },
+          "required": ["primary"]
+        },
+        "computational": {
+          "type": "object",
+          "properties": {
+            "measurement": { "type": "string" },
+            "datatypeType": { "type": "string", "enum": ["integer", "float", "boolean", "string", "array", "object"] }
+          },
+          "required": ["measurement", "datatypeType"]
+        }
+      }
+    }
+  ]
+}

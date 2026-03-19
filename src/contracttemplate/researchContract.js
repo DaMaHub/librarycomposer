@@ -9,47 +9,45 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
-import util from 'util'
-import events from 'events'
+import { EventEmitter } from 'events';
+import { validateContract } from '../validation/validationUtility.js';
 
-var ResearchContract = function () {
-  events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+class ResearchContract extends EventEmitter {
+  constructor(heliLive) {
+    super();
+    this.heliLive = heliLive;
+  }
 
+  /**
+  * prepare and individual research
+  * @method researchContractform
+  *
+  */
+  researchContractform(inRe) {
+    const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
+    const researchContract = {
+      refcontract: 'research',
+      concept: inRe,
+      space: { concept: 'mind' },
+      computational: {},
+      time: {
+        createTimestamp: currentTime,
+        lastTimestamp: currentTime,
+        frequencyCount: 0
+      }
+    };
+    
+    return validateContract('research', researchContract);
+  }
+
+  /**
+  * prepare and individual 
+  * @method ResearchRelationships
+  *
+  */
+  ResearchRelationships() {
+    return {};
+  }
 }
 
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(ResearchContract, events.EventEmitter)
-
-/**
-* prepare and indiviual cue
-* @method researchContractform
-*
-*/
-ResearchContract.prototype.researchContractform = function (inRe) {
-  let researchContract = {}
-  researchContract.refcontract = 'research'
-  researchContract.concept = {}
-  researchContract.space = {}
-  researchContract.computational = {}
-  // prepare semantic part of datatype ref contracts
-  researchContract.concept = inRe
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  researchContract.space = { concept: 'mind' }
-  return researchContract
-}
-
-/**
-* prepare and indiviual 
-* @method ResearchRelationships
-*
-*/
-ResearchContract.prototype.relationshipsBuilder = function () {
-
-}
-
-export default ResearchContract
+export default ResearchContract;

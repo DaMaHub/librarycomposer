@@ -1,0 +1,22 @@
+{
+  "$id": "https://hop.io/schemas/marker.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "const": "marker"
+        },
+        "concept": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "url": { "type": "string", "format": "uri" }
+          },
+          "required": ["name", "url"]
+        }
+      }
+    }
+  ]
+}

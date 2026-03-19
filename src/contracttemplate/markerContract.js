@@ -9,47 +9,45 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
-import util from 'util'
-import events from 'events'
+import { EventEmitter } from 'events';
+import { validateContract } from '../validation/validationUtility.js';
 
-var MarkerContract = function () {
-  events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+class MarkerContract extends EventEmitter {
+  constructor(heliLive) {
+    super();
+    this.heliLive = heliLive;
+  }
 
+  /**
+  * prepare and individual marker
+  * @method markerContractform
+  *
+  */
+  markerContractform(inMa) {
+    const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
+    const markerContract = {
+      refcontract: 'marker',
+      concept: inMa,
+      space: { concept: 'mind' },
+      computational: {},
+      time: {
+        createTimestamp: currentTime,
+        lastTimestamp: currentTime,
+        frequencyCount: 0
+      }
+    };
+    
+    return validateContract('marker', markerContract);
+  }
+
+  /**
+  * prepare and individual 
+  * @method MarkerRelationships
+  *
+  */
+  MarkerRelationships() {
+    return {};
+  }
 }
 
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(MarkerContract, events.EventEmitter)
-
-/**
-* prepare and indiviual cue
-* @method markerContractform
-*
-*/
-MarkerContract.prototype.markerContractform = function (inMa) {
-  let cueContract = {}
-  cueContract.refcontract = 'marker'
-  cueContract.concept = {}
-  cueContract.space = {}
-  cueContract.computational = {}
-  // prepare semantic part of datatype ref contracts
-  cueContract.concept = inMa
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  cueContract.space = { concept: 'mind' }
-  return cueContract
-}
-
-/**
-* prepare and indiviual 
-* @method MarkerRelationships
-*
-*/
-MarkerContract.prototype.relationshipsBuilder = function () {
-
-}
-
-export default MarkerContract
+export default MarkerContract;

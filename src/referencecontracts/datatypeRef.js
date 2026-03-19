@@ -10,15 +10,16 @@
 * @version    $Id$
 */
 import { EventEmitter } from 'events';
-import { DateTime } from 'luxon';
+import { validateContract } from '../validation/validationUtility.js';
 
 class DatatypeReferenceContract extends EventEmitter {
-  constructor() {
+  constructor(heliLive) {
     super();
+    this.heliLive = heliLive;
   }
 
   dtContractform(inputRC) {
-    const currentTime = DateTime.now().toMillis();
+    const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     const contract = {
       refcontract: 'datatype',
       concept: inputRC,
@@ -30,7 +31,7 @@ class DatatypeReferenceContract extends EventEmitter {
         frequencyCount: 0
       }
     };
-    return contract;
+    return validateContract('datatype', contract);
   }
 }
 

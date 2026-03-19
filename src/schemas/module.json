@@ -1,0 +1,14 @@
+{
+  "$id": "https://hop.io/schemas/module.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "const": "module"
+        }
+      }
+    }
+  ]
+}

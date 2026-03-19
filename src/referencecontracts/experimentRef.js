@@ -6,84 +6,68 @@
 * @class ExperimentReferenceContract
 * @package    LKN health
 * @copyright  Copyright (c) 2020 James Littlejohn
-* @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
+* @license    http://www.gnu.org/licenses/old-licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
-import util from 'util'
-import events from 'events'
+import { EventEmitter } from 'events';
+import { validateContract } from '../validation/validationUtility.js';
 
-var ExperimentReferenceContract = function () {
-  events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+class ExperimentReferenceContract extends EventEmitter {
+  constructor(heliLive) {
+    super();
+    this.heliLive = heliLive;
+  }
+
+  /**
+  * prepare network experiment ref contract
+  * @method nxpPrepare
+  *
+  */
+  nxpPrepare(inputRC) {
+    const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
+    const nxpReferenceContract = {
+      refcontract: 'experiment',
+      modules: inputRC,
+      concept: { state: 'genesis' },
+      space: { concept: 'mind' },
+      computational: { refcontract: null },
+      time: {
+        createTimestamp: currentTime,
+        lastTimestamp: currentTime,
+        frequencyCount: 0
+      }
+    };
+    
+    validateContract('experiment', nxpReferenceContract);
+
+    return nxpReferenceContract;
+  }
+
+  /**
+  * prepare network experiment
+  * @method nxpJoinedPrepare
+  *
+  */
+  nxpJoinedPrepare(genkey, inputRC) {
+    const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
+    const nxpReferenceContract = {
+      refcontract: 'experiment-join',
+      genesis: genkey,
+      modules: inputRC,
+      concept: { state: 'joined' },
+      space: { concept: 'mind' },
+      computational: { refcontract: null },
+      time: {
+        createTimestamp: currentTime,
+        lastTimestamp: currentTime,
+        frequencyCount: 0
+      }
+    };
+    
+    validateContract('experiment', nxpReferenceContract);
+
+    return nxpReferenceContract;
+  }
 }
 
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(ExperimentReferenceContract, events.EventEmitter)
-
-/**
-* prepare network experiment ref contract
-* @method nxpPrepare
-*
-*/
-ExperimentReferenceContract.prototype.nxpPrepare = function (inputRC) {
-  const nxpReferenceContract = {}
-  nxpReferenceContract.refcontract = 'experiment'
-  nxpReferenceContract.modules = {}
-  nxpReferenceContract.concept = {}
-  nxpReferenceContract.space = {}
-  nxpReferenceContract.computational = {}
-  // prepare semantic part of datatype ref contracts
-  nxpReferenceContract.concept = { state: 'genesis' }
-  nxpReferenceContract.modules = inputRC
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  nxpReferenceContract.space = { concept: 'mind' }
-  nxpReferenceContract.computational = { refcontract: null }
-  // create a hash of entries as the index key
-  const dtHASH = this.cryptoLive.evidenceProof(nxpReferenceContract)
-  const RefContractHolder = {}
-  RefContractHolder.type = 'library'
-  RefContractHolder.reftype = 'experiment-new'
-  RefContractHolder.action = 'PUT'
-  let contractData = {}
-  contractData.hash = dtHASH
-  contractData.contract = nxpReferenceContract
-  RefContractHolder.data = contractData
-  return RefContractHolder
-}
-
-/**
-* prepare network experiment
-* @method nxpJoinedPrepare
-*
-*/
-ExperimentReferenceContract.prototype.nxpJoinedPrepare = function (genkey, inputRC) {
-  const nxpReferenceContract = {}
-  nxpReferenceContract.refcontract = 'experiment-join'
-  nxpReferenceContract.genesis = genkey
-  nxpReferenceContract.modules = {}
-  nxpReferenceContract.concept = {}
-  nxpReferenceContract.space = {}
-  nxpReferenceContract.computational = {}
-  // prepare semantic part of datatype ref contracts
-  nxpReferenceContract.concept = { state: 'joined' }
-  nxpReferenceContract.modules = inputRC
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  nxpReferenceContract.space = { concept: 'mind' }
-  nxpReferenceContract.computational = { refcontract: null }
-  // create a hash of entries as the index key
-  const dtHASH = this.cryptoLive.evidenceProof(nxpReferenceContract)
-  const RefContractHolder = {}
-  RefContractHolder.reftype = 'experiment'
-  RefContractHolder.action = 'PUT'
-  let contractData = {}
-  contractData.hash = dtHASH
-  contractData.contract = nxpReferenceContract
-  RefContractHolder.data = contractData
-  return RefContractHolder
-}
-
-export default ExperimentReferenceContract
+export default ExperimentReferenceContract;

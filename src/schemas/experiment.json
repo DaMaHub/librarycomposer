@@ -1,0 +1,14 @@
+{
+  "$id": "https://hop.io/schemas/experiment.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "enum": ["experiment", "experiment-join"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$id": "https://hop.io/schemas/base-contract.json",
+  "type": "object",
+  "properties": {
+    "refcontract": {
+      "type": "string"
+    },
+    "concept": {
+      "type": "object"
+    },
+    "computational": {
+      "type": "object"
+    },
+    "space": {
+      "$ref": "https://hop.io/schemas/space.json"
+    },
+    "time": {
+      "type": "object",
+      "properties": {
+        "createTimestamp": {
+          "type": "number"
+        },
+        "lastTimestamp": {
+          "type": "number"
+        },
+        "frequencyCount": {
+          "type": "number"
+        }
+      },
+      "required": ["createTimestamp", "lastTimestamp", "frequencyCount"]
+    }
+  },
+  "required": ["refcontract", "concept", "computational", "space"]
+}

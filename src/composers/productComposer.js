@@ -9,45 +9,45 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import { Encryption } from 'hop-crypto/encryption'
 import productContract from '../contracttemplate/productContract.js'
-import util from 'util'
 import events from 'events'
 
-var ProductComposer = function () {
-  events.EventEmitter.call(this)
-  this.cryptoLive = Encryption
-  this.liveproductContracts = new productContract()
-}
+class ProductComposer extends events.EventEmitter {
+  constructor(contextAgent) {
+    super()
+    this.cryptoLive = contextAgent.crypto
+    this.heliLive = contextAgent.heliclock
+    this.liveproductContracts = new productContract(this.heliLive)
+  }
 
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(ProductComposer, events.EventEmitter)
+  /**
+  * prepare and indiviual cue
+  * @method productPrepare
+  *
+  */
+  productPrepare(pData) {
+    try {
+      let reContract = this.liveproductContracts.productContractform(pData.data)
+      const cueHASH = this.cryptoLive.createKey(reContract)
+      let reReady = {}
+      reReady.cueid = this.cryptoLive.createPrefixedKey('product', cueHASH)
+      reReady.data = reContract
+      return reReady
+    } catch (error) {
+      console.error('Validation Error in productPrepare:', error.message)
+      throw error
+    }
+  }
 
-/**
-* prepare and indiviual cue
-* @method productPrepare
-*
-*/
-ProductComposer.prototype.productPrepare = function (pData) {
-  let reContract = this.liveproductContracts.productContractform(pData.data)
-  const cueHASH = this.cryptoLive.createKey(reContract)
-  let reReady = {}
-  reReady.cueid = this.cryptoLive.createPrefixedKey('product', cueHASH)
-  reReady.data = reContract
-  return reReady
-}
-
-/**
-* prepare and indiviual cue
-* @method productRelationships
-*
-*/
-ProductComposer.prototype.productRelationships = function () {
-  let relContract = {}
-  return relContract
+  /**
+  * prepare and indiviual cue
+  * @method productRelationships
+  *
+  */
+  productRelationships() {
+    let relContract = {}
+    return relContract
+  }
 }
 
 export default ProductComposer

@@ -9,50 +9,48 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
-import util from 'util'
-import events from 'events'
+import { EventEmitter } from 'events';
+import { validateContract } from '../validation/validationUtility.js';
 
-var ModelContract = function () {
-  events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
+class ModelContract extends EventEmitter {
+  constructor(heliLive) {
+    super();
+    this.heliLive = heliLive;
+  }
 
+  /**
+  * prepare and individual model
+  * @method ModelContractform
+  *
+  */
+  ModelContractform(inCue) {
+    const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
+    const modelContract = {
+      refcontract: 'model',
+      concept: inCue.concept,
+      computational: inCue.computational,
+      space: { concept: 'mind' },
+      time: {
+        createTimestamp: currentTime,
+        lastTimestamp: currentTime,
+        frequencyCount: 0
+      }
+    };
+    
+    return validateContract('model', modelContract);
+  }
+
+  /**
+  * prepare and individual cue
+  * @method ModelRelationships
+  *
+  */
+  relationshipsBuilder(cue, relationships) {
+    cue.computational.relationships = relationships;
+    cue.time.lastTimestamp = Date.now();
+    cue.time.frequencyCount += 1;
+    return cue;
+  }
 }
 
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(ModelContract, events.EventEmitter)
-
-/**
-* prepare and indiviual cue
-* @method ModelContractform
-*
-*/
-ModelContract.prototype.ModelContractform = function (inCue) {
-  let cueContract = {}
-  cueContract.refcontract = 'model'
-  cueContract.concept = {}
-  cueContract.space = {}
-  cueContract.computational = {}
-  // prepare semantic part of datatype ref contracts
-  cueContract.concept = inCue.concept
-  // relationships with cue
-  cueContract.computational = inCue.computational
-
-  cueContract.space = { concept: 'mind' }
-  return cueContract
-}
-
-/**
-* prepare and indiviual cue
-* @method ModelRelationships
-*
-*/
-ModelContract.prototype.relationshipsBuilder = function (cueContract, updateRels) {
-  cueContract.value.computational.relationships = updateRels
-  return cueContract
-}
-
-export default ModelContract
+export default ModelContract;

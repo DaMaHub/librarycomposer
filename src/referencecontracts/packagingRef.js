@@ -1,6 +1,6 @@
 'use strict'
 /**
-*  Prepare Datatype Reference Contracts
+*  Prepare Packaging Reference Contracts
 *
 *
 * @class PackagingReferenceContract
@@ -9,124 +9,106 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
-import util from 'util'
-import events from 'events'
+import { EventEmitter } from 'events';
+import { validateContract } from '../validation/validationUtility.js';
 
-var PackagingReferenceContract = function () {
-  events.EventEmitter.call(this)
-  this.cryptoLive = new CryptoUtility()
-}
-
-/**
-* inherits core emitter class within this class
-* @method inherits
-*/
-util.inherits(PackagingReferenceContract, events.EventEmitter)
-
-/**
-* prepare a datatype reference contract
-* @method packagingPrepare
-*
-*/
-PackagingReferenceContract.prototype.packagingPrepare = function (inputRC) {
-  console.log('packaingININNINII')
-  console.log(inputRC)
-  const datatypeReferenceContract = {}  
-  datatypeReferenceContract.refcontract = 'packaging'
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
-  // need to prepare matching of datatyps ref contracts to table columns
-  const mergeDTColumn = this.mergePackageMap(inputRC.apicolumns, inputRC.apicolHolder) //  manual mapping to datatypes job for LLM
-  const newPackagingMap = {}
-  newPackagingMap.name = inputRC.name
-  newPackagingMap.description = inputRC.description
-  newPackagingMap.primary = inputRC.primary
-  newPackagingMap.api = inputRC.api
-  newPackagingMap.apibase = inputRC.apibase
-  newPackagingMap.apipath = inputRC.apipath
-  newPackagingMap.filename = inputRC.filename
-  newPackagingMap.path = inputRC.path
-  newPackagingMap.tableQuery = inputRC.tableQuery
-  newPackagingMap.sourcedevicecol = inputRC.sourcedevicecol
-  newPackagingMap.sqlitetablename = inputRC.sqlitetablename
-  newPackagingMap.tablestructure = mergeDTColumn
-  newPackagingMap.tidy = inputRC.tidy
-  newPackagingMap.category = inputRC.category
-  newPackagingMap.device = inputRC.device
-  newPackagingMap.devicesList = inputRC.devicesList
-  newPackagingMap.deviceColumns = inputRC.deviceColumns
-  newPackagingMap.devicequery = inputRC.deviceQuery
-  newPackagingMap.firmwarequery = inputRC.firmwareQuery
-  newPackagingMap.deviceColumnID = inputRC.deviceColumnID
-  // prepare semantic part of datatype ref contracts
-  datatypeReferenceContract.concept = newPackagingMap
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
-  return datatypeReferenceContract
-}
-
-/**
-* prepare a datatype reference contract
-* @method packagingBlindPrepare
-*
-*/
-PackagingReferenceContract.prototype.packagingBlindPrepare = function (inputRC) {
-  const datatypeReferenceContract = {}  
-  datatypeReferenceContract.refcontract = 'packaging'
-  datatypeReferenceContract.concept = {}
-  datatypeReferenceContract.space = {}
-  datatypeReferenceContract.computational = {}
-  // need to prepare matching of datatyps ref contracts to table columns
-  const mergeDTColumn = [{refcontract: 'blind1234555554321'}] // this.mergePackageMap(inputRC.apicolumns, inputRC.apicolHolder)  manual mapping to datatypes job for LLM
-  const newPackagingMap = {}
-  newPackagingMap.name = inputRC.name
-  newPackagingMap.description = inputRC.description
-  newPackagingMap.primary = inputRC.primary
-  newPackagingMap.api = inputRC.api
-  newPackagingMap.apibase = inputRC.apibase
-  newPackagingMap.apipath = inputRC.apipath
-  newPackagingMap.filename = inputRC.filename
-  newPackagingMap.tableQuery = inputRC.sqlitetablename
-  newPackagingMap.sourcedevicecol = inputRC.deviceColumns
-  newPackagingMap.sqlitetablename = inputRC.sqlitetablename
-  newPackagingMap.tablestructure = mergeDTColumn
-  newPackagingMap.tidy = inputRC.tidy
-  newPackagingMap.category = inputRC.category
-  newPackagingMap.device = inputRC.device
-  newPackagingMap.devicesList = inputRC.devicesList
-  newPackagingMap.deviceColumns = inputRC.deviceColumns
-  newPackagingMap.devicequery = inputRC.devicequery
-  newPackagingMap.firmwarequery = inputRC.firmwarequery
-  newPackagingMap.deviceColumnID = inputRC.deviceColumnID
-  // prepare semantic part of datatype ref contracts
-  datatypeReferenceContract.concept = newPackagingMap
-  // prepare space coordinates e.g. quark, atom, molecule etc.
-  datatypeReferenceContract.space = { concept: 'mind' }
-  datatypeReferenceContract.computational = { refcontract: null }
-  return datatypeReferenceContract
-}
-
-/**
-* map columns to datatype reference contracts
-* @method mergePackageMap
-*
-*/
-PackagingReferenceContract.prototype.mergePackageMap = function (col, table) {
-  const mapped = []
-  let countCol = 0
-  for (const co of col) {
-    if (co.count === countCol || co.count === countCol.cid) {
-      const mapPair = {}
-      mapPair.refcontract = table[co.name]
-      mapPair.column = co.name
-      mapped.push(mapPair)
-      countCol++
-    }
+class PackagingReferenceContract extends EventEmitter {
+  constructor(heliLive) {
+    super();
+    this.heliLive = heliLive;
   }
-  return mapped
+
+  /**
+  * prepare a packaging reference contract
+  * @method packagingPrepare
+  *
+  */
+  packagingPrepare(inputRC) {
+    const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
+    const mergeDTColumn = this.mergePackageMap(inputRC.apicolumns, inputRC.apicolHolder);
+    const newPackagingMap = {
+      name: inputRC.name,
+      description: inputRC.description,
+      primary: inputRC.primary,
+      api: inputRC.api,
+      apibase: inputRC.apibase,
+      apipath: inputRC.apipath,
+      filename: inputRC.filename,
+      path: inputRC.path,
+      tableQuery: inputRC.tableQuery,
+      sourcedevicecol: inputRC.sourcedevicecol,
+      sqlitetablename: inputRC.sqlitetablename,
+      tablestructure: mergeDTColumn,
+      tidy: inputRC.tidy,
+      category: inputRC.category,
+      device: inputRC.device,
+      devicesList: inputRC.devicesList,
+      deviceColumns: inputRC.deviceColumns,
+      devicequery: inputRC.deviceQuery,
+      firmwarequery: inputRC.firmwareQuery,
+      deviceColumnID: inputRC.deviceColumnID
+    };
+
+    const packagingContract = {
+      refcontract: 'packaging',
+      concept: newPackagingMap,
+      space: { concept: 'mind' },
+      computational: { refcontract: null },
+      time: {
+        createTimestamp: currentTime,
+        lastTimestamp: currentTime,
+        frequencyCount: 0
+      }
+    };
+    
+    return validateContract('packaging', packagingContract);
+  }
+
+  /**
+  * prepare a blind packaging reference contract
+  * @method packagingBlindPrepare
+  *
+  */
+  packagingBlindPrepare(inputRC) {
+    const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
+    const mergeDTColumn = [{refcontract: 'blind1234555554321'}];
+    const newPackagingMap = {
+      name: inputRC.name,
+      description: inputRC.description,
+      primary: inputRC.primary,
+      api: inputRC.api,
+      apibase: inputRC.apibase,
+      apipath: inputRC.apipath,
+      filename: inputRC.filename,
+      tableQuery: inputRC.sqlitetablename,
+      sourcedevicecol: inputRC.deviceColumns,
+      sqlitetablename: inputRC.sqlitetablename,
+      tablestructure: mergeDTColumn,
+      tidy: inputRC.tidy,
+      category: inputRC.category,
+      device: inputRC.device,
+      devicesList: inputRC.devicesList
+    };
+
+    const packagingContract = {
+      refcontract: 'packaging',
+      concept: newPackagingMap,
+      space: { concept: 'mind' },
+      computational: { refcontract: null },
+      time: {
+        createTimestamp: currentTime,
+        lastTimestamp: currentTime,
+        frequencyCount: 0
+      }
+    };
+    
+    return validateContract('packaging', packagingContract);
+  }
+
+  mergePackageMap(cols, holder) {
+    // Implementation of mergePackageMap would go here
+    return [];
+  }
 }
 
-export default PackagingReferenceContract
+export default PackagingReferenceContract;

@@ -1,0 +1,78 @@
+{
+  "$id": "https://hop.io/schemas/reference-pointer.json",
+  "type": "object",
+  "description": "A polymorphic pointer that evolves from static links to active agents.",
+  "properties": {
+    "priority": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "title": "HOP Native (Besearch / Contract)",
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "hop-contract"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^hop:[a-zA-Z0-9]+"
+              },
+              "version": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "id"
+            ]
+          },
+          {
+            "title": "Active Agent (ResonAgent)",
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "reson-agent"
+              },
+              "agentId": {
+                "type": "string"
+              },
+              "endpoint": {
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "required": [
+              "type",
+              "agentId"
+            ]
+          },
+          {
+            "title": "Legacy Web (Wikipedia / DBpedia)",
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "legacy-web"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "format": {
+                "enum": [
+                  "html",
+                  "rdf",
+                  "json-ld"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "url"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
