@@ -9,14 +9,12 @@
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 * @version    $Id$
 */
-import CryptoUtility from '../cryptoUtility.js'
 import util from 'util'
 import events from 'events'
 
 var KBID = function () {
   events.EventEmitter.call(this)
   console.log('KBID live')
-  this.cryptoLive = new CryptoUtility()
 }
 
 /**

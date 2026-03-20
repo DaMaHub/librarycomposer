@@ -19,24 +19,26 @@ import RcUtility from './rcUtility.js'
 * @version    $Id$
 */
 import util from 'util'
-import events from 'events'
+import EventEmitter from 'events'
 
-class LibraryLib extends events.EventEmitter {
-  constructor(contextAgent) {
+class LibraryComposer extends EventEmitter {
+
+  constructor(contextAgents) {
     super()
-    if (!contextAgent || !contextAgent.crypto || !contextAgent.heliclock) {
+    console.log('library composerLIVE')
+    if (!contextAgents || !contextAgents.crypto || !contextAgents.heliclock) {
       throw new Error('contextAgent with crypto and heliclock properties is required')
     }
-    this.liveCues = new CuesComposer(contextAgent)
-    this.liveModel = new ModelComposer(contextAgent)
-    this.liveMedia = new MediaComposer(contextAgent)
-    this.liveResearch = new ResearchComposer(contextAgent)
-    this.liveMarker = new MarkerComposer(contextAgent)
-    this.liveProduct = new ProductComposer(contextAgent)
-    this.liveComposer = new RcComposer(contextAgent)
-    this.liveKBID = new KbidComposer(contextAgent)
-    this.liveRefcontUtility = new RcUtility(contextAgent)
+    this.liveCues = new CuesComposer(contextAgents)
+    this.liveModel = new ModelComposer(contextAgents)
+    this.liveMedia = new MediaComposer(contextAgents)
+    this.liveResearch = new ResearchComposer(contextAgents)
+    this.liveMarker = new MarkerComposer(contextAgents)
+    this.liveProduct = new ProductComposer(contextAgents)
+    this.liveComposer = new RcComposer(contextAgents)
+    this.liveKBID = new KbidComposer(contextAgents)
+    this.liveRefcontUtility = new RcUtility(contextAgents)
   }
 }
 
-export default LibraryLib
+export default LibraryComposer

@@ -4,7 +4,7 @@
   "description": "create new reference contracts and utilities",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
     "build": "babel src -d babout",
     "build:schemas": "node scripts/compile-schemas.js"
   },
@@ -32,6 +32,7 @@
   "devDependencies": {
     "ajv": "^8.18.0",
     "ajv-cli": "^5.0.0",
-    "ajv-formats": "^3.0.1"
+    "ajv-formats": "^3.0.1",
+    "vitest": "^4.1.0"
   }
 }

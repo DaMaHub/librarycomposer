@@ -89,8 +89,12 @@ class ReferenceContractComposer extends events.EventEmitter {
   *
   */
   datatypeComposer(input) {
+    console.log('datatypeCOMPOSER')
+    console.log(input)
     try {
       const prepContract = this.datatypeRefLive.dtContractform(input)
+      console.log('prepContract after VALIDATION')
+      console.log(prepContract)
         // create a hash of entries as the index key
         const dtHASH = this.cryptoLive.createKey(prepContract)
         const RefContractHolder = {}
