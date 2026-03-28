@@ -26,7 +26,8 @@ const ajv = new Ajv({
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/packaging.json"), "utf8")),
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/question.json"), "utf8")),
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/units.json"), "utf8")),
-    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/visualise.json"), "utf8"))
+    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/visualise.json"), "utf8")),
+    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/lifestrap.json"), "utf8"))
   ],
   code: { source: true, esm: true },
   strict: false
@@ -48,7 +49,8 @@ let moduleCode = standaloneCode(ajv, {
   "packaging": "https://hop.io/schemas/packaging.json",
   "question": "https://hop.io/schemas/question.json",
   "units": "https://hop.io/schemas/units.json",
-  "visualise": "https://hop.io/schemas/visualise.json"
+  "visualise": "https://hop.io/schemas/visualise.json",
+  "lifestrap": "https://hop.io/schemas/lifestrap.json"
 });
 
 // Fix for ajv-formats in ESM standalone mode

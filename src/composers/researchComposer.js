@@ -16,7 +16,7 @@ class ResearchComposer extends events.EventEmitter {
   constructor(contextAgent) {
     super()
     this.cryptoLive = contextAgent.crypto
-    this.heliLive = contextAgent.heliclock
+    this.heliLive = contextAgent.heliLocation
     this.liveresearchContracts = new researchContract(this.heliLive)
   }
 

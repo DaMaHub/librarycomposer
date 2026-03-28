@@ -34,7 +34,6 @@ describe('Datatype Form Reference Contract', () => {
   it('should correctly form the datatype contract via DatatypeReferenceContract', () => {
     const dtRef = new DatatypeReferenceContract(mockHeliLive);
     const prepared = dtRef.dtContractform(inputData);
-    console.log(prepared);
     expect(prepared.refcontract).toBe('datatype');
     expect(prepared.concept.name).toBe('Heart Rate');
     expect(prepared.time.createTimestamp).toBe(1234567890);

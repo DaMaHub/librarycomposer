@@ -21,10 +21,10 @@ import UnitsRefCont from '../referencecontracts/unitsRef.js'
 import events from 'events'
 
 class ReferenceContractComposer extends events.EventEmitter {
-  constructor(contextAgent) {
+  constructor(contextAgents) {
     super()
-    this.cryptoLive = contextAgent.crypto
-    this.heliLive = contextAgent.heliclock
+    this.cryptoLive = contextAgents.crypto
+    this.heliLive = contextAgents.heliLocation
     this.lifeboardRefLive = new LifeboardRefCont(this.heliLive)
     this.questionRefLive = new QuestionRefCont(this.heliLive)
     this.datatypeRefLive = new DatatypeRefCont(this.heliLive)
@@ -89,25 +89,14 @@ class ReferenceContractComposer extends events.EventEmitter {
   *
   */
   datatypeComposer(input) {
-    console.log('datatypeCOMPOSER')
-    console.log(input)
     try {
       const prepContract = this.datatypeRefLive.dtContractform(input)
-      console.log('prepContract after VALIDATION')
-      console.log(prepContract)
         // create a hash of entries as the index key
         const dtHASH = this.cryptoLive.createKey(prepContract)
-        const RefContractHolder = {}
-        RefContractHolder.type = 'library'
-        RefContractHolder.action = 'contracts'
-        RefContractHolder.privacy = 'public'
-        RefContractHolder.reftype = 'datatype'
-        RefContractHolder.task = 'PUT'
         let contractData = {}
-        contractData.hash = this.cryptoLive.createPrefixedKey(RefContractHolder.reftype, dtHASH)
+        contractData.hash = this.cryptoLive.createPrefixedKey('datatype', dtHASH)
         contractData.contract = prepContract
-        RefContractHolder.data = contractData
-      return RefContractHolder
+      return contractData
     } catch (error) {
       console.error('Validation Error in datatypeComposer:', error.message)
       throw error

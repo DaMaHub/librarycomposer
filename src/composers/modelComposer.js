@@ -16,7 +16,7 @@ class ModelComposer extends events.EventEmitter {
   constructor(contextAgent) {
     super()
     this.cryptoLive = contextAgent.crypto
-    this.heliLive = contextAgent.heliclock
+    this.heliLive = contextAgent.heliLocation
     this.liveModelContracts = new ModelContract(this.heliLive)
   }
 

@@ -1,0 +1,21 @@
+{
+  "$id": "https://hop.io/schemas/lifestrap.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "const": "lifestrap"
+        },
+        "concept": {
+          "type": "object",
+          "properties": {
+            "story": { "type": "string" }
+          },
+          "required": ["story"]
+        }
+      }
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 *  Prepare Cues Contract
 *
 *
-* @class CuesContract
+* @class LifestrapContract
 * @package    HOP library 
 * @copyright  Copyright (c) 2024 James Littlejohn
 * @license    http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
@@ -12,34 +12,33 @@
 import { EventEmitter } from 'events';
 import { validateContract } from '../validation/validationUtility.js';
 
-class CuesContract extends EventEmitter {
+class LifestrapContract extends EventEmitter {
   constructor(heliLive) {
     super();
     this.heliLive = heliLive;
   }
 
-  cuesContractform(cue) {
+  LifestrapContractform(lifestrap) {
+    console.log('start  conra ctomf LS')
+    console.log(lifestrap)
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
+    
     const contract = {
-      refcontract: 'cue',
-      concept: cue.concept,
+      refcontract: 'lifestrap',
+      concept: { story: lifestrap.inquiry },
       space: { concept: 'mind' },
-      computational: cue.computational,
+      computational: { science: 'consilience-weave' },
       time: {
         createTimestamp: currentTime,
         lastTimestamp: currentTime,
         frequencyCount: 0
       }
     };
-    return validateContract('cue', contract);
+    console.log('intput to validiatvvvvvvvvvvvvvvv')
+    console.log(contract)
+    return validateContract('lifestrap', contract);
   }
 
-  relationshipsBuilder(cue, relationships) {
-    cue.value.computational.relationships = relationships;
-    cue.value.time.lastTimestamp = this.heliLive ? this.heliLive.helistamp() : Date.now();
-    cue.value.time.frequencyCount += 1;
-    return cue;
-  }
 }
 
-export default CuesContract;
+export default LifestrapContract;

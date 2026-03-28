@@ -1,5 +1,6 @@
 'use strict'
 import CuesComposer from './composers/cuesComposer.js'
+import LifestrapComposer from './composers/lifestrapComposer.js'
 import ModelComposer from './composers/modelComposer.js'
 import MediaComposer from './composers/mediaComposer.js'
 import ResearchComposer from './composers/researchComposer.js'
@@ -25,11 +26,11 @@ class LibraryComposer extends EventEmitter {
 
   constructor(contextAgents) {
     super()
-    console.log('library composerLIVE')
     if (!contextAgents || !contextAgents.crypto || !contextAgents.heliclock) {
       throw new Error('contextAgent with crypto and heliclock properties is required')
     }
     this.liveCues = new CuesComposer(contextAgents)
+    this.liveLifestrap = new LifestrapComposer(contextAgents)
     this.liveModel = new ModelComposer(contextAgents)
     this.liveMedia = new MediaComposer(contextAgents)
     this.liveResearch = new ResearchComposer(contextAgents)

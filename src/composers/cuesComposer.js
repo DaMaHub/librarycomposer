@@ -16,7 +16,7 @@ class CuesComposer extends events.EventEmitter {
   constructor(contextAgent) {
     super()
     this.cryptoLive = contextAgent.crypto
-    this.heliLive = contextAgent.heliclock
+    this.heliLive = contextAgent.heliLocation
     this.liveCuesContracts = new CuesContract(this.heliLive)
   }
 
@@ -30,8 +30,8 @@ class CuesComposer extends events.EventEmitter {
       let cueContract = this.liveCuesContracts.cuesContractform(inCue.data)
       let cueReady = {}
       const cueHASH = this.cryptoLive.createKey(cueContract)
-      cueReady.cueid = this.cryptoLive.createPrefixedKey('cues', cueHASH)
-      cueReady.data = cueContract
+      cueReady.hash = this.cryptoLive.createPrefixedKey('cues', cueHASH)
+      cueReady.contract = cueContract
       return cueReady
     } catch (error) {
       console.error('Validation Error in cuesPrepare:', error.message)

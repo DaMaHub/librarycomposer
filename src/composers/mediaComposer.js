@@ -16,7 +16,7 @@ class MediaComposer extends events.EventEmitter {
   constructor(contextAgent) {
     super()
     this.cryptoLive = contextAgent.crypto
-    this.heliLive = contextAgent.heliclock
+    this.heliLive = contextAgent.heliLocation
     this.livemediaContracts = new mediaContract(this.heliLive)
   }
 
