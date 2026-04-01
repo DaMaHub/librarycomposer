@@ -1,14 +1,39 @@
 {
-  "$id": "https://hop.io/schemas/visualise.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "allOf": [
-    { "$ref": "https://hop.io/schemas/base-contract.json" },
-    {
+  "title": "Emulation-Aware Visualisation Contract",
+  "properties": {
+    "experimentId": { "type": "string" },
+    "scales": {
+      "type": "object",
       "properties": {
-        "refcontract": {
-          "const": "visualise"
-        }
-      }
+        "cell": { "$ref": "#/definitions/emulationMapping" },
+        "organ": { "$ref": "#/definitions/emulationMapping" },
+        "bioregion": { "$ref": "#/definitions/emulationMapping" }
+      },
+      "additionalProperties": false
     }
-  ]
+  },
+  "definitions": {
+    "emulationMapping": {
+      "type": "object",
+      "properties": {
+        "component": { "type": "string", "description": "BentoBoxDS Vue Component" },
+        "resonanceMapping": {
+          "type": "object",
+          "properties": {
+            "input": { "type": "string", "default": "resonance_vector_primary" },
+            "targetProperty": { "type": "string", "description": "e.g., 'turbidity', 'pulseRate', 'emission'" },
+            "transformation": { "type": "string", "description": "JS math string or WASM hook" }
+          },
+          "required": ["targetProperty"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["component", "resonanceMapping"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["experimentId", "scales"],
+  "additionalProperties": false
 }

@@ -19,8 +19,6 @@ class LifestrapContract extends EventEmitter {
   }
 
   LifestrapContractform(lifestrap) {
-    console.log('start  conra ctomf LS')
-    console.log(lifestrap)
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
     const contract = {
@@ -34,8 +32,6 @@ class LifestrapContract extends EventEmitter {
         frequencyCount: 0
       }
     };
-    console.log('intput to validiatvvvvvvvvvvvvvvv')
-    console.log(contract)
     return validateContract('lifestrap', contract);
   }
 

@@ -42,3 +42,35 @@ class VisualiseReferenceContract extends EventEmitter {
 }
 
 export default VisualiseReferenceContract;
+
+
+// visualiseRef.js (Upgraded for HOP Emulation)
+// Location: Computational Space | Environment: BentoBoxDS / WASM Bridge
+
+export const visualiseRef = {
+  contractId: "hop-emulation-v1",
+  
+  /**
+   * Concept-to-Space Mapping:
+   * Maps abstract 'Resonance' to physical 'Properties' in the Emulation.
+   */
+  attachToWorld: (scale, resonanceVector, bentoContext) => {
+    // scale: Concept Level (e.g., 'bioregion')
+    // resonanceVector: Computational Output from resonAgent
+    
+    const config = this.scales[scale];
+    if (!config) return;
+
+    // The 'Feel' Intensity (0.0 - 1.0)
+    const intensity = resonanceVector[0]; 
+    
+    // Transformation Logic (The Algebra of the Space)
+    const mappedValue = eval(config.resonanceMapping.transformation.replace('x', intensity));
+
+    // Emission: Pushing state back into the World Space
+    bentoContext.emit('UPDATE_EMULATION_STATE', {
+      property: config.resonanceMapping.targetProperty, // e.g. 'river_turbidity'
+      value: mappedValue
+    });
+  }
+};

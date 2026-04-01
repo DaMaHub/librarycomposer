@@ -11,7 +11,7 @@
         "concept": {
           "type": "object",
           "properties": {
-            "primary": { "type": "string", "enum": ["yes", "no"] },
+            "primary": { "type": "boolean" },
             "name": { "type": "string" },
             "description": { "type": "string" },
             "wiki": { "type": "string", "format": "uri" },
@@ -23,9 +23,8 @@
           "type": "object",
           "properties": {
             "measurement": { "type": "string" },
-            "datatypeType": { "type": "string", "enum": ["integer", "float", "boolean", "string", "array", "object"] }
-          },
-          "required": ["measurement", "datatypeType"]
+            "datatypeType": { "type": "string", "enum": ["integer", "float", "boolean", "string", "array", "object", "datatype"] }
+          }
         }
       }
     }

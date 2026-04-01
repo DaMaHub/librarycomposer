@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/DaMaHub/referencecontractcomposer#readme",
   "dependencies": {
+    "b4a": "^1.8.0",
     "bs58": "^4.0.1"
   },
   "devDependencies": {
