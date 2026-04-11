@@ -32,7 +32,7 @@ class LifestrapComposer extends events.EventEmitter {
       let lifestrapContract = this.liveLifestrapContracts.LifestrapContractform(inLifestrap.data)
       let lifestrapReady = {}
       const lifestrapHASH = this.cryptoLive.createKey(lifestrapContract)
-      lifestrapReady.hash = this.cryptoLive.createPrefixedKey('lifestrap', lifestrapHASH)
+      lifestrapReady.key = this.cryptoLive.createPrefixedKey('lifestrap', lifestrapHASH)
       lifestrapReady.contract = lifestrapContract
       return lifestrapReady
     } catch (error) {

@@ -103,15 +103,12 @@ datatypeComposer(lsKey, input) {
         // If it's the 42-byte content key, take the last 32 bytes
         const idBuf = lsKey.length > 32 ? lsKey.slice(lsKey.length - 32) : lsKey;
         cleanLSID = b4a.toString(idBuf, 'hex');
-    } else {
-        // If it's a string, just strip any 'lifestrap!' text
-        cleanLSID = lsKey.replace('lifestrap!', '');
     }
 
     // 3. Create the Stitch Key
     // By passing the cleanLSID (hex) and dtHASH (binary) to your utility,
     // the utility can now form a clean [HEX]!link![HEX] key.
-    const stitchKey = this.cryptoLive.createStitchKey(cleanLSID, dtHASH)
+    const stitchKey = this.cryptoLive.createStitchKey(lsKey, dtHASH)
     
     const dtContentKey = this.cryptoLive.createContentKey('datatype', dtHASH)
     
@@ -125,35 +122,6 @@ datatypeComposer(lsKey, input) {
     throw error
   }
 }
-
-/*
-datatypeComposer(lsKey, input) {
-  try {
-    const prepContract = this.datatypeRefLive.dtContractform(input)
-    const dtHASH = this.cryptoLive.createKey(prepContract) 
-    
-    // 1. ENSURE THE HEAD IS CLEAN
-    // If lsKey is the 42-byte buffer, we slice it to get just the 32-byte hash
-    const cleanLSID = (b4a.isBuffer(lsKey) && lsKey.length > 32) 
-      ? lsKey.slice(lsKey.length - 32) 
-      : lsKey;
-
-    // 2. Create the stitch using the raw 32-byte ID and raw 32-byte DT Hash
-    // This will force both sides to Hex in your utility
-    const stitchKey = this.cryptoLive.createStitchKey(cleanLSID, dtHASH)
-    
-    const dtContentKey = this.cryptoLive.createContentKey('datatype', dtHASH)
-    
-    return {
-      hash: stitchKey,
-      contentKey: dtContentKey,
-      contract: prepContract
-    }
-  } catch (error) { ... }
-}
-*/
-
-
 
   /**
   * Packaging composer

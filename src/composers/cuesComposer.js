@@ -11,6 +11,7 @@
 */
 import CuesContract from '../contracttemplate/cuesContract.js'
 import events from 'events'
+import b4a from 'b4a'
 
 class CuesComposer extends events.EventEmitter {
   constructor(contextAgent) {
@@ -25,14 +26,26 @@ class CuesComposer extends events.EventEmitter {
   * @method cuesPrepare
   *
   */
-  cuesPrepare(inCue) {
+  cueComposer(lsKey, inCue) {
+    console.log('cue cmopser start')
     try {
-      let cueContract = this.liveCuesContracts.cuesContractform(inCue.data)
-      let cueReady = {}
+      const cueContract = this.liveCuesContracts.cuesContractform(inCue)
+      
+      // 1. Create the raw 32-byte hash
       const cueHASH = this.cryptoLive.createKey(cueContract)
-      cueReady.hash = this.cryptoLive.createPrefixedKey('cues', cueHASH)
-      cueReady.contract = cueContract
-      return cueReady
+
+      // 3. Create the Stitch Key
+      // By passing the cleanLSID (hex) and cueHASH (binary) to your utility,
+      // the utility can now form a clean [HEX]!link![HEX] key.
+      const stitchKey = this.cryptoLive.createStitchKey(lsKey, cueHASH)
+      
+      const cueContentKey = this.cryptoLive.createContentKey('cues', cueHASH)
+      
+      return {
+        hash: stitchKey,
+        contentKey: cueContentKey,
+        contract: cueContract
+      }
     } catch (error) {
       console.error('Validation Error in cuesPrepare:', error.message)
       throw error

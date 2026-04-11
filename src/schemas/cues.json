@@ -1,14 +1,50 @@
 {
-  "$id": "https://hop.io/schemas/cues.json",
+  "$id": "https://hop.io/schemas/cue.json",
   "type": "object",
-  "allOf": [
-    { "$ref": "https://hop.io/schemas/base-contract.json" },
-    {
+  "required": ["concept", "computational", "space", "time"],
+  "properties": {
+    "refcontract": { "const": "cue" },
+    "concept": {
+      "type": "object",
       "properties": {
-        "refcontract": {
-          "const": "cue"
+        "network": { "enum": ["warm", "cold"] },
+        "links": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "target": { "type": "string" },
+              "type": { "enum": ["systemic", "causal", "inhibitory"] }
+            }
+          }
         }
+      },
+      "required": ["network", "links"]
+    },
+    "computational": {
+      "type": "object",
+      "properties": {
+        "frequency": { "type": "number", "minimum": 0, "maximum": 1 },
+        "gate": { "type": "number" },
+        "confidence": { "type": "number", "default": 1 },
+        "linkWeights": { "type": "array", "items": { "type": "number" } }
+      },
+      "required": ["frequency"]
+    },
+    "space": {
+      "type": "object",
+      "properties": {
+        "hops": { "type": "integer", "default": 0 },
+        "context": { "type": "string" }
       }
+    },
+    "time": {
+      "type": "object",
+      "properties": {
+        "decayRate": { "type": "number" },
+        "ttl": { "type": "integer" },
+        "timestamp": { "type": "integer" }
+      },
+      "required": ["decayRate", "timestamp"]
     }
-  ]
+  }
 }

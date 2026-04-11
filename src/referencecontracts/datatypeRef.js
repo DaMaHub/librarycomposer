@@ -19,8 +19,6 @@ class DatatypeReferenceContract extends EventEmitter {
   }
 
   dtContractform(inputRC) {
-    console.log('form dt contract--------')
-    console.log(inputRC)
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     const contract = {
       refcontract: 'datatype',
@@ -42,7 +40,6 @@ class DatatypeReferenceContract extends EventEmitter {
         frequencyCount: 0
       }
     };
-    console.log(contract)
     return validateContract('datatype', contract);
   }
 }
