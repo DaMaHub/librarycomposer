@@ -19,6 +19,8 @@ class LifestrapContract extends EventEmitter {
   }
 
   LifestrapContractform(lifestrap) {
+    console.log('lifestrap parpepare   ---------')
+    console.log(lifestrap)
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
     const contract = {

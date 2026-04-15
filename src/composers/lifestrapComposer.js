@@ -26,8 +26,6 @@ class LifestrapComposer extends events.EventEmitter {
   *
   */
   lifestrapPrepare(inLifestrap) {
-    console.log('start prepare')
-    console.log(inLifestrap)
     try {
       let lifestrapContract = this.liveLifestrapContracts.LifestrapContractform(inLifestrap.data)
       let lifestrapReady = {}
