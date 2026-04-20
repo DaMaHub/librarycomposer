@@ -1,6 +1,6 @@
 {
   "name": "librarycomposer",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "create new reference contracts and utilities",
   "main": "src/index.js",
   "scripts": {
@@ -28,7 +28,8 @@
   "homepage": "https://github.com/DaMaHub/referencecontractcomposer#readme",
   "dependencies": {
     "b4a": "^1.8.0",
-    "bs58": "^4.0.1"
+    "bs58": "^4.0.1",
+    "ajv-formats": "^3.0.1"
   },
   "devDependencies": {
     "ajv": "^8.18.0",
