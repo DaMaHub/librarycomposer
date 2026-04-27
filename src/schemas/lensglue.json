@@ -1,0 +1,41 @@
+{
+  "$id": "https://hop.io/schemas/lensglue.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "const": "lensglue"
+        },
+        "concept": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "id": { "type": "string" },
+            "ledger": { "type": "string" },
+            "status": { "type": "string" },
+            "type": { "type": "string" },
+            "label": { "type": "string" },
+            "author": { "type": "string" },
+            "description": { "type": "string" },
+            "tags": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "computational": {
+          "type": "object",
+          "properties": {
+            "glueLogic": { "type": "string" },
+            "mappings": { "type": "array" }
+          }
+        },
+        "space": {
+          "type": "object"
+        },
+        "time": {
+          "type": "object"
+        }
+      }
+    }
+  ]
+}

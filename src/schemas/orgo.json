@@ -1,0 +1,72 @@
+{
+  "$id": "https://hop.io/schemas/orgo.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "const": "orgo"
+        },
+        "concept": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "id": { "type": "string" },
+            "ledger": { "type": "string" },
+            "status": { "type": "string" },
+            "type": { "type": "string" },
+            "label": { "type": "string" },
+            "author": { "type": "string" },
+            "description": { "type": "string" },
+            "tags": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "computational": {
+          "type": "object",
+          "properties": {
+            "calculate": { "type": "string" },
+            "params": { "type": "object" },
+            "sifter": {
+              "type": "object",
+              "properties": {
+                "source": { "type": "string" },
+                "status": { "type": "string" }
+              }
+            }
+          }
+        },
+        "space": {
+          "type": "object",
+          "properties": {
+            "world": { "type": "string" },
+            "anchor": { "type": "string" },
+            "scale": { "type": "string" },
+            "influence": {
+              "type": "object",
+              "properties": {
+                "radius": { "type": "number" },
+                "unit": { "type": "string" }
+              }
+            }
+          }
+        },
+        "time": {
+          "type": "object",
+          "properties": {
+            "epoch": { "type": "string" },
+            "orbit": { "type": "string" },
+            "heliTime": {
+              "type": "object",
+              "properties": {
+                "decayRate": { "type": "string" },
+                "horizon": { "type": "number" },
+                "persistence": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

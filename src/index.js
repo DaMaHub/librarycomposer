@@ -1,11 +1,15 @@
 'use strict'
 import CuesComposer from './composers/cuesComposer.js'
+import BesearchComposer from './composers/besearchComposer.js'
 import LifestrapComposer from './composers/lifestrapComposer.js'
 import ModelComposer from './composers/modelComposer.js'
 import MediaComposer from './composers/mediaComposer.js'
 import ResearchComposer from './composers/researchComposer.js'
 import MarkerComposer from './composers/markerComposer.js'
 import ProductComposer from './composers/productComposer.js'
+import OrgoComposer from './composers/orgoComposer.js'
+import GelleComposer from './composers/gelleComposer.js'
+import LensglueComposer from './composers/lensglueComposer.js'
 import RcComposer from './composers/rcComposer.js'
 import KbidComposer from './composers/kbidComposer.js'
 import RcUtility from './rcUtility.js'
@@ -30,12 +34,16 @@ class LibraryComposer extends EventEmitter {
       throw new Error('contextAgent with crypto and heliclock properties is required')
     }
     this.liveCues = new CuesComposer(contextAgents)
+    this.liveBesearch = new BesearchComposer(contextAgents)
     this.liveLifestrap = new LifestrapComposer(contextAgents)
     this.liveModel = new ModelComposer(contextAgents)
     this.liveMedia = new MediaComposer(contextAgents)
     this.liveResearch = new ResearchComposer(contextAgents)
     this.liveMarker = new MarkerComposer(contextAgents)
     this.liveProduct = new ProductComposer(contextAgents)
+    this.liveOrgo = new OrgoComposer(contextAgents)
+    this.liveGelle = new GelleComposer(contextAgents)
+    this.liveLensglue = new LensglueComposer(contextAgents)
     this.liveComposer = new RcComposer(contextAgents)
     this.liveKBID = new KbidComposer(contextAgents)
     this.liveRefcontUtility = new RcUtility(contextAgents)

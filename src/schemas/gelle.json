@@ -1,0 +1,71 @@
+{
+  "$id": "https://hop.io/schemas/gelle.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "const": "gelle"
+        },
+        "concept": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "id": { "type": "string" },
+            "ledger": { "type": "string" },
+            "status": { "type": "string" },
+            "type": { "type": "string" },
+            "label": { "type": "string" },
+            "author": { "type": "string" },
+            "description": { "type": "string" },
+            "tags": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "computational": {
+          "type": "object",
+          "properties": {
+            "render": { "type": "string" },
+            "subscription": {
+              "type": "object",
+              "properties": {
+                "masterOrgo": { "type": "string" },
+                "targetKey": { "type": "string" }
+              }
+            }
+          }
+        },
+        "space": {
+          "type": "object",
+          "properties": {
+            "world": { "type": "string" },
+            "anchor": { "type": "string" },
+            "topology": { "type": "string" },
+            "dimensions": {
+              "type": "object",
+              "properties": {
+                "x": { "type": "number" },
+                "y": { "type": "number" },
+                "z": { "type": "number" },
+                "unit": { "type": "string" }
+              }
+            }
+          }
+        },
+        "time": {
+          "type": "object",
+          "properties": {
+            "refreshRate": { "type": "string" },
+            "persistence": { "type": "string" },
+            "heliTime": {
+              "type": "object",
+              "properties": {
+                "aestheticDecay": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

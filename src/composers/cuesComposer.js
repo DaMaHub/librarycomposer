@@ -11,7 +11,6 @@
 */
 import CuesContract from '../contracttemplate/cuesContract.js'
 import events from 'events'
-import b4a from 'b4a'
 
 class CuesComposer extends events.EventEmitter {
   constructor(contextAgent) {

@@ -1,0 +1,53 @@
+{
+  "$id": "https://hop.io/schemas/besearch.json",
+  "type": "object",
+  "required": ["concept", "computational", "space", "time"],
+  "properties": {
+    "refcontract": { "const": "besearch" },
+    "concept": {
+      "type": "object",
+      "properties": {
+        "stage": { "enum": ["cycle", "strand", "braid"] },
+        "network": { "enum": ["warm", "cold"] },
+        "query": { "type": "string" },
+        "capacity": { "type": "number" },
+        "author": { "type": "string" },
+        "permissions": { "type": "object" },
+        "context": { "type": "string" },
+        "plan": { "type": "object" },
+        "result": { "type": "object" },
+        "record": { "type": "object" },
+        "orgoRefs": { "type": "array" },
+        "gelleRefs": { "type": "array" },
+        "heliPulse": { "type": "object" }
+      },
+      "required": ["stage"]
+    },
+    "computational": {
+      "type": "object",
+      "properties": {
+        "frequency": { "type": "number", "minimum": 0, "maximum": 1 },
+        "gate": { "type": "number" },
+        "confidence": { "type": "number", "default": 1 },
+        "linkWeights": { "type": "array", "items": { "type": "number" } }
+      },
+      "required": ["frequency"]
+    },
+    "space": {
+      "type": "object",
+      "properties": {
+        "hops": { "type": "integer", "default": 0 },
+        "context": { "type": "string" }
+      }
+    },
+    "time": {
+      "type": "object",
+      "properties": {
+        "decayRate": { "type": "number" },
+        "ttl": { "type": "integer" },
+        "timestamp": { "type": "integer" }
+      },
+      "required": ["decayRate", "timestamp"]
+    }
+  }
+}

@@ -27,7 +27,11 @@ const ajv = new Ajv({
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/question.json"), "utf8")),
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/units.json"), "utf8")),
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/visualise.json"), "utf8")),
-    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/lifestrap.json"), "utf8"))
+    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/lifestrap.json"), "utf8")),
+    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/orgo.json"), "utf8")),
+    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/gelle.json"), "utf8")),
+    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/lensglue.json"), "utf8")),
+    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/besearch.json"), "utf8"))
   ],
   code: { source: true, esm: true },
   strict: false
@@ -38,7 +42,7 @@ addFormats(ajv);
 let moduleCode = standaloneCode(ajv, {
   "datatype": "https://hop.io/schemas/datatype.json",
   "marker": "https://hop.io/schemas/marker.json",
-  "cue": "https://hop.io/schemas/cues.json",
+  "cue": "https://hop.io/schemas/cue.json",
   "media": "https://hop.io/schemas/media.json",
   "product": "https://hop.io/schemas/product.json",
   "research": "https://hop.io/schemas/research.json",
@@ -50,7 +54,11 @@ let moduleCode = standaloneCode(ajv, {
   "question": "https://hop.io/schemas/question.json",
   "units": "https://hop.io/schemas/units.json",
   "visualise": "https://hop.io/schemas/visualise.json",
-  "lifestrap": "https://hop.io/schemas/lifestrap.json"
+  "lifestrap": "https://hop.io/schemas/lifestrap.json",
+  "orgo": "https://hop.io/schemas/orgo.json",
+  "gelle": "https://hop.io/schemas/gelle.json",
+  "lensglue": "https://hop.io/schemas/lensglue.json",
+  "besearch": "https://hop.io/schemas/besearch.json"
 });
 
 // Fix for ajv-formats in ESM standalone mode

@@ -18,6 +18,9 @@ import VisualiseRefCont from '../referencecontracts/visualiseRef.js'
 import ModulueRefCont from '../referencecontracts/moduleRef.js'
 import ExperimentRefCont from '../referencecontracts/experimentRef.js'
 import UnitsRefCont from '../referencecontracts/unitsRef.js'
+import OrgoRefCont from '../referencecontracts/orgoRef.js'
+import GelleRefCont from '../referencecontracts/gelleRef.js'
+import LensglueRefCont from '../referencecontracts/lensglueRef.js'
 import events from 'events'
 import b4a from 'b4a'
 
@@ -35,6 +38,87 @@ class ReferenceContractComposer extends events.EventEmitter {
     this.moduleRefLive = new ModulueRefCont(this.heliLive)
     this.experimentRefLive = new ExperimentRefCont(this.heliLive)
     this.unitsRefLive = new UnitsRefCont(this.heliLive, this.cryptoLive)
+    this.orgoRefLive = new OrgoRefCont(this.heliLive)
+    this.gelleRefLive = new GelleRefCont(this.heliLive)
+    this.lensglueRefLive = new LensglueRefCont(this.heliLive)
+  }
+
+  /**
+  * Orgo composer
+  * @method orgoComposer
+  *
+  */
+  orgoComposer(input) {
+    try {
+      const prepContract = this.orgoRefLive.orgoPrepare(input)
+      const dtHASH = this.cryptoLive.createKey(prepContract)
+      const RefContractHolder = {}
+      RefContractHolder.type = 'library'
+      RefContractHolder.action = 'contracts'
+      RefContractHolder.privacy = 'public'
+      RefContractHolder.reftype = 'orgo'
+      RefContractHolder.task = 'PUT'
+      let contractData = {}
+      contractData.hash = this.cryptoLive.createPrefixedKey(RefContractHolder.reftype, dtHASH)
+      contractData.contract = prepContract
+      RefContractHolder.data = contractData
+      return RefContractHolder
+    } catch (error) {
+      console.error('Validation Error in orgoComposer:', error.message)
+      throw error
+    }
+  }
+
+  /**
+  * Gelle composer
+  * @method gelleComposer
+  *
+  */
+  gelleComposer(input) {
+    try {
+      const prepContract = this.gelleRefLive.gellePrepare(input)
+      const dtHASH = this.cryptoLive.createKey(prepContract)
+      const RefContractHolder = {}
+      RefContractHolder.type = 'library'
+      RefContractHolder.action = 'contracts'
+      RefContractHolder.privacy = 'public'
+      RefContractHolder.reftype = 'gelle'
+      RefContractHolder.task = 'PUT'
+      let contractData = {}
+      contractData.hash = this.cryptoLive.createPrefixedKey(RefContractHolder.reftype, dtHASH)
+      contractData.contract = prepContract
+      RefContractHolder.data = contractData
+      return RefContractHolder
+    } catch (error) {
+      console.error('Validation Error in gelleComposer:', error.message)
+      throw error
+    }
+  }
+
+  /**
+  * Lensglue composer
+  * @method lensglueComposer
+  *
+  */
+  lensglueComposer(input) {
+    try {
+      const prepContract = this.lensglueRefLive.lensgluePrepare(input)
+      const dtHASH = this.cryptoLive.createKey(prepContract)
+      const RefContractHolder = {}
+      RefContractHolder.type = 'library'
+      RefContractHolder.action = 'contracts'
+      RefContractHolder.privacy = 'public'
+      RefContractHolder.reftype = 'lensglue'
+      RefContractHolder.task = 'PUT'
+      let contractData = {}
+      contractData.hash = this.cryptoLive.createPrefixedKey(RefContractHolder.reftype, dtHASH)
+      contractData.contract = prepContract
+      RefContractHolder.data = contractData
+      return RefContractHolder
+    } catch (error) {
+      console.error('Validation Error in lensglueComposer:', error.message)
+      throw error
+    }
   }
 
   /**
