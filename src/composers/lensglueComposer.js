@@ -26,28 +26,28 @@ class LensglueComposer extends events.EventEmitter {
   *
   */
   lensgluePrepare(lsKey, inLensglue) {
-    try {
-      let lensglueContract = this.liveLensglueContracts.lensgluePrepare(inLensglue)
+    // 1. Ensure the agent has a name so it isn't 'undefined'
+    if (!inLensglue.name) inLensglue.name = 'reson-agent-alpha';
 
-      // 1. Create the raw 32-byte hash
-      const keyHASH = this.cryptoLive.createKey(lensglueContract)
+    let lensglueContract = this.liveLensglueContracts.lensglueForm(inLensglue);
+    const itemHash = this.cryptoLive.createKey(lensglueContract);
 
-      let lensglueReady = {}
-      // const lensglueHASH = this.cryptoLive.createKey(lensglueContract)
-      const stitchKey = this.cryptoLive.createStitchKey(lsKey, keyHASH)
+    // 2. The RAW ID Rule: Strip 'lifestrap!' if it exists
+    const rawLsID = this.cryptoLive.getRawID(lsKey);
 
-      const cueContentKey = this.cryptoLive.createContentKey('cues', cueHASH)
-      
-      return {
-        hash: stitchKey,
-        contentKey: cueContentKey,
-        contract: cueContract
-      }
-    } catch (error) {
-      console.error('Validation Error in lensgluePrepare:', error.message)
-      throw error
-    }
+    // 3. Create the Stitch: [RAW_HASH]!link![ITEM_HASH]
+    const stitchKey = this.cryptoLive.createStitchKey(rawLsID, itemHash);
+
+    // 4. Create the Content Key: lensglue![ITEM_HASH]
+    const lensContentKey = this.cryptoLive.createContentKey('lensglue', itemHash);
+    
+    return {
+      stitchHash: stitchKey, // Named 'stitchHash' to match the saver
+      contentKey: lensContentKey,
+      contract: lensglueContract
+    };
   }
+
 }
 
 export default LensglueComposer

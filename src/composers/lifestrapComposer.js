@@ -26,18 +26,22 @@ class LifestrapComposer extends events.EventEmitter {
   *
   */
   lifestrapPrepare(inLifestrap) {
-    try {
-      let lifestrapContract = this.liveLifestrapContracts.LifestrapContractform(inLifestrap.data)
-      let lifestrapReady = {}
-      const lifestrapHASH = this.cryptoLive.createKey(lifestrapContract)
-      lifestrapReady.key = this.cryptoLive.createPrefixedKey('lifestrap', lifestrapHASH)
-      lifestrapReady.contract = lifestrapContract
-      return lifestrapReady
-    } catch (error) {
-      console.error('Validation Error in lifestrapPrepare:', error.message)
-      throw error
+      const lifestrapContract = this.liveLifestrapContracts.LifestrapContractform(inLifestrap.data);
+      
+      // 1. The Raw Fingerprint (32 bytes)
+      const lifestrapHASH = this.cryptoLive.createKey(lifestrapContract);
+      
+      // 2. The Storage Address (lifestrap!HASH)
+      const storageKey = this.cryptoLive.createPrefixedKey('lifestrap', lifestrapHASH);
+
+      return {
+        id: lifestrapHASH, // USE THIS FOR STITCHING
+        key: storageKey,   // USE THIS FOR SAVING THE ROOT
+        contract: lifestrapContract
+      };
     }
-  }
+
+
 
   /**
   * update contract for latest timestamp

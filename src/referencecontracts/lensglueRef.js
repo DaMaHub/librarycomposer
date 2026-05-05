@@ -18,23 +18,19 @@ class LensglueReferenceContract extends EventEmitter {
     this.heliLive = heliLive;
   }
 
-  lensgluePrepare(inputRC) {
-    console.log('lens glue prepare-------')
-    console.log(inputRC)
+  lensglueForm(inputRC) {
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
     // Map meta to concept and data to computational as requested
     const contract = {
       refcontract: 'lensglue',
       concept: {
-        ...inputRC.meta,
-        ...inputRC.data?.concept
+        ...inputRC
       },
       computational: {
-        ...inputRC.data?.emulation
       },
-      space: inputRC.data?.space || { concept: 'mind' },
-      time: inputRC.data?.time || {
+      space: { concept: 'mind' },
+      time: {
         createTimestamp: currentTime,
         lastTimestamp: currentTime,
         frequencyCount: 0

@@ -96,32 +96,6 @@ class ReferenceContractComposer extends events.EventEmitter {
   }
 
   /**
-  * Lensglue composer
-  * @method lensglueComposer
-  *
-  */
-  lensglueComposer(input) {
-    try {
-      const prepContract = this.lensglueRefLive.lensgluePrepare(input)
-      const dtHASH = this.cryptoLive.createKey(prepContract)
-      const RefContractHolder = {}
-      RefContractHolder.type = 'library'
-      RefContractHolder.action = 'contracts'
-      RefContractHolder.privacy = 'public'
-      RefContractHolder.reftype = 'lensglue'
-      RefContractHolder.task = 'PUT'
-      let contractData = {}
-      contractData.hash = this.cryptoLive.createPrefixedKey(RefContractHolder.reftype, dtHASH)
-      contractData.contract = prepContract
-      RefContractHolder.data = contractData
-      return RefContractHolder
-    } catch (error) {
-      console.error('Validation Error in lensglueComposer:', error.message)
-      throw error
-    }
-  }
-
-  /**
   * Lifeboard composer
   * @method lifeboardComposer
   *
