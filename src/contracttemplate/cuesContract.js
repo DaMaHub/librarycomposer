@@ -60,6 +60,7 @@ class CuesContract extends EventEmitter {
         decayRate: cue.time?.decayRate ?? 0,
         createTimestamp: currentTime,
         lastTimestamp: currentTime,
+        timestamp: Math.floor(currentTime),
         frequencyCount: cue.time?.frequencyCount ?? 1,
         ttl: cue.time?.ttl
       }

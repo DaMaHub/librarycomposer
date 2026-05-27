@@ -28,7 +28,9 @@ class VisualiseReferenceContract extends EventEmitter {
     const visualiseReferenceContract = {
       refcontract: 'visualise',
       concept: {},
-      computational: inputRC,
+      experimentId: inputRC.experimentId,
+      scales: inputRC.scales,
+      computational: {},
       space: { concept: 'mind' },
       time: {
         createTimestamp: currentTime,

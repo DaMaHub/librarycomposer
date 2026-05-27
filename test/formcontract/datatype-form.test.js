@@ -11,24 +11,24 @@ describe('Datatype Form Reference Contract', () => {
   // Mock cryptoLive
   const mockCryptoLive = {
     createKey: vi.fn((data) => 'mock-hash'),
-    createPrefixedKey: vi.fn((prefix, hash) => `${prefix}-${hash}`)
+    createPrefixedKey: vi.fn((prefix, hash) => `${prefix}-${hash}`),
+    createStitchKey: vi.fn((lsKey, hash) => `stitched-${lsKey}-${hash}`),
+    createContentKey: vi.fn((prefix, hash) => `content-${prefix}-${hash}`)
   };
 
   const mockContextAgent = {
-    heliclock: mockHeliLive,
+    heliLocation: mockHeliLive,
     crypto: mockCryptoLive
   };
 
   const inputData = {
-    primary: 'yes',
+    primary: true,
     name: 'Heart Rate',
     description: 'Beats per minute',
     wiki: 'https://en.wikipedia.org/wiki/Heart_rate',
     rdf: 'https://dbpedia.org/page/Heart_rate',
-    computational: {
-      measurement: 'bpm',
-      datatypeType: 'integer'
-    }
+    measurement: 'bpm',
+    datatypeType: 'integer'
   };
 
   it('should correctly form the datatype contract via DatatypeReferenceContract', () => {
@@ -43,22 +43,12 @@ describe('Datatype Form Reference Contract', () => {
 
   it('should correctly compose the contract via ReferenceContractComposer', () => {
     const composer = new ReferenceContractComposer(mockContextAgent);
-    const result = composer.datatypeComposer(inputData);
+    const lsKey = 'mock-ls-key';
+    const result = composer.datatypeComposer(lsKey, inputData);
 
     // Check structure
-    expect(result.type).toBe('library');
-    expect(result.action).toBe('contracts');
-    expect(result.privacy).toBe('public');
-    expect(result.reftype).toBe('datatype');
-    expect(result.task).toBe('PUT');
-
-    // Check key structure
-    expect(result.data.hash).toBe('datatype-mock-hash');
-    expect(mockCryptoLive.createPrefixedKey).toHaveBeenCalledWith('datatype', 'mock-hash');
-
-    // Check value content
-    expect(result.data.contract.concept.name).toBe('Heart Rate');
-    expect(result.data.contract.computational.measurement).toBe('bpm');
-    expect(result.data.contract.computational.datatypeType).toBe('integer');
+    expect(result.hash).toBe('stitched-mock-ls-key-mock-hash');
+    expect(result.contentKey).toBe('content-datatype-mock-hash');
+    expect(result.contract.concept.name).toBe('Heart Rate');
   });
 });

@@ -8,6 +8,7 @@
   ],
   "properties": {
     "refcontract": { "const": "visualise" },
+    "concept": { "type": "object", "default": {} },
     "experimentId": { "type": "string" },
     "scales": {
       "type": "object",
@@ -17,6 +18,17 @@
         "bioregion": { "$ref": "#/definitions/emulationMapping" }
       },
       "additionalProperties": false
+    },
+    "computational": { "type": "object", "default": {} },
+    "space": { "$ref": "https://hop.io/schemas/space.json" },
+    "time": {
+      "type": "object",
+      "properties": {
+        "createTimestamp": { "type": "number" },
+        "lastTimestamp": { "type": "number" },
+        "frequencyCount": { "type": "number" }
+      },
+      "required": ["createTimestamp", "lastTimestamp", "frequencyCount"]
     }
   },
   "definitions": {
