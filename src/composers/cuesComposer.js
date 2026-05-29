@@ -26,7 +26,6 @@ class CuesComposer extends events.EventEmitter {
   *
   */
   cueComposer(lsKey, inCue) {
-    console.log('cue cmopser start')
     try {
       const cueContract = this.liveCuesContracts.cuesContractform(inCue)
       

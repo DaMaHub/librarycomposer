@@ -19,8 +19,6 @@ class CuesContract extends EventEmitter {
   }
 
   cuesContractform(cue) {
-    console.log('cue ingredient in')
-    console.log(cue)
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     const contract = {
       refcontract: 'cue',
@@ -65,8 +63,6 @@ class CuesContract extends EventEmitter {
         ttl: cue.time?.ttl
       }
     };
-    console.log('pre vallalal')
-    console.log(contract)
     return validateContract('cue', contract);
   }
 

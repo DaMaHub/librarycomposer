@@ -19,8 +19,6 @@ class LifestrapContract extends EventEmitter {
   }
 
   LifestrapContractform(lifestrap) {
-    console.log('lifestrap parpepare   ---------')
-    console.log(lifestrap)
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
     const contract = {
@@ -35,6 +33,13 @@ class LifestrapContract extends EventEmitter {
       }
     };
     return validateContract('lifestrap', contract);
+  }
+
+  relationshipsBuilder(lifestrap, relationships) {
+    lifestrap.value.computational.relationships = relationships;
+    lifestrap.value.time.lastTimestamp = this.heliLive ? this.heliLive.helistamp() : Date.now();
+    lifestrap.value.time.frequency = 1;
+    return lifestrap;
   }
 
 }
