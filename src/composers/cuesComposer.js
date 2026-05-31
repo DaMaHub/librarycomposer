@@ -71,7 +71,7 @@ class CuesComposer extends events.EventEmitter {
     let relContract = this.liveCuesContracts.relationshipsBuilder(cueUpdate.data.contract, cueUpdate.data.relationships)
     let cueReady = {}
     const cueHASH = cueUpdate.data.contract.key
-    cueReady.cueid = cueHASH
+    cueReady.hash = cueHASH
     cueReady.data = relContract.value
     return cueReady
   }

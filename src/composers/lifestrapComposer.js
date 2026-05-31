@@ -36,7 +36,7 @@ class LifestrapComposer extends events.EventEmitter {
 
       return {
         id: lifestrapHASH, // USE THIS FOR STITCHING
-        key: storageKey,   // USE THIS FOR SAVING THE ROOT
+        hash: storageKey,   // USE THIS FOR SAVING THE ROOT
         contract: lifestrapContract
       };
     }

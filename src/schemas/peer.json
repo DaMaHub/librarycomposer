@@ -1,0 +1,55 @@
+{
+  "$id": "https://hop.io/schemas/peer.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "const": "peer"
+        },
+        "concept": {
+          "type": "object",
+          "properties": {
+            "datatype": { "type": "string" },
+            "publickey": { "type": "string" },
+            "name": { "type": "string" },
+            "longterm": { "type": "boolean" },
+            "topic": { "type": "string" },
+            "settopic": { "type": "boolean" },
+            "live": { "type": "boolean" },
+            "status": { "type": "string", "enum": ["warm", "cold"] }
+          },
+          "required": ["publickey", "name"]
+        },
+        "computational": {
+          "type": "object",
+          "properties": {
+            "network": { "type": "string" },
+            "topic": { "type": "string" },
+            "trustWeight": { "type": "number", "minimum": 0, "maximum": 1 },
+            "permissions": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "time": {
+          "type": "object",
+          "properties": {
+            "lastHeliSignature": { "type": "string" },
+            "lastPulse": { "type": "number" }
+          }
+        },
+        "space": {
+          "type": "object",
+          "properties": {
+            "concept": { "type": "string" },
+            "bioregion": { "type": "string" },
+            "proximity": { "type": "string", "enum": ["remote", "local", "meeting"] }
+          }
+        }
+      }
+    }
+  ]
+}
