@@ -49,6 +49,33 @@ class PeerComposer extends events.EventEmitter {
   }
 
   /**
+   * 
+   * @method updatePreparePeer
+  */
+  updatePreparePeer (updateChanges, exisingContract) {
+    let updateContract = {}
+    updateContract.hash = Buffer.from(exisingContract.key, 'hex')
+    // build update conract
+    exisingContract.value.concept.topic = updateChanges.topic
+    exisingContract.value.concept.settopic = updateChanges.settopic
+    updateContract.contract = exisingContract.value
+    return updateContract
+  }
+
+  /**
+   * 
+   * @method updatePreparePeer
+  */
+  updatePrepareNamePeer (updateChanges, exisingContract) {
+    let updateContract = {}
+    updateContract.hash = exisingContract.key // Buffer.from(exisingContract.key, 'hex')
+    // build update conract
+    exisingContract.value.concept.name = updateChanges.name
+    updateContract.contract = exisingContract.value
+    return updateContract
+  }
+
+  /**
   * update contract for latest timestamp
   * @method peerTimestamp
   *
