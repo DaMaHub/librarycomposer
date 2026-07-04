@@ -153,20 +153,14 @@ datatypeComposer(lsKey, input) {
     
     // 1. Create the raw 32-byte hash
     const dtHASH = this.cryptoLive.createKey(prepContract)
-    
-    // 2. CLEAN THE HEAD: Strip the 'lifestrap!' prefix if it's there
-    // and force the 32-byte ID into a 64-character hex string.
-    let cleanLSID;
-    if (b4a.isBuffer(lsKey)) {
-        // If it's the 42-byte content key, take the last 32 bytes
-        const idBuf = lsKey.length > 32 ? lsKey.slice(lsKey.length - 32) : lsKey;
-        cleanLSID = b4a.toString(idBuf, 'hex');
-    }
+  
+    // 2. The RAW ID Rule: Strip 'lifestrap!' if it existsut)
+    const rawLsID = this.cryptoLive.getRawID(lsKey);
 
     // 3. Create the Stitch Key
     // By passing the cleanLSID (hex) and dtHASH (binary) to your utility,
     // the utility can now form a clean [HEX]!link![HEX] key.
-    const stitchKey = this.cryptoLive.createStitchKey(lsKey, dtHASH)
+    const stitchKey = this.cryptoLive.createStitchKey(rawLsID, dtHASH)
     
     const dtContentKey = this.cryptoLive.createContentKey('datatype', dtHASH)
     

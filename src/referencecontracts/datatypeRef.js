@@ -19,19 +19,21 @@ class DatatypeReferenceContract extends EventEmitter {
   }
 
   dtContractform(inputRC) {
+    console.log('data reaching formation datatype')
+    console.log(inputRC)
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     const contract = {
       refcontract: 'datatype',
       concept: {
-        primary: !!inputRC?.primary,
-        name: inputRC?.name,
-        description: inputRC?.description,
-        wiki: inputRC?.wiki,
-        rdf: inputRC?.rdf
+        primary: true,
+        name: inputRC.name,
+        description: inputRC.description,
+        wiki: inputRC.wiki,
+        rdf: inputRC.rdf
       },
       computational: {
-        measurement: inputRC?.measurement,
-        datatypeType: inputRC?.datatypeType
+        // measurement: inputRC.measurement,
+        // datatypeType: inputRC.datatypeType
       },
       space: { concept: 'mind' },
       time: {
@@ -45,3 +47,8 @@ class DatatypeReferenceContract extends EventEmitter {
 }
 
 export default DatatypeReferenceContract;
+
+/*
+  "measurement": { "type": "string" },
+  "datatypeType": { "type": "string", "enum": ["integer", "float", "boolean", "string", "array", "object", "datatype"] }
+*/

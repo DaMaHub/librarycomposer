@@ -18,6 +18,12 @@ class LensglueReferenceContract extends EventEmitter {
     this.heliLive = heliLive;
   }
 
+  /**
+  * Prepare a lensglue contract
+  * @method lensglueForm
+  * @param {Object} inputRC
+  * @return {Object} contract
+  */
   lensglueForm(inputRC) {
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     

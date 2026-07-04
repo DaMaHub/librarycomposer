@@ -35,6 +35,10 @@
     "ajv": "^8.18.0",
     "ajv-cli": "^5.0.0",
     "ajv-formats": "^3.0.1",
+    "heliclock-hop": "^0.3.0",
+    "holepunch-hop": "^0.7.6",
+    "hop-crypto": "^0.1.6",
+    "hop-learn": "^0.2.1",
     "vitest": "^4.1.0"
   }
 }

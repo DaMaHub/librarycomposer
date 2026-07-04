@@ -22,8 +22,7 @@
         "computational": {
           "type": "object",
           "properties": {
-            "measurement": { "type": "string" },
-            "datatypeType": { "type": "string", "enum": ["integer", "float", "boolean", "string", "array", "object", "datatype"] }
+
           }
         }
       }
