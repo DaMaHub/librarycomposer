@@ -14,7 +14,6 @@ import events from 'events'
 
 var KBID = function () {
   events.EventEmitter.call(this)
-  console.log('KBID live')
 }
 
 /**
@@ -29,7 +28,6 @@ util.inherits(KBID, events.EventEmitter)
 *
 */
 KBID.prototype.prepareKBIDtemplate = function (inputRC) {
-  console.log('KBID template')
   return true
 }
 
@@ -39,7 +37,6 @@ KBID.prototype.prepareKBIDtemplate = function (inputRC) {
 *
 */
 KBID.prototype.prepareKBIDentry = function (inputRC) {
-  console.log('KIB ENTRY')
   return true
 }
 

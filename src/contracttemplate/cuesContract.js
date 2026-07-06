@@ -18,12 +18,17 @@ class CuesContract extends EventEmitter {
     this.heliLive = heliLive;
   }
 
+  /**
+   * 
+   * @method cuesContractform
+  */
   cuesContractform(cue) {
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     const contract = {
       refcontract: 'cue',
       concept: {
-        datatype: cue.datatype,
+        name: cue.name,
+        datatype: cue.concept.datatypeRef,
         network: cue.network || 'cold', // 'warm' or 'cold'
         links: cue.links || [] // Array of { target: string, type: 'systemic'|'causal'|'inhibitory' }
       },

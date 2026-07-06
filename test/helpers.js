@@ -6,7 +6,7 @@ import HeliLocation from 'heliclock-hop/src/index.js'
  * @returns {Promise<LibraryHop>}
  */
 export async function startRealLibraryHop() {
-  console.log('start helper')
+  // console.log('start helper')
 
   const encryption = new Encryption()
   encryption.Encryption = Encryption

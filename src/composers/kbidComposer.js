@@ -26,7 +26,6 @@ class KbidComposer extends events.EventEmitter {
   *
   */
   kbidTemplateNew(input) {
-    console.log('prepare New KBID template entry')
     const templateEntry = this.entryLive.prepareKBIDtemplate(input)
     return templateEntry
   }
@@ -37,7 +36,6 @@ class KbidComposer extends events.EventEmitter {
   *
   */
   kbidEntry(input) {
-    console.log('prepare KBID entry')
     const kbidEntry = this.entryLive.prepareKBIDentry(input)
     return kbidEntry
   }

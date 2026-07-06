@@ -28,7 +28,6 @@ class CuesComposer extends events.EventEmitter {
   cueComposer(lsKey, inCue) {
     try {
       const cueContract = this.liveCuesContracts.cuesContractform(inCue)
-      
       // 1. Create the raw 32-byte hash
       const cueHASH = this.cryptoLive.createKey(cueContract)
 

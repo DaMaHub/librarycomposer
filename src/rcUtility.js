@@ -38,8 +38,6 @@ class RCutility extends events.EventEmitter {
   *
   */
   refcontractSperate(refContractsList) {
-    console.log('compuser utilitysplit new iindes-------------------')
-    console.log(refContractsList)
     const refContractHolder = {}
     const questionList = []
     const datatypeList = []
