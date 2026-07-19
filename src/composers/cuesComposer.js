@@ -50,6 +50,36 @@ class CuesComposer extends events.EventEmitter {
   }
 
   /**
+  * prepare compound cue, combining two cue existing contracts
+  * @method cuesCompoundPrepare
+  *
+  */
+  cueCompoundComposer(lsKey, inCue) {
+    try {
+      const cueContract = this.liveCuesContracts.cuesContractform(inCue)
+      // only one cue allow if list take first
+      // 1. Create the raw 32-byte hash
+      const cueHASH = this.cryptoLive.combineHashes(inCue.compoundKeys.sourceContract.key, inCue.compoundKeys.targetContract[0].key)
+
+      // 3. Create the Stitch Key
+      // By passing the cleanLSID (hex) and cueHASH (binary) to your utility,
+      // the utility can now form a clean [HEX]!link![HEX] key.
+      const stitchKey = this.cryptoLive.createStitchKey(lsKey, cueHASH)
+      
+      const cueContentKey = this.cryptoLive.createContentKey('cues', cueHASH)
+      
+      return {
+        hash: stitchKey,
+        contentKey: cueContentKey,
+        contract: cueContract
+      }
+    } catch (error) {
+      console.error('Validation Error in cuesPrepare:', error.message)
+      throw error
+    }
+  }
+
+  /**
   * update contract for latest timestamp
   * @method cuesTimestamp
   *

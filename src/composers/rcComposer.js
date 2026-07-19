@@ -147,34 +147,34 @@ class ReferenceContractComposer extends events.EventEmitter {
   * @method datatypeComposer
   *
   */
-datatypeComposer(lsKey, input) {
-  try {
-    const prepContract = this.datatypeRefLive.dtContractform(input)
+  datatypeComposer(lsKey, input) {
+    try {
+      const prepContract = this.datatypeRefLive.dtContractform(input)
+      
+      // 1. Create the raw 32-byte hash
+      const dtHASH = this.cryptoLive.createKey(prepContract)
     
-    // 1. Create the raw 32-byte hash
-    const dtHASH = this.cryptoLive.createKey(prepContract)
-  
-    // 2. The RAW ID Rule: Strip 'lifestrap!' if it existsut)
-    const rawLsID = this.cryptoLive.getRawID(lsKey);
+      // 2. The RAW ID Rule: Strip 'lifestrap!' if it existsut)
+      const rawLsID = this.cryptoLive.getRawID(lsKey);
 
-    // 3. Create the Stitch Key
-    // By passing the cleanLSID (hex) and dtHASH (binary) to your utility,
-    // the utility can now form a clean [HEX]!link![HEX] key.
-    const stitchKey = this.cryptoLive.createStitchKey(rawLsID, dtHASH)
-    
-    const dtContentKey = this.cryptoLive.createContentKey('datatype', dtHASH)
-    
-    return {
-      hash: stitchKey,
-      contentKey: dtContentKey,
-      contract: prepContract
+      // 3. Create the Stitch Key
+      // By passing the cleanLSID (hex) and dtHASH (binary) to your utility,
+      // the utility can now form a clean [HEX]!link![HEX] key.
+      const stitchKey = this.cryptoLive.createStitchKey(rawLsID, dtHASH)
+      
+      const dtContentKey = this.cryptoLive.createContentKey('datatype', dtHASH)
+      
+      return {
+        hash: stitchKey,
+        contentKey: dtContentKey,
+        contract: prepContract
+      }
+    } catch (error) {
+      console.error('Validation Error in datatypeComposer:', error.message)
+      throw error
     }
-  } catch (error) {
-    console.error('Validation Error in datatypeComposer:', error.message)
-    throw error
   }
-}
-
+  
   /**
   * Packaging composer
   * @method packagingComposer
