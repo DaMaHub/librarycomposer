@@ -13,6 +13,7 @@ import LensglueComposer from './composers/lensglueComposer.js'
 import RcComposer from './composers/rcComposer.js'
 import KbidComposer from './composers/kbidComposer.js'
 import PeerComposer from './composers/peerComposer.js'
+import FileComposer from './composers/fileComposer.js'
 import RcUtility from './rcUtility.js'
 /**
 *  Interface to reference contract libraries
@@ -48,6 +49,7 @@ class LibraryComposer extends EventEmitter {
     this.liveComposer = new RcComposer(contextAgents)
     this.liveKBID = new KbidComposer(contextAgents)
     this.livePeer = new PeerComposer(contextAgents)
+    this.liveFile = new FileComposer(contextAgents)
     this.liveRefcontUtility = new RcUtility(contextAgents)
   }
 }
