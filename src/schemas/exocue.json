@@ -1,0 +1,31 @@
+{
+  "$id": "https://hop.io/schemas/exocue.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "const": "exocue"
+        },
+        "concept": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "cue": { "type": "string" }
+          }
+        },
+        "computational": {
+          "type": "object",
+          "properties": {
+            "components": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "required": ["components"]
+        }
+      }
+    }
+  ]
+}

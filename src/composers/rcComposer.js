@@ -20,6 +20,7 @@ import ExperimentRefCont from '../referencecontracts/experimentRef.js'
 import UnitsRefCont from '../referencecontracts/unitsRef.js'
 import OrgoRefCont from '../referencecontracts/orgoRef.js'
 import GelleRefCont from '../referencecontracts/gelleRef.js'
+import ExoCueRefCont from '../referencecontracts/exoCueRef.js'
 import LensglueRefCont from '../referencecontracts/lensglueRef.js'
 import events from 'events'
 import b4a from 'b4a'
@@ -40,6 +41,7 @@ class ReferenceContractComposer extends events.EventEmitter {
     this.unitsRefLive = new UnitsRefCont(this.heliLive, this.cryptoLive)
     this.orgoRefLive = new OrgoRefCont(this.heliLive)
     this.gelleRefLive = new GelleRefCont(this.heliLive)
+    this.exoCueRefLive = new ExoCueRefCont(this.heliLive)
     this.lensglueRefLive = new LensglueRefCont(this.heliLive)
   }
 
@@ -91,6 +93,32 @@ class ReferenceContractComposer extends events.EventEmitter {
       return RefContractHolder
     } catch (error) {
       console.error('Validation Error in gelleComposer:', error.message)
+      throw error
+    }
+  }
+
+  /**
+  * ExoCue composer
+  * @method exoCueComposer
+  *
+  */
+  exoCueComposer(input) {
+    try {
+      const prepContract = this.exoCueRefLive.exoCuePrepare(input)
+      const dtHASH = this.cryptoLive.createKey(prepContract)
+      const RefContractHolder = {}
+      RefContractHolder.type = 'library'
+      RefContractHolder.action = 'contracts'
+      RefContractHolder.privacy = 'public'
+      RefContractHolder.reftype = 'exocue'
+      RefContractHolder.task = 'PUT'
+      let contractData = {}
+      contractData.hash = this.cryptoLive.createPrefixedKey(RefContractHolder.reftype, dtHASH)
+      contractData.contract = prepContract
+      RefContractHolder.data = contractData
+      return RefContractHolder
+    } catch (error) {
+      console.error('Validation Error in exoCueComposer:', error.message)
       throw error
     }
   }

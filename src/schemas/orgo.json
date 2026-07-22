@@ -19,7 +19,8 @@
             "label": { "type": "string" },
             "author": { "type": "string" },
             "description": { "type": "string" },
-            "tags": { "type": "array", "items": { "type": "string" } }
+            "tags": { "type": "array", "items": { "type": "string" } },
+            "cue": { "type": "string" }
           }
         },
         "computational": {
@@ -33,6 +34,15 @@
                 "source": { "type": "string" },
                 "status": { "type": "string" }
               }
+            },
+            "executable": { "type": "string" },
+            "conduction_map": {
+              "type": "object",
+              "properties": {
+                "inputs": { "type": "array", "items": { "type": "string" } },
+                "outputs": { "type": "array", "items": { "type": "string" } }
+              },
+              "required": ["inputs", "outputs"]
             }
           }
         },

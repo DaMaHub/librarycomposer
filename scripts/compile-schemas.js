@@ -30,6 +30,7 @@ const ajv = new Ajv({
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/lifestrap.json"), "utf8")),
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/orgo.json"), "utf8")),
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/gelle.json"), "utf8")),
+    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/exocue.json"), "utf8")),
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/lensglue.json"), "utf8")),
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/besearch.json"), "utf8")),
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/peer.json"), "utf8"))
@@ -58,6 +59,7 @@ let moduleCode = standaloneCode(ajv, {
   "lifestrap": "https://hop.io/schemas/lifestrap.json",
   "orgo": "https://hop.io/schemas/orgo.json",
   "gelle": "https://hop.io/schemas/gelle.json",
+  "exocue": "https://hop.io/schemas/exocue.json",
   "lensglue": "https://hop.io/schemas/lensglue.json",
   "besearch": "https://hop.io/schemas/besearch.json",
   "peer": "https://hop.io/schemas/peer.json"
