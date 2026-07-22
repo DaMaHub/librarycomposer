@@ -30,7 +30,7 @@ class GelleComposer extends events.EventEmitter {
       let gelleContract = this.liveGelleContracts.gellePrepare(inGelle)
       let gelleReady = {}
       const gelleHASH = this.cryptoLive.createKey(gelleContract)
-      gelleReady.id = this.cryptoLive.createPrefixedKey('gelle', gelleHASH)
+      gelleReady.hash = this.cryptoLive.createPrefixedKey('gelle', gelleHASH)
       gelleReady.data = gelleContract
       return gelleReady
     } catch (error) {

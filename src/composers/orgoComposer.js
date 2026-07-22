@@ -25,13 +25,13 @@ class OrgoComposer extends events.EventEmitter {
   * @method orgoPrepare
   *
   */
-  orgoPrepare(inOrgo) {
+  orgoComposer(inOrgo) {
     try {
       let orgoContract = this.liveOrgoContracts.orgoPrepare(inOrgo)
       let orgoReady = {}
       const orgoHASH = this.cryptoLive.createKey(orgoContract)
-      orgoReady.id = this.cryptoLive.createPrefixedKey('orgo', orgoHASH)
-      orgoReady.data = orgoContract
+      orgoReady.hash = this.cryptoLive.createPrefixedKey('orgo', orgoHASH)
+      orgoReady.contract = orgoContract
       return orgoReady
     } catch (error) {
       console.error('Validation Error in orgoPrepare:', error.message)
