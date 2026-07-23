@@ -31,7 +31,7 @@ class GelleComposer extends events.EventEmitter {
       let gelleReady = {}
       const gelleHASH = this.cryptoLive.createKey(gelleContract)
       gelleReady.hash = this.cryptoLive.createPrefixedKey('gelle', gelleHASH)
-      gelleReady.data = gelleContract
+      gelleReady.contract = gelleContract
       return gelleReady
     } catch (error) {
       console.error('Validation Error in gellePrepare:', error.message)

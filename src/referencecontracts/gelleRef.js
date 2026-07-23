@@ -19,17 +19,22 @@ class GelleReferenceContract extends EventEmitter {
   }
 
   gellePrepare(inputRC) {
+    console.log('gelle')
+    console.log(inputRC)
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
     // Map meta to concept and data to computational as requested
     const contract = {
       refcontract: 'gelle',
       concept: {
-        ...inputRC.meta,
-        ...inputRC.data?.concept
+        gellecue: inputRC.gelleID,
       },
       computational: {
-        ...inputRC.data?.emulation
+        executable: inputRC.compute,
+        conduction_map: {
+          inputs: inputRC.metrics.inputs,
+          outputs: inputRC.metrics.outputs
+        }
       },
       space: inputRC.data?.space || { concept: 'mind' },
       time: inputRC.data?.time || {
