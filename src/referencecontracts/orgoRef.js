@@ -19,8 +19,6 @@ class OrgoReferenceContract extends EventEmitter {
   }
 
   orgoPrepare(inputRC) {
-    console.log('orgo info in')
-    console.log(inputRC)
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
     // Map meta to concept and data to computational as requested

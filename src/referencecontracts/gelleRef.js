@@ -19,8 +19,6 @@ class GelleReferenceContract extends EventEmitter {
   }
 
   gellePrepare(inputRC) {
-    console.log('gelle')
-    console.log(inputRC)
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
     // Map meta to concept and data to computational as requested
