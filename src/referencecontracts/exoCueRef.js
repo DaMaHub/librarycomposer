@@ -21,21 +21,21 @@ class ExoCueReferenceContract extends EventEmitter {
   exoCuePrepare(inputRC) {
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
-    // Accommodating both the standard wrapper {meta, data} and the raw incoming format provided
-    const conceptData = inputRC.concept || inputRC.data?.concept || {};
-    const computationalData = inputRC.computational || inputRC.data?.computational || inputRC.data?.emulation || {};
-
     const contract = {
       refcontract: 'exocue',
       concept: {
-        ...(inputRC.meta || {}),
-        ...conceptData
+        cue: inputRC.cue,
       },
       computational: {
-        ...computationalData
+        organelles: {
+          orgo: inputRC.orgo,
+          gelle: inputRC.gelle
+        },
+        components: {
+        }
       },
-      space: inputRC.space || inputRC.data?.space || { concept: 'mind' },
-      time: inputRC.time || inputRC.data?.time || {
+      space: inputRC.data?.space || { concept: 'mind' },
+      time: inputRC.data?.time || {
         createTimestamp: currentTime,
         lastTimestamp: currentTime,
         frequencyCount: 0

@@ -32,12 +32,8 @@ class FileComposer extends events.EventEmitter {
    * Generates the triplet indexing metadata required for Orgo/Gelle logic files
    */
   prepareBlobIndex(mimeType, fileData, extension) {
-    console.log('loaded file COMPOSER  LC')
-    console.log(fileData)
     // 1. The Content Hash: Hash the file content (BLAKE3). This is your FILE_HASH.
     const fileHash = this.cryptoLive.createKey(fileData.content);
-    console.log('filfe hash formed')
-    console.log(fileHash)
     const blobPath = this.getBlobPath(fileHash, extension);
     
     const metaData = {

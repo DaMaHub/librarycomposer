@@ -11,16 +11,19 @@
         "concept": {
           "type": "object",
           "properties": {
-            "name": { "type": "string" },
             "cue": { "type": "string" }
           }
         },
         "computational": {
           "type": "object",
           "properties": {
-            "components": {
-              "type": "array",
-              "items": { "type": "string" }
+            "organelles": {
+              "type": "object",
+              "properties": {
+                "orgo": { "type": "array", "items": { "type": "string" } },
+                "gelle": { "type": "array", "items": { "type": "string" } }
+              },
+              "required": ["orgo", "gelle"]
             }
           },
           "required": ["components"]

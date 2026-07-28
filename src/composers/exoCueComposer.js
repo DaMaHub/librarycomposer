@@ -30,8 +30,8 @@ class ExoCueComposer extends events.EventEmitter {
       let exoCueContract = this.liveExoCueContracts.exoCuePrepare(inExoCue)
       let exoCueReady = {}
       const exoCueHASH = this.cryptoLive.createKey(exoCueContract)
-      exoCueReady.id = this.cryptoLive.createPrefixedKey('exocue', exoCueHASH)
-      exoCueReady.data = exoCueContract
+      exoCueReady.hash = this.cryptoLive.createPrefixedKey('exocue', exoCueHASH)
+      exoCueReady.contract = exoCueContract
       return exoCueReady
     } catch (error) {
       console.error('Validation Error in exoCuePrepare:', error.message)
