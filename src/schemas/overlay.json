@@ -1,0 +1,68 @@
+{
+  "$id": "https://hop.io/schemas/overlay.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://hop.io/schemas/base-contract.json" },
+    {
+      "properties": {
+        "refcontract": {
+          "const": "overlay"
+        },
+        "concept": {
+          "type": "object",
+          "properties": {
+            "cue": { "type": "string" }
+          }
+        },
+        "computational": {
+          "type": "object",
+          "properties": {
+            "conduction": {
+              "type": "object",
+              "properties": {
+                "meshMode": { "type": "string" },
+                "coherenceThreshold": { "type": "number" }
+              }
+            },
+            "scaleAnchor": {
+              "type": "object",
+              "properties": {
+                "bioregion": { "type": "string" },
+                "temporalCycle": { "type": "string" },
+                "spatialCoordinates": {
+                  "type": "array",
+                  "items": { "type": "number" }
+                }
+              }
+            },
+            "overlayData": {
+              "type": "object",
+              "properties": {
+                "morphology": {
+                  "type": "string",
+                  "description": "Defines field geometry, spiral/circular mappings, and schema definitions."
+                },
+                "data": {
+                  "type": ["string"],
+                  "description": "The payload body or extracted cue data."
+                }
+              },
+              "required": ["morphology", "data"]
+            },
+            "sourcePath": {
+              "type": "string",
+              "default": "hyperdrive://public-seed/example-data.json",
+              "description": "Path to example data for public validation. Replaced by a peer's local Hyperdrive path during active execution."
+            }
+          },
+          "required": [
+            "conduction",
+            "scaleAnchor",
+            "overlayData",
+            "sourcePath"
+          ]
+        }
+      }
+    }
+  ]
+}

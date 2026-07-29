@@ -18,7 +18,7 @@ class ExoCueReferenceContract extends EventEmitter {
     this.heliLive = heliLive;
   }
 
-  exoCuePrepare(inputRC) {
+  exoCueForm(inputRC) {
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
     const contract = {

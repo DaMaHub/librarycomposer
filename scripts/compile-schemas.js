@@ -33,7 +33,8 @@ const ajv = new Ajv({
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/exocue.json"), "utf8")),
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/lensglue.json"), "utf8")),
     JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/besearch.json"), "utf8")),
-    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/peer.json"), "utf8"))
+    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/peer.json"), "utf8")),
+    JSON.parse(fs.readFileSync(path.join(__dirname, "../src/schemas/overlay.json"), "utf8"))
   ],
   code: { source: true, esm: true },
   strict: false
@@ -62,7 +63,8 @@ let moduleCode = standaloneCode(ajv, {
   "exocue": "https://hop.io/schemas/exocue.json",
   "lensglue": "https://hop.io/schemas/lensglue.json",
   "besearch": "https://hop.io/schemas/besearch.json",
-  "peer": "https://hop.io/schemas/peer.json"
+  "peer": "https://hop.io/schemas/peer.json",
+  "overlay": "https://hop.io/schemas/overlay.json"
 });
 
 // Fix for ajv-formats in ESM standalone mode

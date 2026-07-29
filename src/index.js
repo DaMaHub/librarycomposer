@@ -10,6 +10,7 @@ import ProductComposer from './composers/productComposer.js'
 import OrgoComposer from './composers/orgoComposer.js'
 import GelleComposer from './composers/gelleComposer.js'
 import ExoCueComposer from './composers/exoCueComposer.js'
+import OverlayComposer from './composers/overlayComposer.js'
 import LensglueComposer from './composers/lensglueComposer.js'
 import RcComposer from './composers/rcComposer.js'
 import KbidComposer from './composers/kbidComposer.js'
@@ -47,6 +48,7 @@ class LibraryComposer extends EventEmitter {
     this.liveOrgo = new OrgoComposer(contextAgents)
     this.liveGelle = new GelleComposer(contextAgents)
     this.liveExoCue = new ExoCueComposer(contextAgents)
+    this.liveOverlay = new OverlayComposer(contextAgents)
     this.liveLensglue = new LensglueComposer(contextAgents)
     this.liveComposer = new RcComposer(contextAgents)
     this.liveKBID = new KbidComposer(contextAgents)

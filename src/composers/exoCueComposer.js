@@ -27,7 +27,7 @@ class ExoCueComposer extends events.EventEmitter {
   */
   exoCuePrepare(inExoCue) {
     try {
-      let exoCueContract = this.liveExoCueContracts.exoCuePrepare(inExoCue)
+      let exoCueContract = this.liveExoCueContracts.exoCueForm(inExoCue)
       let exoCueReady = {}
       const exoCueHASH = this.cryptoLive.createKey(exoCueContract)
       exoCueReady.hash = this.cryptoLive.createPrefixedKey('exocue', exoCueHASH)
