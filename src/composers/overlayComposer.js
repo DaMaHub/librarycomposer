@@ -28,11 +28,9 @@ class OverlayComposer extends events.EventEmitter {
   overlayPrepare(inOverlay) {
     try {
       let OverlayContract = this.liveOverlayContracts.overlayForm(inOverlay)
-      console.log('contract forme overlay')
-      console.log(OverlayContract)
       let OverlayReady = {}
       const OverlayHASH = this.cryptoLive.createKey(OverlayContract)
-      OverlayReady.hash = this.cryptoLive.createPrefixedKey('Overlay', OverlayHASH)
+      OverlayReady.hash = this.cryptoLive.createPrefixedKey('overlay', OverlayHASH)
       OverlayReady.contract = OverlayContract
       return OverlayReady
     } catch (error) {
