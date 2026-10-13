@@ -46,7 +46,7 @@
           "properties": {
             "concept": { "type": "string" },
             "bioregion": { "type": "string" },
-            "proximity": { "type": "string", "enum": ["remote", "local", "meeting"] }
+            "proximity": { "type": "string", "enum": ["earth", "remote", "local", "meeting"] }
           }
         }
       }

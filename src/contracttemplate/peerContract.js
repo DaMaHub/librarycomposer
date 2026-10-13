@@ -19,25 +19,28 @@ class PeerContract extends EventEmitter {
   }
 
   PeerContractform(peer) {
+
+    console.log('PPPEEEER COMPOSER')
+    console.log(peer)
+
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
     const contract = {
       refcontract: 'peer',
       concept: {
-        datatype: peer.datatype || 'peer-identity',
-        publickey: peer.publickey,
-        name: peer.name,
-        roletaken: peer.roletaken,
-        longterm: peer.longterm ?? true,
-        topic: peer.topic || '',
-        settopic: peer.settopic ?? false,
-        topic: '',
-        live: peer.live ?? false,
-        status: peer.status || 'warm'
+        datatype: 'peer-contract',
+        publickey: peer.key,
+        name: peer.concept.name,
+        roletaken: peer.concept.roletaken,
+        longterm: true,
+        topic: peer.concept.topic,
+        settopic: peer.concept.settopic,
+        live: false,
+        status: 'warm'
       },
       computational: {
-        network: peer.network || 'warm',
-        topic: peer.topic || '', // computational topic might differ or be same as concept topic
+        network: 'warm',
+        topic: peer.concept.topic,
         trustWeight: peer.trustWeight ?? 0.8,
         permissions: peer.permissions || ['interplay', 'read-cues', 'sync-heli']
       },
@@ -45,13 +48,13 @@ class PeerContract extends EventEmitter {
         createTimestamp: currentTime,
         lastTimestamp: currentTime,
         frequencyCount: 0,
-        lastHeliSignature: peer.lastHeliSignature || '',
-        lastPulse: peer.lastPulse ?? 0
+        lastHeliSignature: '',
+        lastPulse: 0
       },
       space: {
-        concept: peer.spaceConcept || 'peer-node',
-        bioregion: peer.bioregion || '',
-        proximity: peer.proximity || 'remote'
+        concept: 'peer-record',
+        bioregion: 'peer-record',
+        proximity: 'earth'
       }
     };
     return validateContract('peer', contract);

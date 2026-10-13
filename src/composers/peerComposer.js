@@ -11,6 +11,7 @@
 */
 import PeerContract from '../contracttemplate/peerContract.js'
 import events from 'events'
+import util from 'util'
 
 class PeerComposer extends events.EventEmitter {
   constructor(contextAgent) {
@@ -53,12 +54,23 @@ class PeerComposer extends events.EventEmitter {
    * @method updatePreparePeer
   */
   updatePreparePeer (updateChanges, exisingContract) {
+    console.log('COMPOSER ------UPDATE PREPARE')
+    console.log(exisingContract)
     let updateContract = {}
+    
     updateContract.hash = Buffer.from(exisingContract.key, 'hex')
     // build update conract
     exisingContract.value.concept.topic = updateChanges.topic
     exisingContract.value.concept.settopic = updateChanges.settopic
     updateContract.contract = exisingContract.value
+    console.log('after update-----------------------------------')
+    console.log(updateContract)
+    console.log(util.inspect(updateContract, { 
+      showHidden: true, 
+      depth: null, 
+      colors: true 
+    }))
+    console.log('inspect COMPOSER OVER')
     return updateContract
   }
 
