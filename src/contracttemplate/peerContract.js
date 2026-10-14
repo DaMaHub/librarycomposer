@@ -20,9 +20,6 @@ class PeerContract extends EventEmitter {
 
   PeerContractform(peer) {
 
-    console.log('PPPEEEER COMPOSER')
-    console.log(peer)
-
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
     const contract = {
