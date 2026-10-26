@@ -19,8 +19,7 @@ class OverlayReferenceContract extends EventEmitter {
   }
 
   overlayForm(inputRC) {
-    console.log('overlay input to buld form')
-    console.log(inputRC)
+
     const currentTime = this.heliLive ? this.heliLive.helistamp() : Date.now();
     
     const contract = {
@@ -54,8 +53,7 @@ class OverlayReferenceContract extends EventEmitter {
         frequencyCount: 0
       }
     };
-    console.log('overlay conract')
-    console.log(contract)
+
     return validateContract('overlay', contract);
   }
 }
